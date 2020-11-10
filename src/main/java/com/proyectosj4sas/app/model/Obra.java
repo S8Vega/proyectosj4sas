@@ -4,12 +4,13 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 @Data
 @AllArgsConstructor
 public class Obra implements Serializable {
 
 	private Long id;
-	private Obrero obraObrero;
+	private ObraObrero obraObrero;
 	private Representante representante;
 	private Siso siso;
 	private String estado;

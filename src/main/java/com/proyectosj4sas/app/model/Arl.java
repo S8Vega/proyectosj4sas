@@ -9,11 +9,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Arl implements Serializable {
-	 
+
 	private Long id;
 	private String nombre;
 	private String codigo;
-	private List<Trabajador> afiliadoArl;
+	private List<AfiliadoArl> afiliadoArl;
 	private static final long serialVersionUID = 1L;
 
 }

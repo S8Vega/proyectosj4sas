@@ -15,6 +15,5 @@ public class Contador implements Serializable {
 	private String correo;
 	private String nombre;
 	private static final long serialVersionUID = 1L;
-	
 
 }

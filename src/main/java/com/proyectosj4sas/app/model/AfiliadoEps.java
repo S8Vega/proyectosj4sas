@@ -7,11 +7,12 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Obrero implements Serializable {
+public class AfiliadoEps implements Serializable {
 
 	private Long id;
-	private ObraObrero obraObrero;
-	private Trabajador trabajador;
+	private String codigo;
+	private String trabajador;
+	private Eps eps;
 	private static final long serialVersionUID = 1L;
 
 }
