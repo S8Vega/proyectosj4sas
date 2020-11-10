@@ -14,5 +14,4 @@ public class AfiliadoArl implements Serializable {
 	private Trabajador trabajador;
 	private Arl arl;
 	private static final long serialVersionUID = 1L;
-
 }
