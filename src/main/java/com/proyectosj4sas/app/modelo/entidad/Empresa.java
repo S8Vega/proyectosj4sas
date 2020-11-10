@@ -1,22 +1,22 @@
-package com.proyectosj4sas.app.model;
+package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Obra implements Serializable {
+public class Empresa implements Serializable {
 
 	private Long id;
-	private ObraObrero obraObrero;
-	private Representante representante;
-	private Siso siso;
-	private String estado;
-	private Empresa empresa;
 	private String nombre;
+	private String nit;
 	private String direccion;
+	private String telefono;
+	private Contador contador;
+	private List<Obra> obras;
 	private static final long serialVersionUID = 1L;
 
 }

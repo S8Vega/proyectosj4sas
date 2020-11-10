@@ -1,18 +1,19 @@
-package com.proyectosj4sas.app.model;
+package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Eps implements Serializable {
+public class Contador implements Serializable {
 
 	private Long id;
+	private Empresa empresa;
+	private String telefono;
+	private String correo;
 	private String nombre;
-	private String codigo;
-	private List<AfiliadoFondoPension> afiliadoEps;
 	private static final long serialVersionUID = 1L;
+
 }

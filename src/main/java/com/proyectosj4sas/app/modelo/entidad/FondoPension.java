@@ -1,4 +1,4 @@
-package com.proyectosj4sas.app.model;
+package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
 import java.util.List;

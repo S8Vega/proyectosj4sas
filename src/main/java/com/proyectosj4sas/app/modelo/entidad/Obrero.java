@@ -1,4 +1,4 @@
-package com.proyectosj4sas.app.model;
+package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
 
@@ -7,12 +7,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AfiliadoArl implements Serializable {
+public class Obrero implements Serializable {
 
 	private Long id;
-	private String codigo;
+	private ObraObrero obraObrero;
 	private Trabajador trabajador;
-	private Arl arl;
 	private static final long serialVersionUID = 1L;
 
 }
