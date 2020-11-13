@@ -1,7 +1,7 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,11 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 @Entity
 public class Empresa implements Serializable {
 
@@ -29,7 +24,87 @@ public class Empresa implements Serializable {
 	@OneToOne(mappedBy = "empresa", cascade = CascadeType.REMOVE)
 	private Contador contador;
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.REMOVE)
-	private List<Obra> obra;
+	private Set<Obra> obra;
 	private static final long serialVersionUID = 1L;
+
+	public Empresa() {
+	}
+
+	public Empresa(Long id, String nombre, String nit, String direccion, String telefono, Contador contador,
+			Set<Obra> obra) {
+		this.id = id;
+		this.nombre = nombre;
+		this.nit = nit;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.contador = contador;
+		this.obra = obra;
+	}
+
+	@Override
+	public String toString() {
+		return "Empresa [id=" + id + ", nombre=" + nombre + ", nit=" + nit + ", direccion=" + direccion + ", telefono="
+				+ telefono + ", contador=" + contador + ", obra=" + obra + "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getNit() {
+		return nit;
+	}
+
+	public void setNit(String nit) {
+		this.nit = nit;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public Contador getContador() {
+		return contador;
+	}
+
+	public void setContador(Contador contador) {
+		this.contador = contador;
+	}
+
+	public Set<Obra> getObra() {
+		return obra;
+	}
+
+	public void setObra(Set<Obra> obra) {
+		this.obra = obra;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 }

@@ -9,11 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 @Entity
 public class Contador implements Serializable {
 
@@ -27,5 +22,66 @@ public class Contador implements Serializable {
 	private String correo;
 	private String nombre;
 	private static final long serialVersionUID = 1L;
+
+	public Contador() {
+	}
+
+	public Contador(Long id, Empresa empresa, String telefono, String correo, String nombre) {
+		this.id = id;
+		this.empresa = empresa;
+		this.telefono = telefono;
+		this.correo = correo;
+		this.nombre = nombre;
+	}
+
+	@Override
+	public String toString() {
+		return "Contador [id=" + id + ", empresa=" + empresa + ", telefono=" + telefono + ", correo=" + correo
+				+ ", nombre=" + nombre + "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 }

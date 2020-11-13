@@ -2,6 +2,7 @@ package com.proyectosj4sas.app.modelo.servicio.implementacion;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import com.proyectosj4sas.app.modelo.servicio.interfaz.IServicio;
 @Service
 public class SisoServicioImpl implements IServicio<Siso, Long> {
 
+	@Autowired
 	private ISisoDao sisoDao;
 
 	@Override
