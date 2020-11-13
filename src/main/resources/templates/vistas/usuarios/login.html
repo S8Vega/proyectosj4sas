@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>J4 SOFT</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/estilo.css}">
+<link rel="stylesheet" type="text/css"
+	href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+</head>
+<body>
+	<div class="contenedor">
+		<div class="caja1">
+			<div class="organizador">
+				<h3 class="titulo_ligth">Bienvenido a</h3>
+				<h1 class="titulo_app">J4 SOFT</h1>
+				<br>
+				<h3 class="introduce_txt">Introduce tus datos:</h3>
+				<div class="divX">
+					<input class="input_usuario" type="text" placeholder="Usuario">
+				</div>
+				<div class="divX">
+					<input class="input_contra" type="password"
+						placeholder="Clave de usuario">
+				</div>
+				<div class="cont_btn_login">
+					<button class="btn_login">Iniciar Sesión</button>
+				</div>
+				<div class="text_recuperar">
+					¿Olvidaste tu contraseña? <a class="link_recuperar" href="">
+						Recuperar</a>
+				</div>
+
+			</div>
+		</div>
+		<div class="caja2">
+			<img class="background" th:src="@{/img/img_login.png}">
+			<div class="txt_logotipo">PROYECTOS E INGENIERÍA J4 S.A.S</div>
+		</div>
+	</div>
+</body>
+</html>
