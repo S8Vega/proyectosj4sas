@@ -1,7 +1,7 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,11 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 @Entity
 public class Obra implements Serializable {
 
@@ -24,7 +19,7 @@ public class Obra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToMany(mappedBy = "obra", cascade = CascadeType.REMOVE)
-	private List<Obrero> obrero;
+	private Set<Obrero> obrero;
 	@ManyToOne
 	@JoinColumn(name = "representante")
 	private Representante representante;
@@ -38,5 +33,95 @@ public class Obra implements Serializable {
 	private String nombre;
 	private String direccion;
 	private static final long serialVersionUID = 1L;
+
+	public Obra() {
+	}
+
+	public Obra(Long id, Set<Obrero> obrero, Representante representante, Siso siso, String estado, Empresa empresa,
+			String nombre, String direccion) {
+		this.id = id;
+		this.obrero = obrero;
+		this.representante = representante;
+		this.siso = siso;
+		this.estado = estado;
+		this.empresa = empresa;
+		this.nombre = nombre;
+		this.direccion = direccion;
+	}
+
+	@Override
+	public String toString() {
+		return "Obra [id=" + id + ", obrero=" + obrero + ", representante=" + representante + ", siso=" + siso
+				+ ", estado=" + estado + ", empresa=" + empresa + ", nombre=" + nombre + ", direccion=" + direccion
+				+ "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Obrero> getObrero() {
+		return obrero;
+	}
+
+	public void setObrero(Set<Obrero> obrero) {
+		this.obrero = obrero;
+	}
+
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+
+	public Siso getSiso() {
+		return siso;
+	}
+
+	public void setSiso(Siso siso) {
+		this.siso = siso;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 }
