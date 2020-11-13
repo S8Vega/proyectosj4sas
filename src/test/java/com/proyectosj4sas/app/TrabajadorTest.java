@@ -19,12 +19,12 @@ class TrabajadorTest {
 	
 	@Test
 	void test() {
-		Trabajador trabajador = new Trabajador(null, null, null, null, null, null, "hola", "mundo");
-		this.servicio.save(trabajador);
+		Trabajador t1= new Trabajador(null, null, null, null, null, null, "hola", "mundo");
+		servicio.save(t1);
 		ArrayList<Trabajador> lista = (ArrayList<Trabajador>) servicio.findAll();
-		for (Trabajador t: lista) {
-			System.out.println(t.toString());
-		}
+		Trabajador t2 = lista.get(lista.size() - 1);
+		assertEquals(t1.getNombre(), t2.getNombre());
+		assertEquals(t1.getCedula(), t2.getCedula());
 	}
 
 }
