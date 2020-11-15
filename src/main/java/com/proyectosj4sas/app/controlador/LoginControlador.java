@@ -12,19 +12,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LoginControlador {
 
 	@GetMapping("/login")
-	public String login(@RequestParam(value="error", required=false) String error,
-			@RequestParam(value="logout", required = false) String logout,
-			Model model, Principal principal, RedirectAttributes flash) {
-		
-		
-		  if(principal != null) { flash.addFlashAttribute("info",
-		  "Ya ha iniciado sesion"); return "redirect:/"; }else if(error != null) {
-		  model.addAttribute("error",
-		  "Error en el login: Nombre de usuario o clave incorrecta, intentalo nuevamente"
-		  ); }else if(logout != null) { model.addAttribute("success",
-		  "Ha cerrado sesión con éxito!"); }
-		 
-		
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model, Principal principal,
+			RedirectAttributes flash) {
+
+		if (principal != null) {
+			flash.addFlashAttribute("info", "Ya ha iniciado sesion");
+			return "redirect:/";
+		} else if (error != null) {
+			model.addAttribute("error",
+					"Error en el login: Nombre de usuario o clave incorrecta, intentalo nuevamente");
+		} else if (logout != null) {
+			model.addAttribute("success", "Ha cerrado sesión con éxito!");
+		}
+
 		return "login";
 	}
 }

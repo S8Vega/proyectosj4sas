@@ -6,13 +6,7 @@
 </head>
 
 <body>
-	<div class="alert alert-success" th:if="${success != null}"
-		th:text="${success}"></div>
-	<div class="alert alert-danger" th:if="${error != null}"
-		th:text="${error}"></div>
-	<div class="alert alert-warning" th:if="${warning != null}"
-		th:text="${warning}"></div>
-	<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+	
 	<div class="d-flex" id="wrapper">
 
 		<!-- Sidebar -->
@@ -49,10 +43,10 @@
 				</div>
 
 				<div>
-<p sec:authorize="isAuthenticated()">
-			Usuario logeado: <span sec:authentication="name"></span> | Roles: <span
-				sec:authentication="principal.authorities"></span>
-		</p>
+					<p sec:authorize="isAuthenticated()">
+						Usuario logeado: <span sec:authentication="name"></span> | Roles:
+						<span sec:authentication="principal.authorities"></span>
+					</p>
 					<h4>
 						<span class="badge badge-secondary hudsoft-badge-important">Genera
 							reportes</span>
@@ -64,17 +58,17 @@
 							<a href=""
 								class="list-group-item list-group-item-action bg-light text-center col"
 								id="sub_menu_constructoras" type="button" data-toggle="collapse"
-								data-target="#" aria-expanded="false">
-								<img width="50" class="mx-auto"
-								th:src="@{/img/icons/reporte-de-salud.svg}"><br> ARL
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/reporte-de-salud.svg}"><br>
+								ARL
 							</a>
 						</div>
 						<div class="col">
 							<a href=""
 								class="list-group-item list-group-item-action bg-light text-center col"
 								id="sub_menu_constructoras" type="button" data-toggle="collapse"
-								data-target="#" aria-expanded="false">
-								<img width="50" class="mx-auto" th:src="@{/img/icons/eps.svg}"><br>
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/eps.svg}"><br>
 								EPS
 							</a>
 						</div>
@@ -82,8 +76,8 @@
 							<a href=""
 								class="list-group-item list-group-item-action bg-light text-center col"
 								id="sub_menu_constructoras" type="button" data-toggle="collapse"
-								data-target="#" aria-expanded="false">
-								<img width="50" class="mx-auto" th:src="@{/img/icons/papel.svg}"><br>
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/papel.svg}"><br>
 								PENSIONES
 							</a>
 						</div>
@@ -91,8 +85,8 @@
 							<a href=""
 								class="list-group-item list-group-item-action bg-light text-center col"
 								id="sub_menu_constructoras" type="button" data-toggle="collapse"
-								data-target="#" aria-expanded="false">
-								<img width="50" class="mx-auto" th:src="@{/img/icons/apoyo.svg}"><br>
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/apoyo.svg}"><br>
 								OPERADOR DE PAGO
 							</a>
 						</div>

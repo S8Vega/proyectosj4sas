@@ -5,13 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class EmpresaControlador {
-	
-	@GetMapping({"/","/empresas"})
-	public String listar(Model model) {
-		model.addAttribute("titulo", "Empresas asociadas");
-		model.addAttribute("ruta_de_navegacion", "Empresas asociadas");
-		return "/vistas/empresas/listar";
-	}
+public class ObraControlador {
 
+	@GetMapping({"/obras"})
+	public String listar(Model model) {
+		model.addAttribute("titulo", "Obras");
+		model.addAttribute("ruta_de_navegacion", "Obras");
+		return "/vistas/obras/listar";
+	}
 }
