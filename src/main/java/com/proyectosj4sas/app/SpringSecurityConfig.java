@@ -21,15 +21,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 	  @Bean public BCryptPasswordEncoder passwordEncoder() { return new
-	  BCryptPasswordEncoder(); }
-	 
-	 
-	 
+	  BCryptPasswordEncoder(); } 
 
 	
 	  @Override protected void configure(HttpSecurity http) throws Exception {
 	  http.authorizeRequests().antMatchers("/css/**", "/js/**",
-	  "/img/**").permitAll().antMatchers("/empresas")
+	  "/img/**").permitAll().antMatchers("/","/empresas","/constructoras/obras/{id}")
 	  .hasAnyRole("ADMIN").anyRequest().authenticated().and().formLogin().successHandler(successHandler).loginPage
 	  ("/login").permitAll()
 	  .and().logout().permitAll().and().exceptionHandling().accessDeniedPage(

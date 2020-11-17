@@ -37,10 +37,10 @@
 		th:fragment="menu_horizontal">
 		<button class="btn" id="menu-toggle">
 			<span class="fa fa-chevron-left"></span>
-			
+
 		</button>
 		<i class="fas fa-grip-lines-vertical ml-1 hudsoft-background-color"></i>
-<span class="ml-1" th:text="${ruta_de_navegacion}"></span>
+		<span class="ml-1" th:text="${ruta_de_navegacion}"></span>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -55,16 +55,20 @@
 				<li sec:authorize="!isAuthenticated()"><a
 					class="btn btn-outline-primary" th:href="@{/login}">Entrar</a></li>
 
-				
-					</li>
-				<li sec:authorize="isAuthenticated()" class="ml-auto row align-items-center">
-				<spam sec:authentication="name" class="col"></spam> 
-				
-				
+
+				</li>
+				<li sec:authorize="isAuthenticated()"
+					class="ml-auto row align-items-center"><spam
+						sec:authentication="name" class="col"></spam>
+
+
 					<form id="logoutForm" th:action="@{/logout}" method="post">
 						<button class="btn btn-light col	"
 							onclick="document.getElementById('logoutForm').submit();"
-							type="submit"><i class="fas fa-sign-out-alt hudsoft-background-color"></i> Salir</button>
+							type="submit">
+							<i class="fas fa-sign-out-alt hudsoft-background-color"></i>
+							Salir
+						</button>
 						<input type="hidden" th:name="${_csrf.parameterName}"
 							th:value="${_csrf.token}" />
 					</form></li>
@@ -165,17 +169,35 @@
 	</div>
 	<div class="row" th:fragment="menu_inferior">
 
-		<div class="col">
-			<a href=""
+		<!-- <div class="col">
+			<a th:href="@{/arl/reporte/excel/}"
 				class="list-group-item list-group-item-action bg-light text-center col"
-				id="sub_menu_constructoras" type="button" data-toggle="collapse"
-				data-target="#" aria-expanded="false"> <img width="50"
+				id="sub_menu_arl" type="button" data-toggle="collapse"
+				data-target="#collapse_arl" aria-expanded="false"> <img width="50"
 				class="mx-auto" th:src="@{/img/icons/reporte-de-salud.svg}"><br>
 				ARL
 			</a>
-		</div>
+			<div id="collapse_arl" class="collapse"
+				aria-labelledby="sub_menu_arl" data-parent="#menu_padre">
+				<a th:href="@{/arl/reporte/excel/}"
+					class="list-group-item list-group-item-action bg-light text-center">Todas las Arl</a>
+			</div>
+			<div id="collapse_arl" class="collapse"
+				aria-labelledby="sub_menu_arl" data-parent="#menu_padre">
+				<a th:href="@{/obras/obrerossinarl}"
+					class="list-group-item list-group-item-action bg-light text-center">Sin Arl</a>
+			</div>
+		</div> -->
 		<div class="col">
-			<a href=""
+			<a th:href="@{/obras/obrerossinarl}"
+				class="list-group-item list-group-item-action bg-light text-center col"
+				type="button" > <img width="50"
+				class="mx-auto" th:src="@{/img/icons/reporte-de-salud.svg}"><br> ARL
+			</a>
+		</div>
+		
+		<div class="col">
+			<a href="#"
 				class="list-group-item list-group-item-action bg-light text-center col"
 				id="sub_menu_constructoras" type="button" data-toggle="collapse"
 				data-target="#" aria-expanded="false"> <img width="50"
