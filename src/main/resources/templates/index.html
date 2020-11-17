@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla/template :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+	
+	<div class="d-flex" id="wrapper">
+
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">J4 SOFT</div>
+			<div class="list-group list-group-flush text-center">
+				<a href="#" class="list-group-item list-group-item-action bg-light">
+					<i class="fas fa-play"></i> MENU
+				</a>
+
+				<nav th:replace="plantilla/template :: menu_vertical"></nav>
+
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+
+			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+			<div class="container-fluid">
+				<form id="logoutForm" th:action="@{/logout}" method="post">
+					<button class="dropdown-item"
+						onclick="document.getElementById('logoutForm').submit();"
+						type="submit">Sign Out</button>
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
+
+				<div class="row mx-auto">
+					<img class="mx-auto" width="40%" th:src="@{/img/img_login.png}">
+				</div>
+
+				<div>
+					<p sec:authorize="isAuthenticated()">
+						Usuario logeado: <span sec:authentication="name"></span> | Roles:
+						<span sec:authentication="principal.authorities"></span>
+					</p>
+					<h4>
+						<span class="badge badge-secondary hudsoft-badge-important">Genera
+							reportes</span>
+					</h4>
+
+					<div class="row">
+
+						<div class="col">
+							<a href=""
+								class="list-group-item list-group-item-action bg-light text-center col"
+								id="sub_menu_constructoras" type="button" data-toggle="collapse"
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/reporte-de-salud.svg}"><br>
+								ARL
+							</a>
+						</div>
+						<div class="col">
+							<a href=""
+								class="list-group-item list-group-item-action bg-light text-center col"
+								id="sub_menu_constructoras" type="button" data-toggle="collapse"
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/eps.svg}"><br>
+								EPS
+							</a>
+						</div>
+						<div class="col">
+							<a href=""
+								class="list-group-item list-group-item-action bg-light text-center col"
+								id="sub_menu_constructoras" type="button" data-toggle="collapse"
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/papel.svg}"><br>
+								PENSIONES
+							</a>
+						</div>
+						<div class="col">
+							<a href=""
+								class="list-group-item list-group-item-action bg-light text-center col"
+								id="sub_menu_constructoras" type="button" data-toggle="collapse"
+								data-target="#" aria-expanded="false"> <img width="50"
+								class="mx-auto" th:src="@{/img/icons/apoyo.svg}"><br>
+								OPERADOR DE PAGO
+							</a>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+
+			<footer th:replace="plantilla/template :: footer"></footer>
+		</div>
+		<!-- /#page-content-wrapper -->
+
+	</div>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<!-- Menu Toggle Script -->
+	<script>
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
+</body>
+</html>

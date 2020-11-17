@@ -39,5 +39,18 @@ public class ObreroServicioImpl implements IServicio<Obrero, Long> {
 	public void deleteById(Long id) {
 		obreroDao.deleteById(id);
 	}
+	
+	public List<Obrero> listaObrerosSinArl(Long idObra){
+		return obreroDao.listaObrerosSinArl(idObra);		
+	}
+	
+	public List<Obrero> listaObrerosSinEps(Long idObra){
+		return obreroDao.listaObrerosSinEps(idObra);		
+	}
+	public List<Obrero> listaObrerosSinAfp(Long idObra){
+		return obreroDao.listaObrerosSinAfp(idObra);		
+	}
+
+	
 
 }
