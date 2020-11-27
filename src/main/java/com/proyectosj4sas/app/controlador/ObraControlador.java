@@ -11,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.proyectosj4sas.app.modelo.entidad.Arl;
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
-import com.proyectosj4sas.app.modelo.servicio.implementacion.ArlServicioImpl;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.ObreroServicioImpl;
 
 import com.proyectosj4sas.app.reportes.ObreroReporteExcel;

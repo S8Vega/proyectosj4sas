@@ -16,15 +16,40 @@ class TrabajadorTest {
 
 	@Autowired
 	private TrabajadorServicioImpl servicio;
-	
+
 	@Test
 	void test() {
-		Trabajador t1= new Trabajador(null, null, null, null, null, null, "hola", "mundo");
-		servicio.save(t1);
-		ArrayList<Trabajador> lista = (ArrayList<Trabajador>) servicio.findAll();
-		Trabajador t2 = lista.get(lista.size() - 1);
-		assertEquals(t1.getNombre(), t2.getNombre());
-		assertEquals(t1.getCedula(), t2.getCedula());
+		Trabajador expected = new Trabajador();
+		Trabajador actual = new Trabajador();
+		ArrayList<Trabajador> listaExpected = (ArrayList<Trabajador>) servicio.findAll();
+		for (int i = 0; i < 10; i++) {
+			expected = new Trabajador(null, null, null, null, null, null, "nombre: " + i, "cedula: " + i);
+			// test: save
+			servicio.save(expected);
+			// test: findById
+			actual = servicio.findById(expected.getId());
+			assertEquals(expected.getNombre(), actual.getNombre());
+			assertEquals(expected.getCedula(), actual.getCedula());
+			expected.setNombre("nombre: " + (i + 1));
+			expected.setCedula("cedula: " + (i + 1));
+			// test: save
+			servicio.save(expected);
+			actual = servicio.findById(expected.getId());
+			assertEquals(expected.getNombre(), actual.getNombre());
+			assertEquals(expected.getCedula(), actual.getCedula());
+			// test: deleteById
+			servicio.deleteById(expected.getId());
+			actual = servicio.findById(expected.getId());
+			assertNull(actual);
+		}
+		// test: findAll
+		ArrayList<Trabajador> listaActual = (ArrayList<Trabajador>) servicio.findAll();
+		assertEquals(listaExpected.size(), listaActual.size());
+		for (int i = 0; i < listaExpected.size(); i++) {
+			expected = listaExpected.get(i);
+			actual = listaActual.get(i);
+			assertEquals(expected.getNombre(), actual.getNombre());
+			assertEquals(expected.getCedula(), actual.getCedula());
+		}
 	}
-
 }
