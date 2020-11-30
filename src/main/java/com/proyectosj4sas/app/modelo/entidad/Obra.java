@@ -1,6 +1,7 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -32,13 +33,16 @@ public class Obra implements Serializable {
 	private Empresa empresa;
 	private String nombre;
 	private String direccion;
+	private Date fechaInicio;
+	private Date fechaFin;
 	private static final long serialVersionUID = 1L;
 
 	public Obra() {
 	}
 
 	public Obra(Long id, Set<Obrero> obrero, Representante representante, Siso siso, String estado, Empresa empresa,
-			String nombre, String direccion) {
+			String nombre, String direccion, Date fechaInicio, Date fechaFin) {
+		super();
 		this.id = id;
 		this.obrero = obrero;
 		this.representante = representante;
@@ -47,13 +51,31 @@ public class Obra implements Serializable {
 		this.empresa = empresa;
 		this.nombre = nombre;
 		this.direccion = direccion;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 	}
 
 	@Override
 	public String toString() {
 		return "Obra [id=" + id + ", obrero=" + obrero + ", representante=" + representante + ", siso=" + siso
 				+ ", estado=" + estado + ", empresa=" + empresa + ", nombre=" + nombre + ", direccion=" + direccion
-				+ "]";
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
+	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
 	public Long getId() {
