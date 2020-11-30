@@ -11,9 +11,7 @@
 		<div class="bg-light border-right" id="sidebar-wrapper">
 			<div class="sidebar-heading">J4 SOFT</div>
 			<div class="list-group list-group-flush text-center">
-				<a href="#" class="list-group-item list-group-item-action bg-light">
-					<i class="fas fa-play"></i> MENU
-				</a>
+
 
 				<nav th:replace="plantilla/template :: menu_vertical"></nav>
 
@@ -28,41 +26,89 @@
 			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
 
 			<div class="container-fluid">
-				
 
-				<div class="row mx-auto">
-					<img class="mx-auto" width="40%" th:src="@{/img/img_login.png}">
+				<!-- CONTENIDO DINAMICO -->
+				<div class="mt-2">
+					<div class="card">
+						<div class="card-header hudsoft-thead-dark">Obras</div>
+						<div class="card-body card-block">
+
+							<table id="dtBasicExample"
+								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
+								<thead class="hudsoft-thead-dark">
+									<tr class="text-center">
+										<th scope="col">#</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Direccion</th>
+										<th scope="col">Estado</th>
+										<th scope="col">siso</th>
+										<th scope="col">Representante</th>
+										<th scope="col">Obreros</th>
+										<th scope="col">Opciones</th>
+									</tr>
+								</thead>
+								<tbody class="">
+									<tr th:each="obra: ${obras}" class="text-center">
+										<th th:text="${obra.id}"></th>
+										<td th:text="${obra.nombre}"></td>
+										<td th:text="${obra.direccion}"></td>
+										<td><span th:if="${obra.estado} == 'activo'"
+											class="hudsoft-badge-pill"> <i class="fas fa-check"></i>
+												activo
+										</span> <span th:if="${obra.estado} == 'inactivo'"
+											class="hudsoft-badge-pill-danger"> <i
+												class="fas fa-times"></i> inactivo
+										</span></td>
+
+										<td th:text="${obra.siso.trabajador.nombre}"></td>
+										<td th:text="${obra.representante.nombre}"></td>
+										<td th:text="${obra.obrero.size()}"></td>
+										<td><a th:href="@{/obras/}+${obra.id}"
+											class="hudsoft-btn-sm"> <i class="far fa-eye"> </i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="card-footer">						
+							<button type="reset" class="hudsoft-btn-sm float-right">
+								Opcion</button>
+						</div>
+					</div>
+					<!-- ./CONTENIDO DINAMICO -->
+
+
+
+					<div class="mt-2">
+						<h4>
+							<span class="badge badge-secondary hudsoft-badge-important">Informacion</span>
+						</h4>
+					</div>
+
+					<!-- INFORMACION -->
+					<div class="row mx-auto">
+						<div class="col-md-2">
+							<div class="card">
+								<div class="card-body">
+									<span>Obras</span><br> <span>Total: </span> <span
+										class="count" th:text="${obras.size()}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="card">
+								<div class="card-body">
+									<span>Obreros</span><br> <span>Total: </span> <span
+										class="count" th:text="${total_obreros}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-
-				<div>
-					
-					<h4>
-						<span class="badge badge-secondary hudsoft-badge-important">Genera
-							reportes</span>
-					</h4>
-
-					<div th:replace="/plantilla/template :: menu_inferior"></div>
-
-
-				</div>
+				<!-- ./INFORMACION -->
 
 				<footer th:replace="plantilla/template :: footer"></footer>
 			</div>
-			<!-- /#page-content-wrapper -->
-
 		</div>
-
-
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<!-- Menu Toggle Script -->
-		<script>
-			$("#menu-toggle").click(function(e) {
-				e.preventDefault();
-				$("#wrapper").toggleClass("toggled");
-			});
-		</script>
+	</div>
 </body>
 </html>

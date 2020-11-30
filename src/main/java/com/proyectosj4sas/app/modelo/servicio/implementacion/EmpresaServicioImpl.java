@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.proyectosj4sas.app.modelo.dao.interfaz.IEmpresaDao;
 import com.proyectosj4sas.app.modelo.entidad.Empresa;
+import com.proyectosj4sas.app.modelo.entidad.Obra;
+import com.proyectosj4sas.app.modelo.entidad.Obrero;
 import com.proyectosj4sas.app.modelo.servicio.interfaz.IServicio;
 
 @Service
@@ -39,5 +41,8 @@ public class EmpresaServicioImpl implements IServicio<Empresa, Long> {
 	public void deleteById(Long id) {
 		empresaDao.deleteById(id);
 	}
-
+	
+	public List<Obra> listaObrasPorEmpresa(Long idEmpresa){
+		return empresaDao.listaObrasPorEmpresa(idEmpresa);		
+	}
 }

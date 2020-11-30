@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+	<div th:replace="/plantilla/template :: mensajes"></div>
+
+	<div class="d-flex" id="wrapper">
+
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">J4 SOFT</div>
+			<div class="list-group list-group-flush text-center">
+
+
+				<nav th:replace="plantilla/template :: menu_vertical"></nav>
+
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+
+			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+			<div class="container-fluid">
+
+				<!-- CONTENIDO DINAMICO -->
+				<div class="mt-2">
+					<div class="card">
+						<div class="card-header hudsoft-thead-dark">
+							Trabajadores de la obra <strong><span
+								th:text="${obra.nombre}"></span></strong>
+						</div>
+						<div class="card-body card-block">
+
+							<table id="dtBasicExample"
+								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
+								<thead class="hudsoft-thead-dark">
+									<tr class="text-center">
+										<th scope="col">#</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Cedula</th>
+										<th scope="col">Estado</th>
+										<th scope="col">Cargo</th>
+										<th scope="col">Opciones</th>
+									</tr>
+								</thead>
+								<tbody class="">
+									<tr th:id="'td_'+ ${obrero.id}" th:each="obrero: ${obreros}"
+										class="text-center">
+										<td th:text="${obrero.id}"></td>
+										<td name="nombre" th:text="${obrero.trabajador.nombre}"></td>
+										<td name="cedula" th:text="${obrero.trabajador.cedula}"></td>
+										<td><span th:if="${obrero.estado} == 'activo'"
+											class="hudsoft-badge-pill"> <i class="fas fa-check"></i>
+												activo
+										</span> <span th:if="${obrero.estado} == 'inactivo'"
+											class="hudsoft-badge-pill-danger"> <i
+												class="fas fa-times"></i> inactivo
+										</span></td>
+
+
+										<td name="cargo" th:text="${obrero.cargo}"></td>
+										<td><a class="hudsoft-btn-sm"
+											th:onclick="'smodal(\'' + ${obrero.id} + '\');'"><i
+												class="far fa-eye"></i></a> <a href="" class="hudsoft-btn-sm">
+												<i class="fas fa-edit"></i>
+										</a></td>
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="card-footer">
+						<a th:href="@{/constructoras/obras/}+${obra.id}"
+											class="hudsoft-btn-sm float-right">Afiliaciones</a>
+						
+						</div>
+					</div>
+					<!-- ./CONTENIDO DINAMICO -->
+
+
+
+					<div class="mt-2">
+						<h4>
+							<span class="badge badge-secondary hudsoft-badge-important">Informacion</span>
+						</h4>
+					</div>
+
+					<!-- INFORMACION -->
+					<div class="row mx-auto">
+						<div class="col">
+							<div class="card">
+								<div class="card-header hudsoft-thead-dark">
+									<div class="media-body">
+										<h4 class="text-light display-6"
+											th:text="${obra.siso.trabajador.nombre}"></h4>
+										<strong>Siso</strong>
+									</div>
+								</div>
+								<div class="">
+									<section class="card">
+										<ul class="list-group list-group-flush">
+
+											<li class="list-group-item"><span>Cedula: </span> <span
+												class="" th:text="${obra.siso.trabajador.cedula}"></span></li>
+											<li class="list-group-item"><span>Telefono: </span> <span
+												class="" th:text="${obra.siso.telefono}"></span></li>
+											<li class="list-group-item"><span>Correo: </span> <span
+												class="" th:text="${obra.siso.correo}"></span></li>
+										</ul>
+									</section>
+
+
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card">
+								<div class="card-header hudsoft-thead-dark">
+									<div class="media-body">
+										<h4 class="text-light display-6"
+											th:text="${obra.representante.nombre}"></h4>
+										<strong>Representante</strong>
+									</div>
+								</div>
+								<div class="">
+									<section class="card">
+										<ul class="list-group list-group-flush">
+
+											<li class="list-group-item"><span>Telefono: </span> <span
+												class="" th:text="${obra.representante.telefono}"></span></li>
+											<li class="list-group-item"><span>Correo: </span> <span
+												class="" th:text="${obra.representante.correo}"></span></li>
+										</ul>
+									</section>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ./INFORMACION -->
+
+				<!-- MODAL -->
+				<div class="modal fade" id="modal_trabajador" role="dialog"
+					th:aria-labelledby="ttt" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="card-header hudsoft-thead-dark">
+								<div class="media-body">
+									<div>
+
+
+										<div class="float-left">
+											<h4 id="trabajador_nombre" class="text-light display-6"></h4>
+											<strong>Cargo: <span id="trabajador_cargo"></span></strong>
+										</div>
+										<a class="hudsoft-btn-sm float-right" data-dismiss="modal"
+											aria-label="Close"> <i class="m-1 fas fa-times"></i>
+										</a>
+									</div>
+
+								</div>
+
+
+							</div>
+
+
+							<div class="modal-body">
+
+								<section class="card">
+
+
+									<ul class="list-group list-group-flush">
+
+										<li class="list-group-item"><span>Cedula: </span> <span
+											id="trabajador_cedula"></span></li>
+
+										<li class="list-group-item">
+											<div class="row" th:fragment="menu_inferior">
+												<div class="col">
+													<span class="align-middle">Verificacion</span>
+												</div>
+												<div class="col">
+													<a
+														class="list-group-item list-group-item-action bg-light text-center col">
+														<img width="50" class="mx-auto"
+														th:src="@{/img/icons/reporte-de-salud.svg}"><br>
+														ARL
+													</a>
+												</div>
+
+												<div class="col">
+													<a
+														class="list-group-item list-group-item-action bg-light text-center col">
+														<img width="50" class="mx-auto"
+														th:src="@{/img/icons/eps.svg}"><br> EPS
+													</a>
+												</div>
+												<div class="col">
+													<a
+														class="list-group-item list-group-item-action bg-light text-center col">
+														<img width="50" class="mx-auto"
+														th:src="@{/img/icons/papel.svg}"><br> PENSIONES
+													</a>
+												</div>
+
+											</div>
+										</li>
+									</ul>
+
+
+
+								</section>
+
+							</div>
+							<div class="modal-footer">
+								<a href="" class="hudsoft-btn-sm" data-toggle="modal"
+									data-target="#modal_trabajador">Cerrar</a> <a href=""
+									class="hudsoft-btn-sm" data-toggle="modal"
+									data-target="#modal_trabajador">Editar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ./MODAL -->
+
+				<footer th:replace="plantilla/template :: footer"></footer>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		function smodal(id) {
+			console.log(id);
+			let fila_trabajador = document.getElementById("td_" + id);
+			fila_trabajador.getElementsByTagName("td");
+			let nombre = fila_trabajador.getElementsByTagName("td")["nombre"].innerText;
+			let cargo = fila_trabajador.getElementsByTagName("td")["cargo"].innerText;
+			let cedula = fila_trabajador.getElementsByTagName("td")["cedula"].innerText;
+			//console.log(fila_trabajador);
+			document.getElementById("trabajador_nombre").innerText = nombre;
+			document.getElementById("trabajador_cargo").innerText = cargo;
+			document.getElementById("trabajador_cedula").innerText = cedula;
+
+			$('#modal_trabajador').modal('show');
+			//let modal_trabajador = document.getElementById("modal_trabajador");
+			//modal_trabajador.style.overflow = "visible";
+		}
+	</script>
+</body>
+
+</html>

@@ -12,22 +12,50 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.proyectosj4sas.app.modelo.entidad.Arl;
+import com.proyectosj4sas.app.modelo.entidad.Obra;
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
+import com.proyectosj4sas.app.modelo.entidad.Trabajador;
+import com.proyectosj4sas.app.modelo.servicio.implementacion.AfiliadoEpsServicioImpl;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.ArlServicioImpl;
+import com.proyectosj4sas.app.modelo.servicio.implementacion.ObraServicioImpl;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.ObreroServicioImpl;
-
+import com.proyectosj4sas.app.modelo.servicio.implementacion.TrabajadorServicioImpl;
 import com.proyectosj4sas.app.reportes.ObreroReporteExcel;
 
 @Controller
 public class ObraControlador {
 	@Autowired
 	private ObreroServicioImpl obreroService;
+	@Autowired
+	private ObraServicioImpl obraService;
+	@Autowired
+	private AfiliadoEpsServicioImpl epsService;
+	@Autowired
+	private TrabajadorServicioImpl trabajadorService;
 
 	@GetMapping({"/obras"})
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Obras");
 		model.addAttribute("ruta_de_navegacion", "Obras");
 		return "/vistas/obras/listar";
+	}
+	
+	@GetMapping("/obras/{id}")
+	public String getObrasPorEmpresa(@PathVariable Long id, Model model) {
+		Obra obra=obraService.findById(id);
+		System.out.println(obra.getRepresentante().getNombre());
+//		Trabajador tbj = null;
+//		obra.getObrero();
+//		for (Obrero obj : obra.getObrero()) {
+//			obj.setTrabajador(trabajadorService.findById(obj.getTrabajador().getId()));
+//			//obj.getTrabajador().getAfiliadoEps().setEps(epsService.findById(Long.parseLong(obj.getTrabajador().getAfiliadoEps().getCodigo())).getEps());
+//			System.out.println(obj.getTrabajador());
+//		}
+		model.addAttribute("titulo", "Obra");
+		model.addAttribute("ruta_de_navegacion", "Obra");
+		model.addAttribute("obra", obra);
+		model.addAttribute("obreros", obra.getObrero());
+		return "/vistas/obras/obra";
 	}
 	
 	@GetMapping("/constructoras/obras/{id}")

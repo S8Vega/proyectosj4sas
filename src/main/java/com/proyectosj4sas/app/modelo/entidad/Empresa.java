@@ -102,6 +102,14 @@ public class Empresa implements Serializable {
 	public void setObra(Set<Obra> obra) {
 		this.obra = obra;
 	}
+	
+	public int totalObreros() {
+		int total = 0;
+		for (Obra obra2 : obra) {
+			total += obra2.getObrero().size();
+		}
+		return total;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
