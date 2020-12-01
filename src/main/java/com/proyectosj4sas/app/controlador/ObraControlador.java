@@ -32,17 +32,17 @@ public class ObraControlador {
 		return "/vistas/obras/listar";
 	}
 
-//	@GetMapping("/obras/{id}")
-//	public String getObrasPorEmpresa(@PathVariable Long id, Model model) {
-//		Obra obra = obraService.findById(id);
-//		System.out.println(obra.getRepresentante().getNombre());
-//
-//		model.addAttribute("titulo", "Obra");
-//		model.addAttribute("ruta_de_navegacion", "Obra");
-//		model.addAttribute("obra", obra);
-//		model.addAttribute("obreros", obra.getObrero());
-//		return "/vistas/obras/obra";
-//	}
+	@GetMapping("/obras/{id}")
+	public String getObrasPorEmpresa(@PathVariable Long id, Model model) {
+		Obra obra = obraService.findById(id);
+		System.out.println(obra.getRepresentante().getNombre());
+
+		model.addAttribute("titulo", "Obra");
+		model.addAttribute("ruta_de_navegacion", "Obra");
+		model.addAttribute("obra", obra);
+		model.addAttribute("obreros", obra.getObrero());
+		return "/vistas/obras/obra";
+}
 
 	@GetMapping("/constructoras/obras/{id}")
 	public void reporteArl(@PathVariable Long id, HttpServletResponse response) throws IOException {
