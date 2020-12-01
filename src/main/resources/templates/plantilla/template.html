@@ -29,7 +29,7 @@
 			th:text="${error}"></div>
 		<div id="1" class="alert alert-warning" th:if="${warning != null}"
 			th:text="${warning}"></div>
-		<div  id="1" class="alert alert-info" th:if="${info != null}"
+		<div id="1" class="alert alert-info" th:if="${info != null}"
 			th:text="${info}"></div>
 	</div>
 	<nav
@@ -78,9 +78,10 @@
 
 	</nav>
 	<div id="menu_padre" th:fragment="menu_vertical">
-	<a th:href="@{/}" class="list-group-item list-group-item-action bg-light">
-					<i class="fas fa-play"></i> MENU
-				</a>
+		<a th:href="@{/}"
+			class="list-group-item list-group-item-action bg-light"> <i
+			class="fas fa-play"></i> MENU
+		</a>
 
 		<div>
 
@@ -107,9 +108,10 @@
 		</div>
 
 		<div>
-			<a th:href="@{/empresas}" 
-				class="list-group-item list-group-item-action bg-light text-center"> <img
-				width="50" class="mx-auto" th:src="@{/img/icons/anteproyecto.svg}"><br>
+			<a th:href="@{/empresas}"
+				class="list-group-item list-group-item-action bg-light text-center">
+				<img width="50" class="mx-auto"
+				th:src="@{/img/icons/anteproyecto.svg}"><br>
 				Constructoras
 			</a>
 			<!-- 
@@ -119,7 +121,7 @@
 					class="list-group-item list-group-item-action bg-light text-center">Nueva</a>
 			</div>
 			-->
-		<!-- 
+			<!-- 
 		
 			<div id="collapse_constructoras" class="collapse"
 				aria-labelledby="sub_menu_constructoras" data-parent="#menu_padre">
@@ -128,15 +130,14 @@
 			</div>
 		 -->
 
-			
+
 		</div>
 		<div>
 
 			<a th:href="@{/registrar}"
-				class="list-group-item list-group-item-action bg-light text-center"
-				> <img
-				width="50" class="mx-auto" th:src="@{/img/icons/anadir-lista.svg}"><br>
-				Registrar
+				class="list-group-item list-group-item-action bg-light text-center">
+				<img width="50" class="mx-auto"
+				th:src="@{/img/icons/anadir-lista.svg}"><br> Registrar
 			</a>
 
 			<!-- 
@@ -184,11 +185,11 @@
 		<div class="col">
 			<a th:href="@{/obras/obrerossinarl}"
 				class="list-group-item list-group-item-action bg-light text-center col"
-				type="button" > <img width="50"
-				class="mx-auto" th:src="@{/img/icons/reporte-de-salud.svg}"><br> ARL
+				type="button"> <img width="50" class="mx-auto"
+				th:src="@{/img/icons/reporte-de-salud.svg}"><br> ARL
 			</a>
 		</div>
-		
+
 		<div class="col">
 			<a href="#"
 				class="list-group-item list-group-item-action bg-light text-center col"
@@ -219,10 +220,10 @@
 
 	</div>
 	<hr width=90% style="height: 2px">
-	<footer th:fragment="footer" class="text-center" >
-	<script type="text/javascript">
-	
-	</script>
+	<footer th:fragment="footer" class="text-center">
+		<script type="text/javascript">
+			
+		</script>
 		<script
 			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
@@ -232,7 +233,7 @@
 				aria-role="presentation" aria-label="Colombia Flag"></i>
 		</p>
 
-<script type="text/javascript" th:src="@{/js/ja_jh.js}"></script>
+		<script type="text/javascript" th:src="@{/js/ja_jh.js}"></script>
 
 	</footer>
 
