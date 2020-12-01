@@ -33,7 +33,7 @@ class ObraTest {
 		for (int i = 0; i < 10; i++) {
 			obraExpected = new Obra(null, null, representanteServicio.findById((long) (i % 10 + 1)),
 					sisoServicio.findById((long) (i % 10 + 1)), "activo", empresaServicio.findById((long) (i % 5 + 1)),
-					"nombre: " + i, "direccion: " + i);
+					"nombre: " + i, "direccion: " + i, null, null);
 			// test: save
 			servicio.save(obraExpected);
 			obraActual = servicio.findById(obraExpected.getId());

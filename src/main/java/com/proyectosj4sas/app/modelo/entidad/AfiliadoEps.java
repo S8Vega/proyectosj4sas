@@ -1,6 +1,7 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,21 +24,43 @@ public class AfiliadoEps implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "eps")
 	private Eps eps;
+	private Date fechaIngreso;
+	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 
 	public AfiliadoEps() {
 	}
 
-	public AfiliadoEps(Long id, String codigo, Trabajador trabajador, Eps eps) {
+	public AfiliadoEps(Long id, String codigo, Trabajador trabajador, Eps eps, Date fechaIngreso, Date fechaRetiro) {
+		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.trabajador = trabajador;
 		this.eps = eps;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaRetiro = fechaRetiro;
 	}
 
 	@Override
 	public String toString() {
-		return "AfiliadoEps [id=" + id + ", codigo=" + codigo + ", trabajador=" + trabajador + ", eps=" + eps + "]";
+		return "AfiliadoEps [id=" + id + ", codigo=" + codigo + ", trabajador=" + trabajador + ", eps=" + eps
+				+ ", fechaIngreso=" + fechaIngreso + ", fechaRetiro=" + fechaRetiro + "]";
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public Date getFechaRetiro() {
+		return fechaRetiro;
+	}
+
+	public void setFechaRetiro(Date fechaRetiro) {
+		this.fechaRetiro = fechaRetiro;
 	}
 
 	public Long getId() {

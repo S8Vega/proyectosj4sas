@@ -1,6 +1,7 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,23 +24,45 @@ public class Obrero implements Serializable {
 	@JoinColumn(name = "obra")
 	private Obra obra;
 	private String cargo;
+	private Date fechaIngreso;
+	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 
 	public Obrero() {
 	}
 
-	public Obrero(Long id, Trabajador trabajador, String estado, Obra obra, String cargo) {
+	public Obrero(Long id, Trabajador trabajador, String estado, Obra obra, String cargo, Date fechaIngreso,
+			Date fechaRetiro) {
+		super();
 		this.id = id;
 		this.trabajador = trabajador;
 		this.estado = estado;
 		this.obra = obra;
 		this.cargo = cargo;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaRetiro = fechaRetiro;
 	}
 
 	@Override
 	public String toString() {
 		return "Obrero [id=" + id + ", trabajador=" + trabajador + ", estado=" + estado + ", obra=" + obra + ", cargo="
-				+ cargo + "]";
+				+ cargo + ", fechaIngreso=" + fechaIngreso + ", fechaRetiro=" + fechaRetiro + "]";
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public Date getFechaRetiro() {
+		return fechaRetiro;
+	}
+
+	public void setFechaRetiro(Date fechaRetiro) {
+		this.fechaRetiro = fechaRetiro;
 	}
 
 	public Long getId() {

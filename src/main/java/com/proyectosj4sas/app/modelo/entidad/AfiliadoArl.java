@@ -1,6 +1,7 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,21 +24,43 @@ public class AfiliadoArl implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "arl")
 	private Arl arl;
+	private Date fechaIngreso;
+	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 
 	public AfiliadoArl() {
 	}
 
-	public AfiliadoArl(Long id, String codigo, Trabajador trabajador, Arl arl) {
+	public AfiliadoArl(Long id, String codigo, Trabajador trabajador, Arl arl, Date fechaIngreso, Date fechaRetiro) {
+		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.trabajador = trabajador;
 		this.arl = arl;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaRetiro = fechaRetiro;
 	}
 
 	@Override
 	public String toString() {
-		return "AfiliadoArl [id=" + id + ", codigo=" + codigo + ", trabajador=" + trabajador + ", arl=" + arl + "]";
+		return "AfiliadoArl [id=" + id + ", codigo=" + codigo + ", trabajador=" + trabajador + ", arl=" + arl
+				+ ", fechaIngreso=" + fechaIngreso + ", fechaRetiro=" + fechaRetiro + "]";
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public Date getFechaRetiro() {
+		return fechaRetiro;
+	}
+
+	public void setFechaRetiro(Date fechaRetiro) {
+		this.fechaRetiro = fechaRetiro;
 	}
 
 	public Long getId() {
