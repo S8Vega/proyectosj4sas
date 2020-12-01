@@ -1,7 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="/plantilla/template :: head">
+	<style TYPE="text/css">
+		#nombre_fragmento {
+			animation-name: in_tittle;
+			animation-duration: 2s;
+		}
+
+		@keyframes in_tittle {
+			from {
+				margin-left: -400%;
+				width: 0px;
+				opacity: 0.2;
+			}
+
+			to {
+				margin-left: 0%;
+				width: max-content;
+				opacity: 1;
+			}
+		}
+
+		@keyframes in_button {
+		from{
+			opacity: 0;
+		}
+		to{
+			opacity: 1;
+		}
+
+	}
+	
+	#btn_opciones{
+			animation-name: in_button;	
+			animation-duration: 2s;
+		}
+			</style>
 </head>
+
 <body>
 	<div th:replace="/plantilla/template :: mensajes"></div>
 
@@ -28,7 +65,7 @@
 				<!-- CONTENIDO DINAMICO -->
 				<div class="mt-2">
 					<div class="card">
-						<div class="card-header hudsoft-thead-dark">Listado de
+						<div id="nombre_fragmento"  class="card-header hudsoft-thead-dark">Listado de
 							Empresas Asociadas</div>
 						<div class="card-body card-block">
 							<table id="dtBasicExample"
@@ -50,18 +87,16 @@
 										<td th:text="${empresa.nit}"></td>
 										<td th:text="${empresa.direccion}"></td>
 										<td th:text="${empresa.telefono}"></td>
-										<td><a th:href="@{/empresas/}+${empresa.id}"
-											class="hudsoft-btn-sm">Empresa</a>
-											 <a
-											th:href="@{/empresas/__${empresa.id}__/obras}"
-											class="hudsoft-btn-sm">Obras</a></td>
+										<td><a th:href="@{/empresas/}+${empresa.id}" class="hudsoft-btn-sm">Empresa</a>
+											<a th:href="@{/empresas/__${empresa.id}__/obras}"
+												class="hudsoft-btn-sm">Obras</a></td>
 									</tr>
 
 								</tbody>
 							</table>
 						</div>
 						<div class="card-footer">
-							<button type="reset" class="hudsoft-btn-sm float-right">
+							<button id="btn_opciones" type="reset" class="hudsoft-btn-sm float-right">
 								Opcion</button>
 						</div>
 					</div>
@@ -74,4 +109,5 @@
 
 	</div>
 </body>
+
 </html>
