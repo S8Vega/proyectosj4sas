@@ -13,12 +13,12 @@ public class ControladorVistas {
 		return "/vistas/obras/registrar.html";
 	}
 
-	@GetMapping("/joimar/registrar_obrero")
-	public String obreroNuevo(Model model) {
-		model.addAttribute("titulo", "PROYECTOS E INGENIERIA J4 S.A.");
-		model.addAttribute("ruta_de_navegacion", "Registrar un obrero");
-		return "/vistas/obras/obreros/registrar.html";
-	}
+	/*
+	 * @GetMapping("/joimar/registrar_obrero") public String obreroNuevo(Model
+	 * model) { model.addAttribute("titulo", "PROYECTOS E INGENIERIA J4 S.A.");
+	 * model.addAttribute("ruta_de_navegacion", "Registrar un obrero"); return
+	 * "/vistas/obras/obreros/registrar.html"; }
+	 */
 
 	
 }

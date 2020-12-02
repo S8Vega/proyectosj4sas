@@ -17,15 +17,15 @@ public class Trabajador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private Set<Obrero> obrero;
-	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.REMOVE)
+	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private Siso siso;
-	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.REMOVE)
+	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private AfiliadoArl afiliadoArl;
-	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.REMOVE)
+	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private AfiliadoEps afiliadoEps;
-	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.REMOVE)
+	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private AfiliadoFondoPension afiliadoFondoPension;
 	private String nombre;
 	private String cedula;

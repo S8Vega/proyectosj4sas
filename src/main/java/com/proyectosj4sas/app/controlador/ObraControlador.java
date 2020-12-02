@@ -35,7 +35,6 @@ public class ObraControlador {
 	@GetMapping("/obras/{id}")
 	public String getObrasPorEmpresa(@PathVariable Long id, Model model) {
 		Obra obra = obraService.findById(id);
-		System.out.println(obra.getRepresentante().getNombre());
 
 		model.addAttribute("titulo", "Obra");
 		model.addAttribute("ruta_de_navegacion", "Obra");
