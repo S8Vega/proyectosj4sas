@@ -77,6 +77,8 @@
 							</select> <input class="form_registro" id="codigo_afiliado_arl"
 								th:field="${obrero.trabajador.afiliadoArl.codigo}"
 								placeholder="Codigo Afiliado ARL">
+								<input class="form_registro" type="date"
+								th:field="${obrero.trabajador.afiliadoArl.fechaIngreso}">
 						</div>
 
 
@@ -87,6 +89,11 @@
 									th:text="${obj.nombre}" />
 
 							</select>
+								<input class="form_registro"placeholder="Codigo Afiliado EPS"
+								th:field="${obrero.trabajador.afiliadoEps.codigo}"
+								>
+								<input class="form_registro" type="date"
+								th:field="${obrero.trabajador.afiliadoEps.fechaIngreso}">
 						</div>
 						<div>
 							<label class="col-md-4" for="afiliadoFondoPension">Fondo
@@ -96,6 +103,11 @@
 									th:text="${obj.nombre}" />
 
 							</select>
+							<input class="form_registro" placeholder="Codigo Afiliado AFP"
+								th:field="${obrero.trabajador.afiliadoFondoPension.codigo}"
+							>
+								<input class="form_registro" type="date"
+								th:field="${obrero.trabajador.afiliadoFondoPension.fechaIngreso}">
 						</div>
 
 						<div class="row">

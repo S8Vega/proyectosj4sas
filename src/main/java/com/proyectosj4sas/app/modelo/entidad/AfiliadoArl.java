@@ -1,6 +1,7 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class AfiliadoArl implements Serializable {
@@ -24,14 +27,15 @@ public class AfiliadoArl implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "arl")
 	private Arl arl;
-	private Date fechaIngreso;
+	@Temporal(TemporalType.DATE)
+	private Calendar fechaIngreso;
 	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 
 	public AfiliadoArl() {
 	}
 
-	public AfiliadoArl(Long id, String codigo, Trabajador trabajador, Arl arl, Date fechaIngreso, Date fechaRetiro) {
+	public AfiliadoArl(Long id, String codigo, Trabajador trabajador, Arl arl, Calendar fechaIngreso, Date fechaRetiro) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -47,11 +51,11 @@ public class AfiliadoArl implements Serializable {
 				+ ", fechaIngreso=" + fechaIngreso + ", fechaRetiro=" + fechaRetiro + "]";
 	}
 
-	public Date getFechaIngreso() {
+	public Calendar getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(Calendar fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 

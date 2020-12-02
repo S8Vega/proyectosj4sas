@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyectosj4sas.app.modelo.entidad.AfiliadoArl;
+import com.proyectosj4sas.app.modelo.entidad.AfiliadoEps;
 import com.proyectosj4sas.app.modelo.entidad.AfiliadoFondoPension;
 import com.proyectosj4sas.app.modelo.entidad.Arl;
 import com.proyectosj4sas.app.modelo.entidad.FondoPension;
@@ -52,6 +53,8 @@ public class ObreroControlador {
 	private ObraServicioImpl obraService;
 	@Autowired
 	private AfiliadoArlServicioImpl afiliadoArlService;
+	@Autowired private AfiliadoEpsServicioImpl afiliadoEpsService;
+	@Autowired private AfiliadoFondoPensionServicioImpl afiliadoAfpService;
 	
 	@GetMapping({ "/crear/{idObra}" })
 	public String listar(@PathVariable Long idObra,Model model) {
@@ -80,18 +83,19 @@ public class ObreroControlador {
 	
 	@PostMapping("/guardar")
 	public String guardar(@Valid @ModelAttribute Obrero obrero,BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			model.addAttribute("obrero", obrero);
-			model.addAttribute("titulo", "CREAR OBRERO");
-			model.addAttribute("ruta_de_navegacion", "REGISTRO DE OBRERO");
-			return "vistas/obreros/registrar";
-		}
+//		if(result.hasErrors()) {
+//			model.addAttribute("obrero", obrero);
+//			model.addAttribute("titulo", "CREAR OBRERO");
+//			model.addAttribute("ruta_de_navegacion", "REGISTRO DE OBRERO");
+//			return "vistas/obreros/registrar";
+//		}
 		
 		System.out.println("ob + " +obraService.findById(obrero.getObra().getId()).getNombre());
+		
 		obrero.setObra(obraService.findById(obrero.getObra().getId()));
 		trabajadorService.save(obrero.getTrabajador());
 		obrero.setFechaIngreso(new Date());
-		
+		System.out.println("ob + " +obrero.getTrabajador().getAfiliadoArl().getFechaIngreso());
 		
 		if(obrero.getTrabajador().getAfiliadoArl().getArl().getId()!=4) {
 			AfiliadoArl afArl = obrero.getTrabajador().getAfiliadoArl();
@@ -101,10 +105,25 @@ public class ObreroControlador {
 			System.out.println(afArl.getCodigo());
 		
 		}
-
+		if(obrero.getTrabajador().getAfiliadoEps().getEps().getId()!=4) {
+			AfiliadoEps afEps = obrero.getTrabajador().getAfiliadoEps();
+			afEps.setTrabajador(obrero.getTrabajador());
+			afEps.setEps(epsService.findById(obrero.getTrabajador().getAfiliadoEps().getEps().getId()));
+			afiliadoEpsService.save(afEps);
+			System.out.println(afEps.getCodigo());
+		
+		}
+		if(obrero.getTrabajador().getAfiliadoFondoPension().getFondoPension().getId()!=4) {
+			AfiliadoFondoPension afAfp = obrero.getTrabajador().getAfiliadoFondoPension();
+			afAfp.setTrabajador(obrero.getTrabajador());
+			afAfp.setFondoPension(afpService.findById(obrero.getTrabajador().getAfiliadoFondoPension().getFondoPension().getId()));
+			afiliadoAfpService.save(afAfp);
+			System.out.println(afAfp.getCodigo());
+		
+		}
 				obreroService.save(obrero);
-
-		return "index";
+				//model.addAttribute("obra", obraService.findById(obrero.getObra().getId()).getNombre());
+		return "redirect:/obras/"+obrero.getObra().getId();
 	}
 
 }
