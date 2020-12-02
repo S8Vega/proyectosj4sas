@@ -1,11 +1,13 @@
 package com.proyectosj4sas.app.controlador;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyectosj4sas.app.modelo.entidad.AfiliadoArl;
 import com.proyectosj4sas.app.modelo.entidad.AfiliadoEps;
@@ -82,29 +85,28 @@ public class ObreroControlador {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardar(@Valid @ModelAttribute Obrero obrero,BindingResult result, Model model) {
-//		if(result.hasErrors()) {
-//			model.addAttribute("obrero", obrero);
-//			model.addAttribute("titulo", "CREAR OBRERO");
-//			model.addAttribute("ruta_de_navegacion", "REGISTRO DE OBRERO");
-//			return "vistas/obreros/registrar";
-//		}
+	public String guardar(@Valid @ModelAttribute Obrero obrero,BindingResult result, Model model,
+			@RequestParam(name = "id_obra", required = false) Long idObra,
+			@RequestParam(name = "id_arl", required = false) Long idArl,
+			@RequestParam(name = "codigo_afiliado_arl", required = false) String codigoAfiliadoArl,
+			@RequestParam("fecha_registro_arl")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroArl
+			)
+			 {
+		Obra obra  = obraService.findById(idObra);
+		Arl arl = arlService.findById(idArl);
+		System.out.println("Nombre de la obra: " +obra.getNombre());
+		System.out.println("Codigo afiliado url: " +codigoAfiliadoArl);
 		
-		System.out.println("ob + " +obraService.findById(obrero.getObra().getId()).getNombre());
-		
-		obrero.setObra(obraService.findById(obrero.getObra().getId()));
+		obrero.setObra(obra);
 		trabajadorService.save(obrero.getTrabajador());
 		obrero.setFechaIngreso(new Date());
-		System.out.println("ob + " +obrero.getTrabajador().getAfiliadoArl().getFechaIngreso());
-		
-		if(obrero.getTrabajador().getAfiliadoArl().getArl().getId()!=4) {
-			AfiliadoArl afArl = obrero.getTrabajador().getAfiliadoArl();
-			afArl.setTrabajador(obrero.getTrabajador());
-			afArl.setArl(arlService.findById(obrero.getTrabajador().getAfiliadoArl().getArl().getId()));
+		Trabajador trabajador = obrero.getTrabajador();
+		if(idArl!=-1) {
+			AfiliadoArl afArl = new AfiliadoArl(codigoAfiliadoArl,trabajador, arl, fechaRegistroArl);
 			afiliadoArlService.save(afArl);
-			System.out.println(afArl.getCodigo());
+			System.out.println(afArl.getCodigo()+"ARL:");
 		
-		}
+		}else {System.out.println("no va a guardar nada");}
 		if(obrero.getTrabajador().getAfiliadoEps().getEps().getId()!=4) {
 			AfiliadoEps afEps = obrero.getTrabajador().getAfiliadoEps();
 			afEps.setTrabajador(obrero.getTrabajador());
@@ -121,9 +123,20 @@ public class ObreroControlador {
 			System.out.println(afAfp.getCodigo());
 		
 		}
+		System.out.println("prueba del envio de parametros");
+		System.out.println(idObra);
 				obreroService.save(obrero);
 				//model.addAttribute("obra", obraService.findById(obrero.getObra().getId()).getNombre());
 		return "redirect:/obras/"+obrero.getObra().getId();
+	}
+	
+	@PostMapping("/form")
+	public String modificarEstadoConJavascript(Obrero obrero,RedirectAttributes flash,
+			@RequestParam(name="codigo_secreto",required = false) String codigo_m
+			) {
+		System.out.println("##");
+		System.out.println(codigo_m);
+		return "index";
 	}
 
 }

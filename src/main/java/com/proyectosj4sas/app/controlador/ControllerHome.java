@@ -20,4 +20,8 @@ public class ControllerHome {
 		model.addAttribute("ruta_de_navegacion", "Registrar");
 		return "/vistas/registro/index";
 	}
+	@GetMapping("/test")
+	public String index2(Model model) {
+		return "pruebas";
+	}
 }

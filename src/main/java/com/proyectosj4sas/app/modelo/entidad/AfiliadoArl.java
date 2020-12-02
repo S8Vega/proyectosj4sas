@@ -27,22 +27,27 @@ public class AfiliadoArl implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "arl")
 	private Arl arl;
-	@Temporal(TemporalType.DATE)
-	private Calendar fechaIngreso;
+	private Date fechaIngreso;
 	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 
 	public AfiliadoArl() {
 	}
 
-	public AfiliadoArl(Long id, String codigo, Trabajador trabajador, Arl arl, Calendar fechaIngreso, Date fechaRetiro) {
+	public AfiliadoArl(Long id, String codigo, Trabajador trabajador, Arl arl, Date fechaIngreso, Date fechaRetiro) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.trabajador = trabajador;
 		this.arl = arl;
 		this.fechaIngreso = fechaIngreso;
-		this.fechaRetiro = fechaRetiro;
+	}
+	public AfiliadoArl(String codigo, Trabajador trabajador, Arl arl, Date fechaIngreso) {
+	
+		this.codigo = codigo;
+		this.trabajador = trabajador;
+		this.arl = arl;
+		this.fechaIngreso = fechaIngreso;	
 	}
 
 	@Override
@@ -51,11 +56,11 @@ public class AfiliadoArl implements Serializable {
 				+ ", fechaIngreso=" + fechaIngreso + ", fechaRetiro=" + fechaRetiro + "]";
 	}
 
-	public Calendar getFechaIngreso() {
+	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Calendar fechaIngreso) {
+	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
