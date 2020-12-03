@@ -56,26 +56,30 @@
                     <h3>Llena los campos necesarios</h3>
 
 
-                    <form th:action="@{/vistas/obreros/guardar}" method="post" th:object="${obrero}">
+                    <form th:action="@{/empresas/guardar}" method="post" th:object="${empresa}">
                         <div class="form-group row">
-                            <label class="col-md-4" for="nombre">Nombre</label> <input class="form_registro" id="nombre" th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
-                            <small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.nombre')}" th:errors="*{trabajador.nombre}"></small>
+                            <label class="col-md-4" for="">Nombre</label> 
+                            <input class="form_registro" id="nombre"  th:field="${empresa.nombre}" placeholder="Nombre">
+                            <small class="form-text text-danger" ></small>
                         </div>
 
 
                         <div>
-                            <label class="col-md-4" for="estado">NIT</label>
-                            <input class="form_registro" id="direccion" th:field="${obrero.trabajador.cedula}" placeholder="123-456-235425-2" value=""> <small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.cedula')}" th:errors="*{trabajador.cedula}"></small>
+                            <label class="col-md-4" for="">NIT</label>
+                            <input class="form_registro" id="nit" th:field="${empresa.nit}" placeholder="123-456-235425-2">
+                            <small class="form-text text-danger" ></small>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4" for="estado">DIRECCIÓN</label> <input class="form_registro" id="direccion" th:field="${obrero.trabajador.cedula}" placeholder="Calle 0A #1" value=""> <small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.cedula')}"
-                                th:errors="*{trabajador.cedula}"></small>
+                            <label class="col-md-4" for="">DIRECCIÓN</label> 
+                            <input class="form_registro" id="direccion" th:field="${empresa.direccion}" placeholder="Calle 0A #1" value=""> 
+                            <small class="form-text text-danger"
+                                ></small>
                         </div>
                         <div>
-                            <label class="col-md-4" for="cargo">TELÉFONO</label>
-                            <input class="form_registro" id="telefono" th:field="${obrero.trabajador.nombre}" placeholder="+57 310 555 55 55">
+                            <label class="col-md-4" for="">TELÉFONO</label>
+                            <input class="form_registro" th:type="tel" id="telefono"  th:field="${empresa.telefono}"placeholder="+57 310 555 55 55">
                         </div>
-                        <div>
+                     <!--    <div>
                             <label class="col-md-4" for="cargo">Asigna un contador a la obra</label>
                             <a href="#miModal"><button type="submit" class="hudsoft-btn-sm mx-auto">Diligenciar</button></a>
                             <div id="miModal">
@@ -84,10 +88,10 @@
                                 <p>Este es mi primera ventana modal sin utilizar JavaScript.</p>
                             </div>
 
-                        </div>
+                        </div> -->
                         <div class="row">
                             <!-- <input name="id_secret" value="56"> -->
-                            <input type="hidden" name="id_obra" th:value="${idObra}">
+                            <!-- <input type="hidden" name="id_obra" th:value="${idObra}"> -->
                             <button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
 
                         </div>
@@ -102,181 +106,7 @@
     <!-- /#page-content-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script>
-        function listaDeEps() {
-            fetch('/eps/', {
-                    method: 'get',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok)
-                        return response.text();
-                    else
-                        throw new Error(response.status);
-                })
-                .then(data => {
-                    sessionStorage.setItem("lista_eps", JSON.stringify(JSON.parse(data)));
-                })
-                .catch(err => {
-                    console.error("ERROR: ", err.message)
-                });
-        }
-
-        function listaDeAfp() {
-            fetch('/afp/', {
-                    method: 'get',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok)
-                        return response.text();
-                    else
-                        throw new Error(response.status);
-                })
-                .then(data => {
-                    sessionStorage.setItem("lista_afp", JSON.stringify(JSON.parse(data)));
-                })
-                .catch(err => {
-                    console.error("ERROR: ", err.message)
-                });
-        }
-        listaDeEps();
-        listaDeAfp();
-    </script>
-    <script>
-        function getAllArlFetch() {
-            let opciones = {
-                method: 'get',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-
-            fetch('/arl/', opciones)
-                .then(response => {
-                    if (response.ok)
-                        return response.text();
-                    else
-                        throw new Error(response.status);
-                })
-                .then(data => {
-                    var lista_arl = JSON.parse(data);
-                    sessionStorage.setItem("lista_arl", JSON.stringify(lista_arl));
-                })
-                .catch(err => {
-                    console.error("ERROR: ", err.message)
-                });
-        }
-        getAllArlFetch();
-    </script>
-    <script>
-        function llenarSelectArl() {
-            lista_arl = JSON.parse(sessionStorage.getItem("lista_arl"));
-            let select = document.getElementById("id_arl");
-
-            lista_arl.forEach(item => {
-                let option = document.createElement("option");
-                option.value = item["id"];
-                option.textContent = item["nombre"];
-                select.appendChild(option);
-            });
-
-            let option = document.createElement("option");
-            option.value = -1;
-            option.textContent = "No cuenta con ARL";
-            select.appendChild(option);
-        }
-        llenarSelectArl();
-    </script>
-    <script>
-        function llenarSelectEps() {
-            lista_eps = JSON.parse(sessionStorage.getItem("lista_eps"));
-            let select_eps = document.getElementById("id_eps");
-            lista_eps.forEach(item => {
-                let option_eps = document.createElement("option");
-                option_eps.value = item["id"];
-                option_eps.textContent = item["nombre"];
-                select_eps.appendChild(option_eps);
-            });
-
-            let option_eps = document.createElement("option");
-            option_eps.value = -1;
-            option_eps.textContent = "No cuenta con EPS";
-            select_eps.appendChild(option_eps);
-        }
-        llenarSelectEps();
-    </script>
-    <!-- 	<script>
-
-
-		function getAllArlFetch() {
-			let opciones = {
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}
-
-			fetch('/arl/', opciones)
-				.then(response => {
-					if (response.ok)
-						return response.text();
-					else
-						throw new Error(response.status);
-				})
-				.then(data => {
-					var lista_arl = JSON.parse(data);
-					sessionStorage.setItem("lista_arl", JSON.stringify(lista_arl));
-				})
-				.catch(err => {
-					console.error("ERROR: ", err.message)
-				});
-		}
-		getAllArlFetch();
-	</script>	
-	
-	<script>
-		lista_arl = JSON.parse(sessionStorage.getItem("lista_arl"));
-
-		let label = document.createElement("label");
-		label.className = "";
-		label.textContent = "ARL";
-
-		let codigo_arl = document.createElement("input");
-		let fecha_ingreso = document.createElement("input");
-		let arl = document.createElement("select");
-
-		codigo_arl.type = "text";
-		codigo_arl.placeholder = "Codigo de usuario de ARL";
-		codigo_arl.setAttribute("th:field","obrero.trabajador.afiliadoArl.codigo");
-		fecha_ingreso.type = "date";
-		fecha_ingreso.setAttribute("th:field","obrero.trabajador.afiliadoArl.fechaIngreso");
-		let div = document.getElementById("arl");
-		console.log(lista_arl);
-		//llenado del select
-		lista_arl.forEach(item => {
-			let option = document.createElement("option");
-			option.value = item["id"];
-			option.textContent = item["nombre"];
-			arl.appendChild(option);
-			//console.log("Nombre: " + arl["nombre"]);
-			//console.log(arl);
-		});
-
-		div.appendChild(label);
-		div.appendChild(arl);
-		div.appendChild(codigo_arl);
-		div.appendChild(fecha_ingreso);
-		//console.log(label);
-		//let v2=div.getElementsByTagName[0];
-		//console.log(v2);
-		//div.removeChild(label);
-		console.log(div);
-		//console.log(label);
-
-	</script> -->
+    
     <!-- ./JAVASCRIPT -->
 </body>
 
