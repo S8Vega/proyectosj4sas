@@ -1,6 +1,14 @@
 package com.proyectosj4sas.app.controlador;
 
+<<<<<<< HEAD
+
 import java.util.Date;
+
+
+
+=======
+import java.util.Date;
+>>>>>>> e92b8adce9df55b3c7196887699eaeb8befcc1a9
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -81,7 +89,11 @@ public class ObreroControlador {
 	}
 	
 	@PostMapping("/guardar")
+<<<<<<< HEAD
+	public String guardar( @ModelAttribute Obrero obrero,BindingResult result, Model model,
+=======
 	public String guardar(@ModelAttribute Obrero obrero,BindingResult result, Model model,
+>>>>>>> e92b8adce9df55b3c7196887699eaeb8befcc1a9
 			@RequestParam(name = "id_obra", required = false) Long idObra,
 			@RequestParam(name = "id_arl", required = false) Long idArl,
 			@RequestParam(name = "id_eps", required = false) Long idEps,

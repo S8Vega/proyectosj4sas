@@ -92,8 +92,12 @@
 		<!-- <dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
+<<<<<<< HEAD
+			</dependency>
+=======
 			<version>1.0.0.GA</version>
 		</dependency> -->
+>>>>>>> e92b8adce9df55b3c7196887699eaeb8befcc1a9
 
 	</dependencies>
 
