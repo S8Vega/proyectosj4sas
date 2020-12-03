@@ -1,10 +1,10 @@
 package com.proyectosj4sas.app.controlador;
 
-import java.lang.ProcessBuilder.Redirect;
-import java.util.Date;
-import java.util.List;
 
-import javax.validation.Valid;
+import java.util.Date;
+
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -85,7 +85,7 @@ public class ObreroControlador {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardar(@Valid @ModelAttribute Obrero obrero,BindingResult result, Model model,
+	public String guardar( @ModelAttribute Obrero obrero,BindingResult result, Model model,
 			@RequestParam(name = "id_obra", required = false) Long idObra,
 			@RequestParam(name = "id_arl", required = false) Long idArl,
 			@RequestParam(name = "codigo_afiliado_arl", required = false) String codigoAfiliadoArl,
