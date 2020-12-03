@@ -1,11 +1,11 @@
-document.body.onload = function () {
+/*document.body.onload = function () {
     setTimeout(eliminarNotificaciones(), 2000);
 };
 
 function eliminarNotificaciones(){
     let notificacion = document.getElementById("notificaciones");
     notificacion.remove();
-}
+}*/
 
 $("#menu-toggle").click(function(e) {
 			e.preventDefault();

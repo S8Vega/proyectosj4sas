@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="/plantilla/template :: head">
 </head>
@@ -30,11 +31,14 @@
 					<h3>Información básica</h3>
 
 
-					<form th:action="@{/vistas/obreros/guardar}" method="post" th:object="${obrero}">
+					<form th:action="@{/vistas/obreros/guardar}" method="post"
+						th:object="${obrero}">
 						<div class="form-group row">
-							<label class="col-md-4" for="nombre">Nombre</label> <input class="form_registro" id="nombre"
+							<label class="col-md-4" for="nombre">Nombre</label> <input
+								class="form_registro" id="nombre"
 								th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
-							<small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.nombre')}"
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('trabajador.nombre')}"
 								th:errors="*{trabajador.nombre}"></small>
 						</div>
 
@@ -42,7 +46,7 @@
 						<div>
 							<label class="col-md-4" for="estado">Estado</label> <select
 								name="estado" id="estado">
-								<option disabled selected>activo</option>
+								<option selected>activo</option>
 								<option value="inactivo">inactivo</option>
 							</select>
 						</div>
@@ -66,29 +70,27 @@
 						</div>
 
 						<div id="arl">
-							
-							
-					
-							<label class="col-md-4" for="afiliadoArl">ARL</label>
-							<select	id ="id_arl" name="id_arl">
-							</select> <input class="form_registro" name="codigo_afiliado_arl"
-								
-								placeholder="Codigo Afiliado ARL">
-								<input class="form_registro" type="date" name="fecha_registro_arl">
+
+
+
+							<label class="col-md-4" for="afiliadoArl">ARL</label> <select
+								id="id_arl" name="id_arl">
+							</select>
+							 <input class="form_registro" name="codigo_afiliado_arl"
+								placeholder="Codigo Afiliado ARL"> <input
+								class="form_registro" type="date" name="fecha_registro_arl">
 						</div>
 
 
 						<div>
-							<label class="col-md-4" for="afiliadoEps">EPS</label> <select
-								th:field="${obrero.trabajador.afiliadoEps.eps.id}">
-								<option th:each="obj : ${listaEps}" th:value="${obj.id}"
-									th:text="${obj.nombre}" />
+							<label class="col-md-4" for="afiliadoEps">EPS</label> 
+							<select id="id_eps" name="id_eps">
+								
 
-							</select>
-								<input class="form_registro"placeholder="Codigo Afiliado EPS"
-								th:field="${obrero.trabajador.afiliadoEps.codigo}"
-								>
-								<input class="form_registro" type="date"
+							</select> 
+							<input class="form_registro" placeholder="Codigo Afiliado EPS"
+								th:field="${obrero.trabajador.afiliadoEps.codigo}">
+							<input class="form_registro" type="date"
 								th:field="${obrero.trabajador.afiliadoEps.fechaIngreso}">
 						</div>
 						<div>
@@ -98,11 +100,9 @@
 								<option th:each="obj : ${listaAfp}" th:value="${obj.id}"
 									th:text="${obj.nombre}" />
 
-							</select>
-							<input class="form_registro" placeholder="Codigo Afiliado AFP"
-								th:field="${obrero.trabajador.afiliadoFondoPension.codigo}"
-							>
-								<input class="form_registro" type="date"
+							</select> <input class="form_registro" placeholder="Codigo Afiliado AFP"
+								th:field="${obrero.trabajador.afiliadoFondoPension.codigo}">
+							<input class="form_registro" type="date"
 								th:field="${obrero.trabajador.afiliadoFondoPension.fechaIngreso}">
 						</div>
 
@@ -121,8 +121,54 @@
 		</div>
 	</div>
 	<!-- /#page-content-wrapper -->
-	
+
 	<!-- JAVASCRIPT -->
+	<script>
+		function listaDeEps() {
+			fetch('/eps/', 
+					{
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}		
+			).then(response => {
+					if (response.ok)
+						return response.text();
+					else
+						throw new Error(response.status);
+				})
+				.then(data => {
+					sessionStorage.setItem("lista_eps", JSON.stringify(JSON.parse(data)));
+				})
+				.catch(err => {
+					console.error("ERROR: ", err.message)
+				});
+		}
+		function listaDeAfp() {
+			fetch('/afp/', 
+					{
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}		
+			).then(response => {
+					if (response.ok)
+						return response.text();
+					else
+						throw new Error(response.status);
+				})
+				.then(data => {
+					sessionStorage.setItem("lista_afp", JSON.stringify(JSON.parse(data)));
+				})
+				.catch(err => {
+					console.error("ERROR: ", err.message)
+				});
+		}
+		listaDeEps();
+		listaDeAfp();
+	</script>
 	<script>
 		function getAllArlFetch() {
 			let opciones = {
@@ -149,23 +195,44 @@
 		}
 		getAllArlFetch();
 	</script>
-<script>
-		lista_arl = JSON.parse(sessionStorage.getItem("lista_arl"));
-		let select = document.getElementById("id_arl");
-		
-		lista_arl.forEach(item => {
+	<script>
+		function llenarSelectArl(){
+			lista_arl = JSON.parse(sessionStorage.getItem("lista_arl"));
+			let select = document.getElementById("id_arl");
+			
+			lista_arl.forEach(item => {
+				let option = document.createElement("option");
+				option.value = item["id"];
+				option.textContent = item["nombre"];
+				select.appendChild(option);
+			});
+			
 			let option = document.createElement("option");
-			option.value = item["id"];
-			option.textContent = item["nombre"];
+			option.value = -1;
+			option.textContent = "No cuenta con ARL";
 			select.appendChild(option);
-		});
-		
-		let option = document.createElement("option");
-		option.value = -1;
-		option.textContent = "No cuenta con ARL";
-		select.appendChild(option);
+		}
+		llenarSelectArl();
 	</script>
-<!-- 	<script>
+		<script>
+		function llenarSelectEps(){
+			lista_eps = JSON.parse(sessionStorage.getItem("lista_eps"));
+			let select_eps = document.getElementById("id_eps");
+			lista_eps.forEach(item => {
+				let option_eps = document.createElement("option");
+				option_eps.value = item["id"];
+				option_eps.textContent = item["nombre"];
+				select_eps.appendChild(option_eps);
+			});
+			
+			let option_eps = document.createElement("option");
+			option_eps.value = -1;
+			option_eps.textContent = "No cuenta con EPS";
+			select_eps.appendChild(option_eps);
+		}
+		llenarSelectEps();
+	</script>
+	<!-- 	<script>
 
 
 		function getAllArlFetch() {

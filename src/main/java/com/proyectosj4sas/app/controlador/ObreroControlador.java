@@ -66,10 +66,10 @@ public class ObreroControlador {
 	Obrero obrero = new Obrero();
 	trabajador.setAfiliadoFondoPension(new AfiliadoFondoPension());
 	trabajador.getAfiliadoFondoPension().setFondoPension(new FondoPension());
-	AfiliadoArl af = new AfiliadoArl();
-	
-	trabajador.setAfiliadoArl(af);
-	trabajador.getAfiliadoArl().setArl(new Arl());
+//	AfiliadoArl af = new AfiliadoArl();
+//	
+//	trabajador.setAfiliadoArl(af);
+//	trabajador.getAfiliadoArl().setArl(new Arl());
 	obrero.setTrabajador(trabajador);
 	obrero.setObra(obraService.findById(idObra));
 	System.out.println(idObra);
