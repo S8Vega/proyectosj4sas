@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="/plantilla/template :: head">
 </head>
@@ -31,14 +30,11 @@
 					<h3>Información básica</h3>
 
 
-					<form th:action="@{/vistas/obreros/guardar}" method="post"
-						th:object="${obrero}">
+					<form th:action="@{/vistas/obreros/guardar}" method="post" th:object="${obrero}">
 						<div class="form-group row">
-							<label class="col-md-4" for="nombre">Nombre</label> <input
-								class="form_registro" id="nombre"
+							<label class="col-md-4" for="nombre">Nombre</label> <input class="form_registro" id="nombre"
 								th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
-							<small class="form-text text-danger"
-								th:if="${#fields.hasErrors('trabajador.nombre')}"
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.nombre')}"
 								th:errors="*{trabajador.nombre}"></small>
 						</div>
 
@@ -88,26 +84,23 @@
 								
 
 							</select> 
-							<input class="form_registro" placeholder="Codigo Afiliado EPS"
-								th:field="${obrero.trabajador.afiliadoEps.codigo}">
-							<input class="form_registro" type="date"
-								th:field="${obrero.trabajador.afiliadoEps.fechaIngreso}">
+							<input class="form_registro" name="codigo_afiliado_eps"
+								placeholder="Codigo Afiliado EPS"> 
+							<input
+								class="form_registro" type="date" name="fecha_registro_eps">
 						</div>
 						<div>
 							<label class="col-md-4" for="afiliadoFondoPension">Fondo
-								de Pension</label> <select name="afiliadoFondoPension"
-								th:field="${obrero.trabajador.afiliadoFondoPension.fondoPension.id}">
-								<option th:each="obj : ${listaAfp}" th:value="${obj.id}"
-									th:text="${obj.nombre}" />
+								de Pension</label> <select name="id_afp" id="id_afp"						>
+								
 
-							</select> <input class="form_registro" placeholder="Codigo Afiliado AFP"
-								th:field="${obrero.trabajador.afiliadoFondoPension.codigo}">
-							<input class="form_registro" type="date"
-								th:field="${obrero.trabajador.afiliadoFondoPension.fechaIngreso}">
+							</select> 
+							<input class="form_registro" name="codigo_afiliado_afp"
+								placeholder="Codigo Afiliado ARL"> <input
+								class="form_registro" type="date" name="fecha_registro_afp">
 						</div>
 
 						<div class="row">
-							<!-- <input name="id_secret" value="56"> -->
 							<input type="hidden" name="id_obra" th:value="${idObra}">
 							<button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
 
@@ -124,183 +117,53 @@
 
 	<!-- JAVASCRIPT -->
 	<script>
-		function listaDeEps() {
-			fetch('/eps/', 
-					{
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}		
-			).then(response => {
-					if (response.ok)
-						return response.text();
-					else
-						throw new Error(response.status);
-				})
-				.then(data => {
-					sessionStorage.setItem("lista_eps", JSON.stringify(JSON.parse(data)));
-				})
-				.catch(err => {
-					console.error("ERROR: ", err.message)
-				});
-		}
-		function listaDeAfp() {
-			fetch('/afp/', 
-					{
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}		
-			).then(response => {
-					if (response.ok)
-						return response.text();
-					else
-						throw new Error(response.status);
-				})
-				.then(data => {
-					sessionStorage.setItem("lista_afp", JSON.stringify(JSON.parse(data)));
-				})
-				.catch(err => {
-					console.error("ERROR: ", err.message)
-				});
-		}
-		listaDeEps();
-		listaDeAfp();
-	</script>
-	<script>
-		function getAllArlFetch() {
-			let opciones = {
+		function guargarListaEnSessionStorage(url, nombre_lista,id_select,mensaje) {
+
+			let options = {
 				method: 'get',
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			}
+			fetch(url, options
 
-			fetch('/arl/', opciones)
-				.then(response => {
-					if (response.ok)
-						return response.text();
-					else
-						throw new Error(response.status);
-				})
+			).then(response => {
+				if (response.ok)
+					return response.text();
+				else
+					throw new Error(response.status);
+			})
 				.then(data => {
-					var lista_arl = JSON.parse(data);
-					sessionStorage.setItem("lista_arl", JSON.stringify(lista_arl));
+					sessionStorage.setItem(nombre_lista, JSON.stringify(JSON.parse(data)));
+					llenarSelect(id_select, nombre_lista, mensaje);
 				})
 				.catch(err => {
 					console.error("ERROR: ", err.message)
 				});
 		}
-		getAllArlFetch();
-	</script>
-	<script>
-		function llenarSelectArl(){
-			lista_arl = JSON.parse(sessionStorage.getItem("lista_arl"));
-			let select = document.getElementById("id_arl");
-			
-			lista_arl.forEach(item => {
+
+
+		function llenarSelect(id_select, nombre_lista, mensaje) {
+			let lista = JSON.parse(sessionStorage.getItem(nombre_lista));
+			let select = document.getElementById(id_select);
+
+			lista.forEach(item => {
 				let option = document.createElement("option");
 				option.value = item["id"];
 				option.textContent = item["nombre"];
 				select.appendChild(option);
 			});
-			
+
 			let option = document.createElement("option");
 			option.value = -1;
-			option.textContent = "No cuenta con ARL";
+			option.textContent = mensaje;
 			select.appendChild(option);
 		}
-		llenarSelectArl();
+		guargarListaEnSessionStorage("/arl/", "lista_arl","id_arl","No tiene Arl");
+		guargarListaEnSessionStorage("/eps/", "lista_eps","id_eps","No tiene Eps");
+		guargarListaEnSessionStorage("/afp/", "lista_afp","id_afp","No tiene Afp");
 	</script>
-		<script>
-		function llenarSelectEps(){
-			lista_eps = JSON.parse(sessionStorage.getItem("lista_eps"));
-			let select_eps = document.getElementById("id_eps");
-			lista_eps.forEach(item => {
-				let option_eps = document.createElement("option");
-				option_eps.value = item["id"];
-				option_eps.textContent = item["nombre"];
-				select_eps.appendChild(option_eps);
-			});
-			
-			let option_eps = document.createElement("option");
-			option_eps.value = -1;
-			option_eps.textContent = "No cuenta con EPS";
-			select_eps.appendChild(option_eps);
-		}
-		llenarSelectEps();
-	</script>
-	<!-- 	<script>
 
-
-		function getAllArlFetch() {
-			let opciones = {
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}
-
-			fetch('/arl/', opciones)
-				.then(response => {
-					if (response.ok)
-						return response.text();
-					else
-						throw new Error(response.status);
-				})
-				.then(data => {
-					var lista_arl = JSON.parse(data);
-					sessionStorage.setItem("lista_arl", JSON.stringify(lista_arl));
-				})
-				.catch(err => {
-					console.error("ERROR: ", err.message)
-				});
-		}
-		getAllArlFetch();
-	</script>	
-	
-	<script>
-		lista_arl = JSON.parse(sessionStorage.getItem("lista_arl"));
-
-		let label = document.createElement("label");
-		label.className = "";
-		label.textContent = "ARL";
-
-		let codigo_arl = document.createElement("input");
-		let fecha_ingreso = document.createElement("input");
-		let arl = document.createElement("select");
-
-		codigo_arl.type = "text";
-		codigo_arl.placeholder = "Codigo de usuario de ARL";
-		codigo_arl.setAttribute("th:field","obrero.trabajador.afiliadoArl.codigo");
-		fecha_ingreso.type = "date";
-		fecha_ingreso.setAttribute("th:field","obrero.trabajador.afiliadoArl.fechaIngreso");
-		let div = document.getElementById("arl");
-		console.log(lista_arl);
-		//llenado del select
-		lista_arl.forEach(item => {
-			let option = document.createElement("option");
-			option.value = item["id"];
-			option.textContent = item["nombre"];
-			arl.appendChild(option);
-			//console.log("Nombre: " + arl["nombre"]);
-			//console.log(arl);
-		});
-
-		div.appendChild(label);
-		div.appendChild(arl);
-		div.appendChild(codigo_arl);
-		div.appendChild(fecha_ingreso);
-		//console.log(label);
-		//let v2=div.getElementsByTagName[0];
-		//console.log(v2);
-		//div.removeChild(label);
-		console.log(div);
-		//console.log(label);
-
-	</script> -->
 	<!-- ./JAVASCRIPT -->
 </body>
 </html>

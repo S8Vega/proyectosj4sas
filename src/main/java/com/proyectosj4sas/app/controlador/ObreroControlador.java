@@ -1,17 +1,12 @@
 package com.proyectosj4sas.app.controlador;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.Date;
-import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +19,7 @@ import com.proyectosj4sas.app.modelo.entidad.AfiliadoArl;
 import com.proyectosj4sas.app.modelo.entidad.AfiliadoEps;
 import com.proyectosj4sas.app.modelo.entidad.AfiliadoFondoPension;
 import com.proyectosj4sas.app.modelo.entidad.Arl;
+import com.proyectosj4sas.app.modelo.entidad.Eps;
 import com.proyectosj4sas.app.modelo.entidad.FondoPension;
 import com.proyectosj4sas.app.modelo.entidad.Obra;
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
@@ -85,15 +81,23 @@ public class ObreroControlador {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardar(@Valid @ModelAttribute Obrero obrero,BindingResult result, Model model,
+	public String guardar(@ModelAttribute Obrero obrero,BindingResult result, Model model,
 			@RequestParam(name = "id_obra", required = false) Long idObra,
 			@RequestParam(name = "id_arl", required = false) Long idArl,
+			@RequestParam(name = "id_eps", required = false) Long idEps,
+			@RequestParam(name = "id_afp", required = false) Long idAfp,
 			@RequestParam(name = "codigo_afiliado_arl", required = false) String codigoAfiliadoArl,
-			@RequestParam("fecha_registro_arl")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroArl
+			@RequestParam(name = "codigo_afiliado_eps", required = false) String codigoAfiliadoEps,
+			@RequestParam(name = "codigo_afiliado_afp", required = false) String codigoAfiliadoAfp,
+			@RequestParam("fecha_registro_arl")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroArl,
+			@RequestParam("fecha_registro_eps")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroEps,
+			@RequestParam("fecha_registro_afp")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroAfp
 			)
 			 {
 		Obra obra  = obraService.findById(idObra);
 		Arl arl = arlService.findById(idArl);
+		Eps eps = epsService.findById(idEps);
+		FondoPension afp = afpService.findById(idAfp);
 		System.out.println("Nombre de la obra: " +obra.getNombre());
 		System.out.println("Codigo afiliado url: " +codigoAfiliadoArl);
 		
@@ -106,28 +110,17 @@ public class ObreroControlador {
 			afiliadoArlService.save(afArl);
 			System.out.println(afArl.getCodigo()+"ARL:");
 		
-		}else {System.out.println("no va a guardar nada");}
-		if(obrero.getTrabajador().getAfiliadoEps().getEps().getId()!=4) {
-			AfiliadoEps afEps = obrero.getTrabajador().getAfiliadoEps();
-			afEps.setTrabajador(obrero.getTrabajador());
-			afEps.setEps(epsService.findById(obrero.getTrabajador().getAfiliadoEps().getEps().getId()));
+		}
+		if(idEps!=-1) {
+			AfiliadoEps afEps = new AfiliadoEps(codigoAfiliadoEps, trabajador, eps, fechaRegistroEps);
 			afiliadoEpsService.save(afEps);
-			System.out.println(afEps.getCodigo());
-		
+				}
+		if(idAfp!=-1) {
+			AfiliadoFondoPension afAfp = new AfiliadoFondoPension(codigoAfiliadoAfp, trabajador, afp, fechaRegistroAfp);
+			afiliadoAfpService.save(afAfp);		
 		}
-		if(obrero.getTrabajador().getAfiliadoFondoPension().getFondoPension().getId()!=4) {
-			AfiliadoFondoPension afAfp = obrero.getTrabajador().getAfiliadoFondoPension();
-			afAfp.setTrabajador(obrero.getTrabajador());
-			afAfp.setFondoPension(afpService.findById(obrero.getTrabajador().getAfiliadoFondoPension().getFondoPension().getId()));
-			afiliadoAfpService.save(afAfp);
-			System.out.println(afAfp.getCodigo());
-		
-		}
-		System.out.println("prueba del envio de parametros");
-		System.out.println(idObra);
 				obreroService.save(obrero);
-				//model.addAttribute("obra", obraService.findById(obrero.getObra().getId()).getNombre());
-		return "redirect:/obras/"+obrero.getObra().getId();
+		return "redirect:/obras/"+obra.getId();
 	}
 	
 	@PostMapping("/form")

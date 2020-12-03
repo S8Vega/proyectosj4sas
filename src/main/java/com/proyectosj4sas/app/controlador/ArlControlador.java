@@ -16,13 +16,13 @@ import com.proyectosj4sas.app.util.ArlResponse;
 
 @Controller
 @RequestMapping("/arl")
-@SessionAttributes("arl")
 public class ArlControlador {
 	
 	@Autowired
 	private ArlServicioImpl arlService;
 	@GetMapping(value = "/", produces = { "application/json" })
-	public @ResponseBody List<ArlResponse> cargarProductos() {
+	public @ResponseBody List<ArlResponse> listar() {
+		System.out.println("Esta solicitando el listado de ARL");
 		List<Arl> lista  =  arlService.findAll();
 		List<ArlResponse> json = new LinkedList<ArlResponse>();
 		for (Arl arl : lista) {

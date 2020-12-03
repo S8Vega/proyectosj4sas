@@ -31,6 +31,14 @@ public class AfiliadoFondoPension implements Serializable {
 	public AfiliadoFondoPension() {
 	}
 
+	public AfiliadoFondoPension(String codigo, Trabajador trabajador, FondoPension fondoPension, Date fechaIngreso) {
+		super();
+		this.codigo = codigo;
+		this.trabajador = trabajador;
+		this.fondoPension = fondoPension;
+		this.fechaIngreso = fechaIngreso;
+	}
+
 	public AfiliadoFondoPension(Long id, String codigo, Trabajador trabajador, FondoPension fondoPension,
 			Date fechaIngreso, Date fechaRetiro) {
 		super();
