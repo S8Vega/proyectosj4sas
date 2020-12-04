@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyectosj4sas.app.modelo.entidad.Empresa;
 import com.proyectosj4sas.app.modelo.entidad.Obra;
@@ -16,6 +20,7 @@ import com.proyectosj4sas.app.modelo.servicio.implementacion.EmpresaServicioImpl
 import com.proyectosj4sas.app.modelo.servicio.implementacion.ObraServicioImpl;
 
 @Controller
+@RequestMapping("/empresas")
 public class EmpresaControlador {
 
 	@Autowired
@@ -23,9 +28,8 @@ public class EmpresaControlador {
 	@Autowired
 	private ObraServicioImpl ob;
 
-	@GetMapping("/empresas")
-	public String listar(Model model) {
-
+	@GetMapping("/")
+	public String listar(Model model) {System.out.println("$$$$$$$$$$$$");
 		List<Empresa> empresas = empresaService.findAll();
 		model.addAttribute("titulo", "Empresas asociadas");
 		model.addAttribute("ruta_de_navegacion", "Empresas asociadas");
@@ -33,7 +37,7 @@ public class EmpresaControlador {
 		return "/vistas/empresas/listar";
 	}
 
-	@GetMapping("/empresas/{id}")
+	@GetMapping("/{id}")
 	public String getEmpresa(@PathVariable Long id, Model model) {
 		Empresa empresa = empresaService.findById(id);
 		if (empresa != null) {
@@ -47,7 +51,7 @@ public class EmpresaControlador {
 		return "/vistas/empresas/empresa";
 	}
 	
-	@GetMapping("/empresas/{id_empresa}/obras")
+	@GetMapping("/{id_empresa}/obras")
 	public String getObrasPorEmpresa(@PathVariable Long id_empresa,Model model) {
 		Empresa empresa=empresaService.findById(id_empresa);
 		List<Obra> obras_t =ob.findAll();
@@ -62,6 +66,21 @@ public class EmpresaControlador {
 		model.addAttribute("total_obreros", empresa.totalObreros());
 		model.addAttribute("obras", obras);
 		return "/vistas/obras/listar";
+	}
+	
+	@GetMapping("/registrar")
+	public String registrar(Model model) {
+		model.addAttribute("titulo", "Registro Empresa");
+		model.addAttribute("ruta_de_navegacion", "Registro Empresa");
+		model.addAttribute("empresa", new Empresa());
+		return "/vistas/empresas/registrar";
+	}
+	
+	@PostMapping("/guardar")
+	public String guardar(@ModelAttribute Empresa empresa, RedirectAttributes flash) {
+		empresaService.save(empresa);
+		flash.addFlashAttribute("success", "Empresa registrada correctamente");
+		return "redirect:/empresas/";
 	}
 
 }

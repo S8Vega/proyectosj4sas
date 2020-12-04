@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/plantilla/template :: head">
 </head>
 
@@ -30,11 +30,14 @@
 					<h3>Información básica</h3>
 
 
-					<form th:action="@{/vistas/obreros/guardar}" method="post" th:object="${obrero}">
+					<form th:action="@{/vistas/obreros/guardar}" method="post"
+						th:object="${obrero}">
 						<div class="form-group row">
-							<label class="col-md-4" for="nombre">Nombre</label> <input class="form_registro" id="nombre"
+							<label class="col-md-4" for="nombre">Nombre</label> <input
+								class="form_registro" id="nombre"
 								th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
-							<small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.nombre')}"
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('trabajador.nombre')}"
 								th:errors="*{trabajador.nombre}"></small>
 						</div>
 
@@ -71,31 +74,27 @@
 
 							<label class="col-md-4" for="afiliadoArl">ARL</label> <select
 								id="id_arl" name="id_arl">
-							</select>
-							 <input class="form_registro" name="codigo_afiliado_arl"
+							</select> <input class="form_registro" name="codigo_afiliado_arl"
 								placeholder="Codigo Afiliado ARL"> <input
 								class="form_registro" type="date" name="fecha_registro_arl">
 						</div>
 
 
 						<div>
-							<label class="col-md-4" for="afiliadoEps">EPS</label> 
-							<select id="id_eps" name="id_eps">
-								
+							<label class="col-md-4" for="afiliadoEps">EPS</label> <select
+								id="id_eps" name="id_eps">
 
-							</select> 
-							<input class="form_registro" name="codigo_afiliado_eps"
-								placeholder="Codigo Afiliado EPS"> 
-							<input
+
+							</select> <input class="form_registro" name="codigo_afiliado_eps"
+								placeholder="Codigo Afiliado EPS"> <input
 								class="form_registro" type="date" name="fecha_registro_eps">
 						</div>
 						<div>
 							<label class="col-md-4" for="afiliadoFondoPension">Fondo
-								de Pension</label> <select name="id_afp" id="id_afp"						>
-								
+								de Pension</label> <select name="id_afp" id="id_afp">
 
-							</select> 
-							<input class="form_registro" name="codigo_afiliado_afp"
+
+							</select> <input class="form_registro" name="codigo_afiliado_afp"
 								placeholder="Codigo Afiliado ARL"> <input
 								class="form_registro" type="date" name="fecha_registro_afp">
 						</div>
@@ -116,54 +115,7 @@
 	<!-- /#page-content-wrapper -->
 
 	<!-- JAVASCRIPT -->
-	<script>
-		function guargarListaEnSessionStorage(url, nombre_lista,id_select,mensaje) {
-
-			let options = {
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}
-			fetch(url, options
-
-			).then(response => {
-				if (response.ok)
-					return response.text();
-				else
-					throw new Error(response.status);
-			})
-				.then(data => {
-					sessionStorage.setItem(nombre_lista, JSON.stringify(JSON.parse(data)));
-					llenarSelect(id_select, nombre_lista, mensaje);
-				})
-				.catch(err => {
-					console.error("ERROR: ", err.message)
-				});
-		}
-
-
-		function llenarSelect(id_select, nombre_lista, mensaje) {
-			let lista = JSON.parse(sessionStorage.getItem(nombre_lista));
-			let select = document.getElementById(id_select);
-
-			lista.forEach(item => {
-				let option = document.createElement("option");
-				option.value = item["id"];
-				option.textContent = item["nombre"];
-				select.appendChild(option);
-			});
-
-			let option = document.createElement("option");
-			option.value = -1;
-			option.textContent = mensaje;
-			select.appendChild(option);
-		}
-		guargarListaEnSessionStorage("/arl/", "lista_arl","id_arl","No tiene Arl");
-		guargarListaEnSessionStorage("/eps/", "lista_eps","id_eps","No tiene Eps");
-		guargarListaEnSessionStorage("/afp/", "lista_afp","id_afp","No tiene Afp");
-	</script>
-
+	<script type="text/javascript" th:src="@{/js/obreros/registrar.js}"></script>
 	<!-- ./JAVASCRIPT -->
 </body>
 </html>

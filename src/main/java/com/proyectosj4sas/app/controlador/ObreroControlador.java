@@ -1,20 +1,11 @@
 package com.proyectosj4sas.app.controlador;
 
-<<<<<<< HEAD
-
 import java.util.Date;
-
-
-
-=======
-import java.util.Date;
->>>>>>> e92b8adce9df55b3c7196887699eaeb8befcc1a9
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +36,7 @@ import com.proyectosj4sas.app.modelo.servicio.implementacion.TrabajadorServicioI
 @Controller
 @RequestMapping("/vistas/obreros")
 public class ObreroControlador {
-	
+
 	@Autowired
 	private ObreroServicioImpl obreroService;
 	@Autowired
@@ -60,40 +51,23 @@ public class ObreroControlador {
 	private ObraServicioImpl obraService;
 	@Autowired
 	private AfiliadoArlServicioImpl afiliadoArlService;
-	@Autowired private AfiliadoEpsServicioImpl afiliadoEpsService;
-	@Autowired private AfiliadoFondoPensionServicioImpl afiliadoAfpService;
-	
+	@Autowired
+	private AfiliadoEpsServicioImpl afiliadoEpsService;
+	@Autowired
+	private AfiliadoFondoPensionServicioImpl afiliadoAfpService;
+
 	@GetMapping({ "/crear/{idObra}" })
-	public String listar(@PathVariable Long idObra,Model model) {
-		
-	Trabajador trabajador = new Trabajador();
-	Obrero obrero = new Obrero();
-	trabajador.setAfiliadoFondoPension(new AfiliadoFondoPension());
-	trabajador.getAfiliadoFondoPension().setFondoPension(new FondoPension());
-//	AfiliadoArl af = new AfiliadoArl();
-//	
-//	trabajador.setAfiliadoArl(af);
-//	trabajador.getAfiliadoArl().setArl(new Arl());
-	obrero.setTrabajador(trabajador);
-	obrero.setObra(obraService.findById(idObra));
-	System.out.println(idObra);
+	public String listar(@PathVariable Long idObra, Model model) {
+		Obrero obrero = new Obrero();
 		model.addAttribute("titulo", "CREAR OBRERO");
-		model.addAttribute("ruta_de_navegacion", "REGISTRO DE OBRERO");	
+		model.addAttribute("ruta_de_navegacion", "REGISTRO DE OBRERO");
 		model.addAttribute("obrero", obrero);
 		model.addAttribute("idObra", idObra);
-		model.addAttribute("listaArl", arlService.findAll());
-		model.addAttribute("listaEps", epsService.findAll());
-		model.addAttribute("listaAfp", afpService.findAll());
-		model.addAttribute("afp", new FondoPension());
 		return "/vistas/obreros/registrar";
 	}
-	
+
 	@PostMapping("/guardar")
-<<<<<<< HEAD
-	public String guardar( @ModelAttribute Obrero obrero,BindingResult result, Model model,
-=======
-	public String guardar(@ModelAttribute Obrero obrero,BindingResult result, Model model,
->>>>>>> e92b8adce9df55b3c7196887699eaeb8befcc1a9
+	public String guardar(@ModelAttribute Obrero obrero, RedirectAttributes flash, Model model,
 			@RequestParam(name = "id_obra", required = false) Long idObra,
 			@RequestParam(name = "id_arl", required = false) Long idArl,
 			@RequestParam(name = "id_eps", required = false) Long idEps,
@@ -101,46 +75,42 @@ public class ObreroControlador {
 			@RequestParam(name = "codigo_afiliado_arl", required = false) String codigoAfiliadoArl,
 			@RequestParam(name = "codigo_afiliado_eps", required = false) String codigoAfiliadoEps,
 			@RequestParam(name = "codigo_afiliado_afp", required = false) String codigoAfiliadoAfp,
-			@RequestParam("fecha_registro_arl")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroArl,
-			@RequestParam("fecha_registro_eps")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroEps,
-			@RequestParam("fecha_registro_afp")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroAfp
-			)
-			 {
-		Obra obra  = obraService.findById(idObra);
+			@RequestParam("fecha_registro_arl") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroArl,
+			@RequestParam("fecha_registro_eps") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroEps,
+			@RequestParam("fecha_registro_afp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroAfp) {
+		Obra obra = obraService.findById(idObra);
 		Arl arl = arlService.findById(idArl);
 		Eps eps = epsService.findById(idEps);
 		FondoPension afp = afpService.findById(idAfp);
-		System.out.println("Nombre de la obra: " +obra.getNombre());
-		System.out.println("Codigo afiliado url: " +codigoAfiliadoArl);
-		
+
 		obrero.setObra(obra);
 		trabajadorService.save(obrero.getTrabajador());
 		obrero.setFechaIngreso(new Date());
 		Trabajador trabajador = obrero.getTrabajador();
-		if(idArl!=-1) {
-			AfiliadoArl afArl = new AfiliadoArl(codigoAfiliadoArl,trabajador, arl, fechaRegistroArl);
+		if (idArl != -1) {
+			AfiliadoArl afArl = new AfiliadoArl(codigoAfiliadoArl, trabajador, arl, fechaRegistroArl);
 			afiliadoArlService.save(afArl);
-			System.out.println(afArl.getCodigo()+"ARL:");
-		
+
 		}
-		if(idEps!=-1) {
+		if (idEps != -1) {
 			AfiliadoEps afEps = new AfiliadoEps(codigoAfiliadoEps, trabajador, eps, fechaRegistroEps);
 			afiliadoEpsService.save(afEps);
-				}
-		if(idAfp!=-1) {
-			AfiliadoFondoPension afAfp = new AfiliadoFondoPension(codigoAfiliadoAfp, trabajador, afp, fechaRegistroAfp);
-			afiliadoAfpService.save(afAfp);		
 		}
-				obreroService.save(obrero);
-		return "redirect:/obras/"+obra.getId();
+		if (idAfp != -1) {
+			AfiliadoFondoPension afAfp = new AfiliadoFondoPension(codigoAfiliadoAfp, trabajador, afp, fechaRegistroAfp);
+			afiliadoAfpService.save(afAfp);
+		}
+		obreroService.save(obrero);
+		flash.addFlashAttribute("success", "Obrero registrado correctamente");
+		return "redirect:/obras/" + obra.getId();
 	}
-	
+
 	@PostMapping("/form")
-	public String modificarEstadoConJavascript(Obrero obrero,RedirectAttributes flash,
-			@RequestParam(name="codigo_secreto",required = false) String codigo_m
-			) {
-		System.out.println("##");
-		System.out.println(codigo_m);
+	public String modificarEstadoConJavascript(Obrero obrero, RedirectAttributes flash,
+			@RequestParam(name = "codigo_secreto", required = false) String codigo_m) {
+		/*
+		 * System.out.println("##"); System.out.println(codigo_m);
+		 */
 		return "index";
 	}
 

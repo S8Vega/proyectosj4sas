@@ -255,14 +255,11 @@
 			let nombre = fila_trabajador.getElementsByTagName("td")["nombre"].innerText;
 			let cargo = fila_trabajador.getElementsByTagName("td")["cargo"].innerText;
 			let cedula = fila_trabajador.getElementsByTagName("td")["cedula"].innerText;
-			//console.log(fila_trabajador);
 			document.getElementById("trabajador_nombre").innerText = nombre;
 			document.getElementById("trabajador_cargo").innerText = cargo;
 			document.getElementById("trabajador_cedula").innerText = cedula;
 
 			$('#modal_trabajador').modal('show');
-			//let modal_trabajador = document.getElementById("modal_trabajador");
-			//modal_trabajador.style.overflow = "visible";
 		}
 	</script>
 </body>

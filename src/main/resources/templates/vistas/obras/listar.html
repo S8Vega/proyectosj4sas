@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="/plantilla/template :: head">
-	<style TYPE="text/css">
-	.margin-letf{
-		margin-left: 20px !important;
-	}
-    </style>
+<style TYPE="text/css">
+.margin-letf {
+	margin-left: 20px !important;
+}
+</style>
 </head>
 
 <body>
@@ -39,8 +39,10 @@
 					<div class="card">
 						<div class="card-header hudsoft-thead-dark">Obras</div>
 						<div class="card-body card-block">
-
-							<table id="dtBasicExample"
+							<div class="alert alert-info my-4" th:if="${obras.isEmpty()}">
+								<span>No hay obreros para mostrar aun.</span>
+							</div>
+							<table id="dtBasicExample" th:if="${!obras.isEmpty()}"
 								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
 								<thead class="hudsoft-thead-dark">
 									<tr class="text-center">
@@ -59,27 +61,27 @@
 										<th th:text="${obra.id}"></th>
 										<td th:text="${obra.nombre}"></td>
 										<td th:text="${obra.direccion}"></td>
-										<td><span th:if="${obra.estado} == 'activo'" class="hudsoft-badge-pill"> <i
-													class="fas fa-check"></i>
+										<td><span th:if="${obra.estado} == 'activo'"
+											class="hudsoft-badge-pill"> <i class="fas fa-check"></i>
 												activo
-											</span> <span th:if="${obra.estado} == 'inactivo'"
-												class="hudsoft-badge-pill-danger"> <i class="fas fa-times"></i> inactivo
-											</span></td>
+										</span> <span th:if="${obra.estado} == 'inactivo'"
+											class="hudsoft-badge-pill-danger"> <i
+												class="fas fa-times"></i> inactivo
+										</span></td>
 
 										<td th:text="${obra.siso.trabajador.nombre}"></td>
 										<td th:text="${obra.representante.nombre}"></td>
 										<td th:text="${obra.obrero.size()}"></td>
-										<td><a th:href="@{/obras/}+${obra.id}" class="hudsoft-btn-sm"> <i
-													class="far fa-eye"> </i></a></td>
+										<td><a th:href="@{/obras/}+${obra.id}"
+											class="hudsoft-btn-sm"> <i class="far fa-eye"> </i></a></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 						<div class="card-footer">
-							<button type="reset" class="hudsoft-btn-sm float-right ">
-								Opcion</button>
-							<button><a th:href="@{/joimar/registrar_obra}"
-								 class="hudsoft-btn-sm float-right ">+ Nuevo</a></button>
+								<a th:href="@{/joimar/registrar_obra}"
+									class="hudsoft-btn-sm float-right mr-1	" >Agregar Obra</a>
+								
 						</div>
 					</div>
 					<!-- ./CONTENIDO DINAMICO -->
@@ -97,16 +99,16 @@
 						<div class="col-md-2">
 							<div class="card">
 								<div class="card-body">
-									<span>Obras</span><br> <span>Total: </span> <span class="count"
-										th:text="${obras.size()}"></span>
+									<span>Obras</span><br> <span>Total: </span> <span
+										class="count" th:text="${obras.size()}"></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="card">
 								<div class="card-body">
-									<span>Obreros</span><br> <span>Total: </span> <span class="count"
-										th:text="${total_obreros}"></span>
+									<span>Obreros</span><br> <span>Total: </span> <span
+										class="count" th:text="${total_obreros}"></span>
 								</div>
 							</div>
 						</div>
