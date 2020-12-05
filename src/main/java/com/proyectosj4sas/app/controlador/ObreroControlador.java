@@ -104,14 +104,4 @@ public class ObreroControlador {
 		flash.addFlashAttribute("success", "Obrero registrado correctamente");
 		return "redirect:/obras/" + obra.getId();
 	}
-
-	@PostMapping("/form")
-	public String modificarEstadoConJavascript(Obrero obrero, RedirectAttributes flash,
-			@RequestParam(name = "codigo_secreto", required = false) String codigo_m) {
-		/*
-		 * System.out.println("##"); System.out.println(codigo_m);
-		 */
-		return "index";
-	}
-
 }

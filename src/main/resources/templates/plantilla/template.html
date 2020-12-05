@@ -56,10 +56,10 @@
 					class="btn btn-outline-primary" th:href="@{/login}">Entrar</a></li>
 
 
-				</li>
+			
 				<li sec:authorize="isAuthenticated()"
-					class="ml-auto row align-items-center"><spam
-						sec:authentication="name" class="col"></spam>
+					class="ml-auto row align-items-center"><p
+						sec:authentication="name" ></p>
 
 
 					<form id="logoutForm" th:action="@{/logout}" method="post">
@@ -71,7 +71,7 @@
 						</button>
 						<input type="hidden" th:name="${_csrf.parameterName}"
 							th:value="${_csrf.token}" />
-					</form></li>
+					</form></li> 
 
 			</ul>
 		</div>
@@ -218,7 +218,7 @@
 		</div>
 	</div>
 
-	</div>
+
 	<hr width=90% style="height: 2px">
 	<footer th:fragment="footer" class="text-center">
 		<script type="text/javascript">

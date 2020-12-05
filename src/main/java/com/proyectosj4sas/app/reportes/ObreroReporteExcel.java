@@ -1,10 +1,7 @@
 package com.proyectosj4sas.app.reportes;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +17,6 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import com.graphbuilder.struc.LinkedList;
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
 
 public class ObreroReporteExcel {

@@ -33,8 +33,7 @@
 				<div class="mt-2">
 					<div class="card">
 						<div class="card-header hudsoft-thead-dark">
-							Trabajadores de la obra <strong><span
-								th:text="${obra.nombre}"></span></strong>
+							Trabajadores de la obra <strong><span th:text="${obra.nombre}"></span></strong>
 						</div>
 						<div class="card-body card-block">
 
@@ -51,26 +50,27 @@
 									</tr>
 								</thead>
 								<tbody class="">
-									<tr th:id="'td_'+ ${obrero.id}" th:each="obrero: ${obreros}"
-										class="text-center">
+									<tr th:id="'td_'+ ${obrero.id}" th:each="obrero: ${obreros}" class="text-center">
 										<td th:text="${obrero.id}"></td>
 										<td name="nombre" th:text="${obrero.trabajador.nombre}"></td>
 										<td name="cedula" th:text="${obrero.trabajador.cedula}"></td>
-										<td><span th:if="${obrero.estado} == 'activo'"
-											class="hudsoft-badge-pill"> <i class="fas fa-check"></i>
+										<td>
+											<span th:if="${obrero.estado} == 'activo'" class="hudsoft-badge-pill"> <i
+													class="fas fa-check"></i>
 												activo
-										</span> <span th:if="${obrero.estado} == 'inactivo'"
-											class="hudsoft-badge-pill-danger"> <i
-												class="fas fa-times"></i> inactivo
-										</span></td>
+											</span>
+											<span th:if="${obrero.estado} != 'activo'" class="hudsoft-badge-pill-danger"
+												th:text="${obrero.estado}"> <i class="fas fa-times"></i> inactivo
+											</span>
+										</td>
 
 
 										<td name="cargo" th:text="${obrero.cargo}"></td>
 										<td><a class="hudsoft-btn-sm"
-											th:onclick="'smodal(\'' + ${obrero.id} + '\');'"><i
-												class="far fa-eye"></i></a> <a href="" class="hudsoft-btn-sm">
+												th:onclick="'smodal(\'' + ${obrero.id} + '\');'"><i
+													class="far fa-eye"></i></a> <a href="" class="hudsoft-btn-sm">
 												<i class="fas fa-edit"></i>
-										</a></td>
+											</a></td>
 
 									</tr>
 								</tbody>
@@ -81,7 +81,7 @@
 								class="hudsoft-btn-sm float-right">Afiliaciones</a> <a
 								th:href="@{/vistas/obreros/crear/}+${obra.id}"
 								class="hudsoft-btn-sm float-right mr-1">Agregar obrero</a>
-						<!-- 	<form th:action="@{/vistas/obreros/crear}" method="post" th:object="${obra}">
+							<!-- 	<form th:action="@{/vistas/obreros/crear}" method="post" th:object="${obra}">
 								<button class="btn btn-light col hudsoft-close"
 									
 									type="submit">
@@ -94,7 +94,7 @@
 						</div>
 					</div>
 					<!-- ./CONTENIDO DINAMICO -->
-<!-- onclick="document.getElementById('logoutForm').submit();" -->
+					<!-- onclick="document.getElementById('logoutForm').submit();" -->
 
 
 					<div class="mt-2">
@@ -109,8 +109,7 @@
 							<div class="card">
 								<div class="card-header hudsoft-thead-dark">
 									<div class="media-body">
-										<h4 class="text-light display-6"
-											th:text="${obra.siso.trabajador.nombre}"></h4>
+										<h4 class="text-light display-6" th:text="${obra.siso.trabajador.nombre}"></h4>
 										<strong>Siso</strong>
 									</div>
 								</div>
@@ -118,12 +117,12 @@
 									<section class="card">
 										<ul class="list-group list-group-flush">
 
-											<li class="list-group-item"><span>Cedula: </span> <span
-												class="" th:text="${obra.siso.trabajador.cedula}"></span></li>
-											<li class="list-group-item"><span>Telefono: </span> <span
-												class="" th:text="${obra.siso.telefono}"></span></li>
-											<li class="list-group-item"><span>Correo: </span> <span
-												class="" th:text="${obra.siso.correo}"></span></li>
+											<li class="list-group-item"><span>Cedula: </span> <span class=""
+													th:text="${obra.siso.trabajador.cedula}"></span></li>
+											<li class="list-group-item"><span>Telefono: </span> <span class=""
+													th:text="${obra.siso.telefono}"></span></li>
+											<li class="list-group-item"><span>Correo: </span> <span class=""
+													th:text="${obra.siso.correo}"></span></li>
 										</ul>
 									</section>
 
@@ -135,8 +134,7 @@
 							<div class="card">
 								<div class="card-header hudsoft-thead-dark">
 									<div class="media-body">
-										<h4 class="text-light display-6"
-											th:text="${obra.representante.nombre}"></h4>
+										<h4 class="text-light display-6" th:text="${obra.representante.nombre}"></h4>
 										<strong>Representante</strong>
 									</div>
 								</div>
@@ -144,10 +142,10 @@
 									<section class="card">
 										<ul class="list-group list-group-flush">
 
-											<li class="list-group-item"><span>Telefono: </span> <span
-												class="" th:text="${obra.representante.telefono}"></span></li>
-											<li class="list-group-item"><span>Correo: </span> <span
-												class="" th:text="${obra.representante.correo}"></span></li>
+											<li class="list-group-item"><span>Telefono: </span> <span class=""
+													th:text="${obra.representante.telefono}"></span></li>
+											<li class="list-group-item"><span>Correo: </span> <span class=""
+													th:text="${obra.representante.correo}"></span></li>
 										</ul>
 									</section>
 
@@ -159,8 +157,7 @@
 				<!-- ./INFORMACION -->
 
 				<!-- MODAL -->
-				<div class="modal fade" id="modal_trabajador" role="dialog"
-					th:aria-labelledby="ttt" aria-hidden="true">
+				<div class="modal fade" id="modal_trabajador" role="dialog" th:aria-labelledby="ttt" aria-hidden="true">
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="card-header hudsoft-thead-dark">
@@ -172,8 +169,8 @@
 											<h4 id="trabajador_nombre" class="text-light display-6"></h4>
 											<strong>Cargo: <span id="trabajador_cargo"></span></strong>
 										</div>
-										<a class="hudsoft-btn-sm float-right" data-dismiss="modal"
-											aria-label="Close"> <i class="m-1 fas fa-times"></i>
+										<a class="hudsoft-btn-sm float-right" data-dismiss="modal" aria-label="Close">
+											<i class="m-1 fas fa-times"></i>
 										</a>
 									</div>
 
@@ -191,7 +188,7 @@
 									<ul class="list-group list-group-flush">
 
 										<li class="list-group-item"><span>Cedula: </span> <span
-											id="trabajador_cedula"></span></li>
+												id="trabajador_cedula"></span></li>
 
 										<li class="list-group-item">
 											<div class="row" th:fragment="menu_inferior">
@@ -202,7 +199,7 @@
 													<a
 														class="list-group-item list-group-item-action bg-light text-center col">
 														<img width="50" class="mx-auto"
-														th:src="@{/img/icons/reporte-de-salud.svg}"><br>
+															th:src="@{/img/icons/reporte-de-salud.svg}"><br>
 														ARL
 													</a>
 												</div>
@@ -211,14 +208,14 @@
 													<a
 														class="list-group-item list-group-item-action bg-light text-center col">
 														<img width="50" class="mx-auto"
-														th:src="@{/img/icons/eps.svg}"><br> EPS
+															th:src="@{/img/icons/eps.svg}"><br> EPS
 													</a>
 												</div>
 												<div class="col">
 													<a
 														class="list-group-item list-group-item-action bg-light text-center col">
 														<img width="50" class="mx-auto"
-														th:src="@{/img/icons/papel.svg}"><br> PENSIONES
+															th:src="@{/img/icons/papel.svg}"><br> PENSIONES
 													</a>
 												</div>
 
@@ -233,9 +230,8 @@
 							</div>
 							<div class="modal-footer">
 								<a href="" class="hudsoft-btn-sm" data-toggle="modal"
-									data-target="#modal_trabajador">Cerrar</a> <a href=""
-									class="hudsoft-btn-sm" data-toggle="modal"
-									data-target="#modal_trabajador">Editar</a>
+									data-target="#modal_trabajador">Cerrar</a> <a href="" class="hudsoft-btn-sm"
+									data-toggle="modal" data-target="#modal_trabajador">Editar</a>
 							</div>
 						</div>
 					</div>

@@ -1,7 +1,9 @@
 package com.proyectosj4sas.app.controlador;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proyectosj4sas.app.modelo.entidad.Obra;
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
@@ -41,7 +46,7 @@ public class ObraControlador {
 		model.addAttribute("obra", obra);
 		model.addAttribute("obreros", obra.getObrero());
 		return "/vistas/obras/obra";
-}
+	}
 
 	@GetMapping("/constructoras/obras/{id}")
 	public void reporteArl(@PathVariable Long id, HttpServletResponse response) throws IOException {
@@ -59,5 +64,22 @@ public class ObraControlador {
 		ObreroReporteExcel excelExporter = new ObreroReporteExcel(obrerosSinArl, obrerosSinEps, obrerosSinAfp);
 
 		excelExporter.export(response);
+	}
+
+	@PostMapping(value="/obras/estados/",produces = "application/json")
+	public @ResponseBody Map<String, String> estados(
+		@RequestParam(name = "id_obra", required = false) Long idObra,
+		@RequestParam(name = "estado", required = false) String estado) {
+		HashMap<String, String> map = new HashMap<>();
+		Obra obra = obraService.findById(idObra);
+		obra.setEstado(estado);
+		obraService.save(obra);
+		if(obraService.findById(idObra).getEstado().equals(estado)){
+			map.put("transaccion", "true");
+			map.put("estado", estado);
+		}else{
+			map.put("transaccion", "false");
+		}		
+		return map;
 	}
 }
