@@ -77,6 +77,8 @@
 							</table>
 						</div>
 						<div class="card-footer">
+							<a th:href="@{/representantes/registrar/}+${obra.id}"
+								class="hudsoft-btn-sm float-right">Agregar Representante</a>
 							<a th:href="@{/constructoras/obras/}+${obra.id}"
 								class="hudsoft-btn-sm float-right">Afiliaciones</a> <a
 								th:href="@{/vistas/obreros/crear/}+${obra.id}"
