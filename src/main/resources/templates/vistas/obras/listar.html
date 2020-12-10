@@ -111,8 +111,12 @@
 												class="hudsoft-badge-pill-danger"> inactivo
 											</span></td>
 
-										<td th:text="${obra.siso.trabajador.nombre}"></td>
-										<td th:text="${obra.representante.nombre}"></td>
+											<td th:if="${obra.siso} == null">sin asignar</td>
+											<td th:if="${obra.siso} != null" th:text="${obra.siso.trabajador.nombre}"></td>
+									
+											<td  th:if="${obra.representante} == null" >sin asignar</td>
+											<td  th:if="${obra.representante} != null" th:text="${obra.representante.nombre}">sin asignar</td>
+									
 										<td th:text="${obra.obrero.size()}"></td>
 										<td><a th:href="@{/obras/}+${obra.id}" class="hudsoft-btn-sm"> <i
 													class="far fa-eye"> </i></a></td>
@@ -121,7 +125,7 @@
 							</table>
 						</div>
 						<div class="card-footer">
-							<a th:href="@{/joimar/registrar_obra}" class="hudsoft-btn-sm float-right mr-1	">Agregar
+							<a th:href="@{/obras/registrar/}+${idEmpresa}" class="hudsoft-btn-sm float-right mr-1	">Agregar
 								Obra</a>
 
 						</div>

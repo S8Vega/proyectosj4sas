@@ -62,6 +62,7 @@ public class EmpresaControlador {
 		model.addAttribute("titulo", "Empresas asociadas");
 		model.addAttribute("ruta_de_navegacion", "Empresa Asociada");
 		model.addAttribute("total_obreros", empresa.totalObreros());
+		model.addAttribute("idEmpresa", id_empresa);
 		model.addAttribute("obras", obras);
 		return "/vistas/obras/listar";
 	}

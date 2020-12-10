@@ -38,34 +38,36 @@
 						<img th:src="@{/img/icons/ingenieria.svg}" class="col-md-4" style="float: right;" >
 		
 					
-						<form th:action="@{/vistas/obreros/guardar}" method="post" th:object="${obrero}">
+						<form th:action="@{/obras/guardar}" method="post" th:object="${obra}">
 		
 							<div class="form-group row">
 								<h3 class="col-md-4" for="nombre">Informacion Basica:</h3>
 							</div>
 							<div class="form-group row">
-								<label class="col-md-4" for="nombre">Nombre de obra:</label> <input class="form_registro col-lg-6"
+								<label class="col-md-4" for="nombre">Nombre de obra:</label> <input th:field="${obra.nombre}"class="form_registro col-lg-6"
 									id="nombre" placeholder="Nombre">
 							</div>
 		
 							<div class="form-group row">
-								<label class="col-md-4" for="nombre">Dirección de obra:</label> <input class="form_registro col-lg-6"
+								<label class="col-md-4" for="nombre">Dirección de obra:</label> <input th:field="${obra.direccion}" class="form_registro col-lg-6"
 									id="direccion" placeholder="Dirección">
 							</div>
 							<div class="form-group row">
 								
-									<label class="col-lg-4" for="estado">Estado:</label> <select name="estado" id="estado" class="col-lg-6 scrollEstado form-control btn btn-secondary dropdown-toggle">
-										<option selected>activa</option>
+									<label class="col-lg-4" for="estado">Estado:</label> <select  name="estado" id="estado" class="col-lg-6 scrollEstado form-control btn btn-secondary dropdown-toggle">
+										<option  value="activa">activa</option>
 										<option value="inactivo">inactiva</option>
 									</select>
 								
 							</div>
 							<div class="form-group row">
 								<label class="col-md-4" for="estado">Fecha de inicio:</label> <input class="form_registro"
-									type="date" id="fecha_inicio">
+									type="date" id="fecha_inicio" name="fecha_inicio">
 							</div>
+							<input type="hidden" name="id_empresa" th:value="${idEmpresa}">
 							<div class="row">
-								<div class="col-lg-4" >
+								<!--
+									<div class="col-lg-4" >
 									<a href="/registrar_siso"> <button type="submit"
 											class="btn col-lg-12 btn-secondary hudsoft-btn-sm mx-auto">Agregar SISO</button></a>
 								</div>
@@ -75,6 +77,7 @@
 											class="hudsoft-btn-sm mx-auto col-lg-12">Agregar representante</button></a>
 											
 								</div>
+								-->
 						
 								<div class="col-lg-4">
 									<button type="submit" class="hudsoft-btn-sm mx-auto col-lg-12">Crear</button>

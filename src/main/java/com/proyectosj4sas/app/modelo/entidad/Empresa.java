@@ -102,11 +102,12 @@ public class Empresa implements Serializable {
 	public void setObra(Set<Obra> obra) {
 		this.obra = obra;
 	}
-	
+
 	public int totalObreros() {
 		int total = 0;
 		for (Obra obra2 : obra) {
-			total += obra2.getObrero().size();
+			total += obra2.getObrero() == null ? 0 : obra2.getObrero().size();
+			// total += obra2.getObrero().size();
 		}
 		return total;
 	}
