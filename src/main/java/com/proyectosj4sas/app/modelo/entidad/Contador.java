@@ -16,7 +16,7 @@ public class Contador implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToOne
-	@JoinColumn(name = "empresa", unique = true)
+	@JoinColumn(name = "empresa", unique = true, updatable = true, insertable = true)
 	private Empresa empresa;
 	private String telefono;
 	private String correo;

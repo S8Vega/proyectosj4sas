@@ -31,6 +31,14 @@ public class AfiliadoEps implements Serializable {
 	public AfiliadoEps() {
 	}
 
+	public AfiliadoEps(String codigo, Trabajador trabajador, Eps eps, Date fechaIngreso) {
+		super();
+		this.codigo = codigo;
+		this.trabajador = trabajador;
+		this.eps = eps;
+		this.fechaIngreso = fechaIngreso;
+	}
+
 	public AfiliadoEps(Long id, String codigo, Trabajador trabajador, Eps eps, Date fechaIngreso, Date fechaRetiro) {
 		super();
 		this.id = id;

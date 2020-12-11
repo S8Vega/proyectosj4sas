@@ -1,7 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="/plantilla/template :: head">
+	<style TYPE="text/css">
+		#nombre_fragmento {
+			animation-name: in_tittle;
+			animation-duration: 2s;
+		}
+
+		@keyframes in_tittle {
+			from {
+				margin-left: -400%;
+				width: 0px;
+				opacity: 0.2;
+			}
+
+			to {
+				margin-left: 0%;
+				width: max-content;
+				opacity: 1;
+			}
+		}
+
+		@keyframes in_button {
+		from{
+			opacity: 0;
+		}
+		to{
+			opacity: 1;
+		}
+
+	}
+	
+	#btn_opciones{
+			animation-name: in_button;	
+			animation-duration: 2s;
+		}
+			</style>
 </head>
+
 <body>
 	<div th:replace="/plantilla/template :: mensajes"></div>
 
@@ -11,10 +48,6 @@
 		<div class="bg-light border-right" id="sidebar-wrapper">
 			<div class="sidebar-heading">J4 SOFT</div>
 			<div class="list-group list-group-flush text-center">
-				<a href="#" class="list-group-item list-group-item-action bg-light">
-					<i class="fas fa-play"></i> MENU
-				</a>
-
 				<nav th:replace="plantilla/template :: menu_vertical"></nav>
 
 			</div>
@@ -28,41 +61,55 @@
 			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
 
 			<div class="container-fluid">
-				
 
-				<div class="row mx-auto">
-					<img class="mx-auto" width="40%" th:src="@{/img/isotipo.png}">
-				</div>
-
-				<div>
+				<!-- CONTENIDO DINAMICO -->
+				<div class="mt-2">
+					<div class="card">
+						<div id="nombre_fragmento"  class="card-header hudsoft-thead-dark">Listado de
+							Empresas Asociadas</div>
+						<div class="card-body card-block">
 					
-					<h4>
-						<span class="badge badge-secondary hudsoft-badge-important">Genera
-							reportes</span>
-					</h4>
+					
+							<table id="dtBasicExample"
+								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
+								<thead class="hudsoft-thead-dark">
+									<tr class="text-center">
+										<th scope="col">#</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Nit</th>
+										<th scope="col">Direccion</th>
+										<th scope="col">Telefono</th>
+										<th scope="col">Opciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="empresa: ${empresas}" class="text-center">
+										<th th:text="${empresa.id}"></th>
+										<td th:text="${empresa.nombre}"></td>
+										<td th:text="${empresa.nit}"></td>
+										<td th:text="${empresa.direccion}"></td>
+										<td th:text="${empresa.telefono}"></td>
+										<td><a th:href="@{/empresas/}+${empresa.id}" class="hudsoft-btn-sm">Empresa</a>
+											<a th:href="@{/empresas/__${empresa.id}__/obras}"
+												class="hudsoft-btn-sm">Obras</a></td>
+									</tr>
 
-					<div th:replace="/plantilla/template :: menu_inferior"></div>
-
-
+								</tbody>
+							</table>
+						</div>
+						<div class="card-footer">
+							<a th:href="@{/empresas/registrar}"
+									class="hudsoft-btn-sm float-right mr-1	" >Agregar Empresa</a>
+						</div>
+					</div>
 				</div>
-
-				<footer th:replace="plantilla/template :: footer"></footer>
 			</div>
-			<!-- /#page-content-wrapper -->
+			<!-- ./CONTENIDO DINAMICO -->
 
+			<footer th:replace="plantilla/template :: footer"></footer>
 		</div>
 
-
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<!-- Menu Toggle Script -->
-		<script>
-			$("#menu-toggle").click(function(e) {
-				e.preventDefault();
-				$("#wrapper").toggleClass("toggled");
-			});
-		</script>
+	</div>
 </body>
+
 </html>

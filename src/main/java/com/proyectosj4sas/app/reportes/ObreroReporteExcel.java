@@ -17,7 +17,6 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
 
 public class ObreroReporteExcel {
@@ -308,5 +307,8 @@ public class ObreroReporteExcel {
 		outputStream.close();
 
 	}
+	
+
+
 
 }

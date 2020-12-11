@@ -38,7 +38,13 @@ public class AfiliadoArl implements Serializable {
 		this.trabajador = trabajador;
 		this.arl = arl;
 		this.fechaIngreso = fechaIngreso;
-		this.fechaRetiro = fechaRetiro;
+	}
+	public AfiliadoArl(String codigo, Trabajador trabajador, Arl arl, Date fechaIngreso) {
+	
+		this.codigo = codigo;
+		this.trabajador = trabajador;
+		this.arl = arl;
+		this.fechaIngreso = fechaIngreso;	
 	}
 
 	@Override

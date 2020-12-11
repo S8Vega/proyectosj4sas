@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="/plantilla/template :: head">
-<meta charset="UTF-8">
-<title>Login</title>
+	<meta charset="UTF-8">
+	<title>Login</title>
 </head>
+
 <body>
-<div class="alert alert-success" th:if="${success != null}"
-		th:text="${success}"></div>
-	<div class="alert alert-danger" th:if="${error != null}"
-		th:text="${error}"></div>
-	<div class="alert alert-warning" th:if="${warning != null}"
-		th:text="${warning}"></div>
+	<div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+	<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+	<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
 	<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
 	<div class="d-flex" id="wrapper">
-	<div class="contenedor">
-		<div class="caja1">
-			<div class="organizador">
-				<h3 class="titulo_ligth">Bienvenido a</h3>
-				<h1 class="titulo_app">J4 SOFT</h1>
-				<br>
-				<h3 class="introduce_txt">Introduce tus datos:</h3>
-				
-				<form th:action="@{/login}" method="post">
-				<div class="divX">
-					<input  value="adminGloria" class="input_usuario" type="text" placeholder="Usuario" name="username" autofocus id="username" required>
-				</div>
-				<div class="divX">
-							<input value="adminBotello123" class="input_contra"
-								type="password" placeholder="Clave de usuario" name="password"
-								id="password" required>
-						</div>
-				<div class="cont_btn_login">
-					<button class="btn_login">Iniciar Sesión</button>
-				</div>
-				</form>
-				<div class="text_recuperar">
-					¿Olvidaste tu contraseña? <a class="link_recuperar" href="">
-						Recuperar</a>
-				</div>
+		<div class="contenedor">
+			<div class="caja1">
+				<div class="organizador">
+					<h3 class="titulo_ligth">Bienvenido a</h3>
+					<h1 class="titulo_app">J4 SOFT</h1>
+					<br>
+					<h3 class="introduce_txt">Introduce tus datos:</h3>
 
+					<form th:action="@{/login}" method="post">
+						<div class="divX">
+							<input value="adminGloria" class="input_usuario" type="text" placeholder="Usuario"
+								name="username" autofocus id="username" required>
+						</div>
+						<div class="divX">
+							<input value="adminBotello123" class="input_contra" type="password"
+								placeholder="Clave de usuario" name="password" id="password" required>
+						</div>
+						<div class="cont_btn_login">
+							<button id="btn_login" class="btn_login">Iniciar Sesión</button>
+						</div>
+						</form>
+					<div class="text_recuperar">
+						¿Olvidaste tu contraseña? <a class="link_recuperar" href="">
+							Recuperar</a>
+					</div>
+
+				</div>
+			</div>
+			<div class="caja2">
+				<img class="background" width="50" th:src="@{/img/img_login.png}">
+				<div class="txt_logotipo">PROYECTOS E INGENIERÍA J4 S.A.S</div>
 			</div>
 		</div>
-		<div class="caja2">
-			<img class="background" width="50" th:src="@{/img/img_login.png}">
-			<div class="txt_logotipo">PROYECTOS E INGENIERÍA J4 S.A.S</div>
-		</div>
 	</div>
+	<script type="text/javascript" th:src="@{/js/util.js}">
 	
+	</script>
 </body>
+
 </html>

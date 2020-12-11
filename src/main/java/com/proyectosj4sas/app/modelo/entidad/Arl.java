@@ -24,7 +24,12 @@ public class Arl implements Serializable {
 
 	public Arl() {
 	}
-
+	public Arl(Long id, String nombre, String codigo) {
+		this.id = id;
+		this.nombre = nombre;
+		this.codigo = codigo;
+	
+	}
 	public Arl(Long id, String nombre, String codigo, Set<AfiliadoArl> afiliadoArl) {
 		this.id = id;
 		this.nombre = nombre;
@@ -32,9 +37,13 @@ public class Arl implements Serializable {
 		this.afiliadoArl = afiliadoArl;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Arl [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", afiliadoArl=" + afiliadoArl + "]";
+//	}
 	@Override
 	public String toString() {
-		return "Arl [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", afiliadoArl=" + afiliadoArl + "]";
+		return "Arl [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
 	}
 
 	public Long getId() {
