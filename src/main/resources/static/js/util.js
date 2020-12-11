@@ -1,5 +1,5 @@
 /**
- * guarda el token de la sesion en 'sesion storage'
+ * guarda el token del formulario de la pagina donde se invoque la funcion en 'sesion storage'
  */
 function save_csrf_token(){
     let input = document.getElementsByName("_csrf")[0];
@@ -12,6 +12,6 @@ function save_csrf_token(){
 
 
 
-window.onload = ()=>{
+document.getElementById("btn_login").onclick = () => {
     save_csrf_token();
 }

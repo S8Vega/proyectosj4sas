@@ -1,6 +1,7 @@
 package com.proyectosj4sas.app.controlador;
 
 import com.proyectosj4sas.app.modelo.entidad.Contador;
+import com.proyectosj4sas.app.modelo.entidad.Empresa;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.ContadorServicioImpl;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.EmpresaServicioImpl;
 
@@ -27,7 +28,6 @@ private EmpresaServicioImpl empresaService;
 
     @GetMapping("crear/{idEmpresa}")
     public String agregar(@PathVariable Long idEmpresa, Model model){
-        System.out.println(idEmpresa);
         Contador contador = new Contador();
 		model.addAttribute("titulo", "CREAR Contador");
         model.addAttribute("ruta_de_navegacion", "REGISTRO DE CONTADOR");
@@ -35,6 +35,26 @@ private EmpresaServicioImpl empresaService;
 		model.addAttribute("contador", contador);
         return "/vistas/contador/registrar";
     }
+    @GetMapping("modificar/{idEmpresa}")
+    public String modificar(@PathVariable Long idEmpresa, Model model){
+        Empresa empresa = empresaService.findById(idEmpresa);
+        
+        Contador contador = empresa.getContador();
+		model.addAttribute("titulo", "CREAR Contador");
+        model.addAttribute("ruta_de_navegacion", "REGISTRO DE CONTADOR");
+        model.addAttribute("idEmpresa", idEmpresa);
+		model.addAttribute("contador", contador);
+        return "/vistas/contador/modificar";
+    }
+    @PostMapping("/guardar_modificacion")
+    public String guardarModificado(@ModelAttribute Contador contador,
+    @RequestParam(name = "idEmpresa", required = false) Long idEmpresa,
+     RedirectAttributes flash, Model model) {
+        contadorService.save(contador);
+		flash.addFlashAttribute("success", "Contador modificado correctamente");
+		return "redirect:/empresas/" + idEmpresa;
+	}
+
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Contador contador,
     @RequestParam(name = "idEmpresa", required = false) Long idEmpresa,

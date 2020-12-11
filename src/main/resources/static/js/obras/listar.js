@@ -4,7 +4,7 @@ function modificarEstado(id_estado) {
 		eliminarFormularioDinamico();
 	}
 
-	csrf_token = JSON.parse(sessionStorage.getItem("csrf_token"));
+	csrf_token = JSON.parse(sessionStorage.getItem("_csrf"));
 
 
 
@@ -91,14 +91,18 @@ btn_cambiar.onclick = () => {
 }
 
 window.onload = () => {
+	save_csrf_token();
 
-	let input = document.getElementById("csrf_token");
+ 	/**
+	  * let input = document.getElementById("csrf_token");
 
 	let csrf_token = {
 		name: input.name,
 		value: input.value
 	}
 	sessionStorage.setItem("csrf_token", JSON.stringify(csrf_token));
+	  */
+ 
 	eliminarFormularioDinamico();
 }
 

@@ -229,8 +229,10 @@
 				<div id="form_dinamico">
 					<form id="formulario">
 
-						<input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}"
+						
+                            <input id="_csrf" name="_csrf"  type="hidden" th:name="${_csrf.parameterName}"
 							th:value="${_csrf.token}" />
+                    
 					</form>
 				</div>
 				<!-- ./FORMULARIO DINAMICO -->
@@ -241,7 +243,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript" th:src="@{/js/util.js}"></script>
 	<script type="text/javascript" th:src="@{/js/obras/listar.js}"></script>
 	<!-- ./JAVASCRIPT -->
 </body>
