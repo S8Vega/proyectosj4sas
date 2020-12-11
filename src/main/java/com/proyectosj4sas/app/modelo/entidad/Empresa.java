@@ -107,7 +107,6 @@ public class Empresa implements Serializable {
 		int total = 0;
 		for (Obra obra2 : obra) {
 			total += obra2.getObrero() == null ? 0 : obra2.getObrero().size();
-			// total += obra2.getObrero().size();
 		}
 		return total;
 	}

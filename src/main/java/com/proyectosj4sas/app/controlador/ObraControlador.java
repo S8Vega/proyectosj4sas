@@ -3,7 +3,6 @@ package com.proyectosj4sas.app.controlador;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +36,20 @@ public class ObraControlador {
 	private ObraServicioImpl obraService;
 	@Autowired
 	private EmpresaServicioImpl empresaService;
+
+	@GetMapping("/_obras")
+	public String listadoGeneralObras(Model model){
+		int total_obreros = 0;
+		List<Obra> obras = obraService.findAll();
+		for (Obra obj : obras) {
+			total_obreros += obj.getObrero().size();
+		}
+		model.addAttribute("titulo", "PROYECTOS E INGENIERIA J4 S.A.");
+		model.addAttribute("ruta_de_navegacion", "Listado general de obras");
+		model.addAttribute("obras", obras);
+		model.addAttribute("total_obreros", total_obreros);
+		return "/vistas/obras/listado_completo";
+	}
 
 	@GetMapping("/obras/registrar/{idEmpresa}")
 	public String index(@PathVariable Long idEmpresa, Model model) {
