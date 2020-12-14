@@ -57,6 +57,10 @@
 								th:if="${#fields.hasErrors('trabajador.cedula')}"
 								th:errors="*{trabajador.cedula}"></small>
 						</div>
+						<div class="form-group row">
+							<label for="">fecha de ingreso</label>
+							<input type="date" th:field="${obrero.fechaIngreso}">
+						</div>
 						<div>
 							<label class="col-md-4" for="cargo">Cargo</label> <select
 								name="cargo" id="cargo">
@@ -68,7 +72,8 @@
 							</select>
 						</div>
 
-						<div id="arl">
+						<!--
+							<div id="arl">
 
 
 
@@ -98,6 +103,7 @@
 								placeholder="Codigo Afiliado ARL"> <input
 								class="form_registro" type="date" name="fecha_registro_afp">
 						</div>
+						-->
 
 						<div class="row">
 							<input type="hidden" name="id_obra" th:value="${idObra}">
@@ -115,7 +121,9 @@
 	<!-- /#page-content-wrapper -->
 
 	<!-- JAVASCRIPT -->
-	<script type="text/javascript" th:src="@{/js/obreros/registrar.js}"></script>
+	<!--
+		<script type="text/javascript" th:src="@{/js/obreros/registrar.js}"></script>
+	-->
 	<!-- ./JAVASCRIPT -->
 </body>
 </html>

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Obrero implements Serializable {
 
@@ -25,7 +27,9 @@ public class Obrero implements Serializable {
 	@JoinColumn(name = "obra")
 	private Obra obra;
 	private String cargo;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaIngreso;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 

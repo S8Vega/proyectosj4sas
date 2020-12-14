@@ -103,8 +103,20 @@ public class ObreroControlador {
 		// model.addAttribute("idObra", idObra);
 		return "/vistas/obreros/modificar";
 	}
-
 	@PostMapping("/guardar")
+	public String guardar(@ModelAttribute Obrero obrero, RedirectAttributes flash, Model model,
+			@RequestParam(name = "id_obra", required = false) Long idObra) {
+		Obra obra = obraService.findById(idObra);
+		obrero.setObra(obra);
+		trabajadorService.save(obrero.getTrabajador());
+		obrero.setFechaIngreso(new Date());
+		obreroService.save(obrero);
+		flash.addFlashAttribute("success", "Obrero registrado correctamente");
+		return "redirect:/obras/" + idObra;
+	}
+
+	/**
+	 * @PostMapping("/guardar")
 	public String guardar(@ModelAttribute Obrero obrero, RedirectAttributes flash, Model model,
 			@RequestParam(name = "id_obra", required = false) Long idObra,
 			@RequestParam(name = "id_arl", required = false) Long idArl,
@@ -142,6 +154,7 @@ public class ObreroControlador {
 		flash.addFlashAttribute("success", "Obrero registrado correctamente");
 		return "redirect:/obras/" + obra.getId();
 	}
+	 */
 
 	@PostMapping("/update")
 	public String guardarModificado(@ModelAttribute Obrero obrero, RedirectAttributes flash, Model model,
