@@ -43,6 +43,9 @@ class ContadorTest {
 			assertNull(actual);
 		}
 		ArrayList<Contador> listaActual = (ArrayList<Contador>) servicio.findAll();
+<<<<<<< HEAD
 		assertEquals(listaExpected, listaActual);
+=======
+>>>>>>> dfab57329d1c1feec4f1b0a1f2cfb3d1f9475b46
 	}
 }
