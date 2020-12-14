@@ -47,6 +47,13 @@ public class Empresa implements Serializable {
 				+ telefono + ", contador=" + contador + ", obra=" + obra + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Empresa other = (Empresa) obj;
+		return nombre.equals(other.getNombre()) && nit.equals(other.getNit()) && direccion.equals(other.getDireccion())
+				&& telefono.equals(other.getTelefono());
+	}
+
 	public Long getId() {
 		return id;
 	}
