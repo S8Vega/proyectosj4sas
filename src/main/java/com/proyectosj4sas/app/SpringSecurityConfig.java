@@ -18,32 +18,31 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private LoginSuccessHandler successHandler;
-	
-	
-	  @Bean public BCryptPasswordEncoder passwordEncoder() { return new
-	  BCryptPasswordEncoder(); } 
 
-	
-	  @Override protected void configure(HttpSecurity http) throws Exception {
-	  http.authorizeRequests().antMatchers("/css/**", "/js/**",
-	  "/img/**").permitAll().antMatchers("/","/arl/**","/empresas/**","/empresas/{id}","/constructoras/obras/{id}","/views/constructoras/listar/**")
-	  .hasAnyRole("ADMIN").anyRequest().authenticated().and().formLogin().successHandler(successHandler).loginPage
-	  ("/login").permitAll()
-	  .and().logout().permitAll().and().exceptionHandling().accessDeniedPage(
-	  "/error_403"); }
-	 
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+				.antMatchers("/", "/arl/**", "/empresas/**", "/empresas/{id}", "/constructoras/obras/{id}",
+						"/views/constructoras/listar/**", "/obras/estados/**", "/vistas/obreros/form")
+				.hasAnyRole("ADMIN").anyRequest().authenticated().and().formLogin().successHandler(successHandler)
+				.loginPage("/login").permitAll().and().logout().permitAll().and().exceptionHandling()
+				.accessDeniedPage("/error_403");
+	}
 
-	  @Autowired
-	  public void ConfigurerGlobal(AuthenticationManagerBuilder builder) throws
-	  Exception { PasswordEncoder encoder = passwordEncoder(); UserBuilder users =
-	  User.builder().passwordEncoder(password -> { return encoder.encode(password);
-	  });
-	  
-	  builder.inMemoryAuthentication()
-	  .withUser(users.username("adminGloria").password("adminBotello123").roles(
-	  "ADMIN")); }
-	 
-	 
+	@Autowired
+	public void ConfigurerGlobal(AuthenticationManagerBuilder builder) throws Exception {
+		PasswordEncoder encoder = passwordEncoder();
+		UserBuilder users = User.builder().passwordEncoder(password -> {
+			return encoder.encode(password);
+		});
+
+		builder.inMemoryAuthentication()
+				.withUser(users.username("adminGloria").password("adminBotello123").roles("ADMIN"));
+	}
 
 }

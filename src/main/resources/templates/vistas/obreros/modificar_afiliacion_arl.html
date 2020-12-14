@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+
+	<div class="d-flex" id="wrapper">
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">J4 SOFT</div>
+			<div class="list-group list-group-flush text-center">
+				<nav th:replace="plantilla/template :: menu_vertical"></nav>
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+
+			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+			<div class="container-fluid">
+
+
+				<!-- CONTENIDO DINAMICO -->
+				<div>
+					<h3>Información básica</h3>
+
+
+					<form th:action="@{/vistas/obreros/update/afiliacion_arl}" method="post" th:object="${afiliacionArl}">
+
+						<div class="form-group row">
+							<label for="">codigo de afiliado:</label>
+							<input th:field="${afiliacionArl.codigo}">
+						</div>
+						<div class="form-group row">
+							<label for="">arl: </label>
+							<select  th:field="${afiliacionArl.arl.id}">
+								<option th:each="arl: ${arls}" th:value="${arl.id}" th:text="${arl.nombre}"></option>
+							</select>
+						</div>
+						<div class="form-group row">
+							<label for="">fecha ingreso:</label>
+							<input type="date" th:field="${afiliacionArl.fechaIngreso}">
+						</div>
+						<div class="form-group row">
+							<label for="">fecha retiro: </label>
+							<input type="date" th:field="${afiliacionArl.fechaRetiro}">
+						</div>
+						<input th:value="${idObrero}" type="hidden" name="idObrero">
+						<input th:field="${afiliacionArl.trabajador.id}" type="hidden">
+						<input th:field="${afiliacionArl.id}" type="hidden">
+						<button class="hudsoft-btn-sm" >guardar</button>
+					</form>
+				</div>
+		
+
+
+			<!-- ./CONTENIDO DINAMICO -->
+			<footer th:replace="plantilla/template :: footer"></footer>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper -->
+
+	<!-- JAVASCRIPT -->
+	<script type="text/javascript" th:src="@{/js/obreros/registrar.js}"></script>
+	<!-- ./JAVASCRIPT -->
+</body>
+
+</html>

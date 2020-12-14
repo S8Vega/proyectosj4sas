@@ -16,7 +16,7 @@ public class Contador implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToOne
-	@JoinColumn(name = "empresa", unique = true)
+	@JoinColumn(name = "empresa", unique = true, updatable = true, insertable = true)
 	private Empresa empresa;
 	private String telefono;
 	private String correo;
@@ -38,6 +38,13 @@ public class Contador implements Serializable {
 	public String toString() {
 		return "Contador [id=" + id + ", empresa=" + empresa + ", telefono=" + telefono + ", correo=" + correo
 				+ ", nombre=" + nombre + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Contador other = (Contador) obj;
+		return telefono.equals(other.getTelefono()) && correo.equals(other.getCorreo())
+				&& nombre.equals(other.getNombre());
 	}
 
 	public Long getId() {

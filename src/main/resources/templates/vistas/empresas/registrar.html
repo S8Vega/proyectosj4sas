@@ -2,36 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="/plantilla/template :: head">
-    <style TYPE="text/css">
-        .modal-contenido {
-            background-color: aqua;
-            width: 300px;
-            padding: 10px 20px;
-            margin: 20% auto;
-            position: relative;
-        }
-        
-        .modal {
-            background-color: rgba(0, 0, 0, .8);
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        #miModal:target {
-            opacity: 1;
-            pointer-events: auto;
-        }
-    </style>
-
 </head>
 
 <body>
-
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
@@ -58,42 +31,31 @@
 
                     <form th:action="@{/empresas/guardar}" method="post" th:object="${empresa}">
                         <div class="form-group row">
-                            <label class="col-md-4" for="">Nombre</label> 
-                            <input class="form_registro" id="nombre"  th:field="${empresa.nombre}" placeholder="Nombre">
-                            <small class="form-text text-danger" ></small>
+                            <label class="col-md-4" for="">Nombre</label>
+                            <input class="form_registro" id="nombre" th:field="${empresa.nombre}" placeholder="Nombre">
+                            <small class="form-text text-danger"></small>
                         </div>
 
 
                         <div>
                             <label class="col-md-4" for="">NIT</label>
-                            <input class="form_registro" id="nit" th:field="${empresa.nit}" placeholder="123-456-235425-2">
-                            <small class="form-text text-danger" ></small>
+                            <input class="form_registro" id="nit" th:field="${empresa.nit}"
+                                placeholder="123-456-235425-2">
+                            <small class="form-text text-danger"></small>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4" for="">DIRECCIÓN</label> 
-                            <input class="form_registro" id="direccion" th:field="${empresa.direccion}" placeholder="Calle 0A #1" value=""> 
-                            <small class="form-text text-danger"
-                                ></small>
+                            <label class="col-md-4" for="">DIRECCIÓN</label>
+                            <input class="form_registro" id="direccion" th:field="${empresa.direccion}"
+                                placeholder="Calle 0A #1" value="">
+                            <small class="form-text text-danger"></small>
                         </div>
                         <div>
                             <label class="col-md-4" for="">TELÉFONO</label>
-                            <input class="form_registro" th:type="tel" id="telefono"  th:field="${empresa.telefono}"placeholder="+57 310 555 55 55">
+                            <input class="form_registro" th:type="tel" id="telefono" th:field="${empresa.telefono}"
+                                placeholder="+57 310 555 55 55">
                         </div>
-                     <!--    <div>
-                            <label class="col-md-4" for="cargo">Asigna un contador a la obra</label>
-                            <a href="#miModal"><button type="submit" class="hudsoft-btn-sm mx-auto">Diligenciar</button></a>
-                            <div id="miModal">
-                                <a href="#">X</a>
-                                <h2>Mi primer Modal</h2>
-                                <p>Este es mi primera ventana modal sin utilizar JavaScript.</p>
-                            </div>
-
-                        </div> -->
                         <div class="row">
-                            <!-- <input name="id_secret" value="56"> -->
-                            <!-- <input type="hidden" name="id_obra" th:value="${idObra}"> -->
                             <button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
-
                         </div>
 
                     </form>
@@ -106,7 +68,6 @@
     <!-- /#page-content-wrapper -->
 
     <!-- JAVASCRIPT -->
-    
     <!-- ./JAVASCRIPT -->
 </body>
 

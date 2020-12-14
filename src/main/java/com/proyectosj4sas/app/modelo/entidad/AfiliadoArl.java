@@ -1,7 +1,6 @@
 package com.proyectosj4sas.app.modelo.entidad;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class AfiliadoArl implements Serializable {
@@ -27,7 +28,9 @@ public class AfiliadoArl implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "arl")
 	private Arl arl;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaIngreso;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 

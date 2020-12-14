@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="/plantilla/template :: head">
 </head>
+
 <body>
 	<div th:replace="/plantilla/template :: mensajes"></div>
 
@@ -34,48 +36,65 @@
 							Empresa</div>
 						<div class="card-body card-block">
 
-							<div class="row form-group">
-								<div class="col col-md-3">
-									<label for="" class=" form-control-label">Nombre</label>
+							<div class="row">
+								<div class="col-8">
+									<div class="row form-group">
+										<div class="col col-md-3">
+											<label for="" class=" form-control-label">Nombre</label>
+										</div>
+										<div class="col-12 col-md-9">
+											<label for="" class=" form-control-label"
+												th:text="${empresa.nombre}"></label>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col col-md-3">
+											<label for="" class=" form-control-label">Nit</label>
+										</div>
+										<div class="col-12 col-md-9">
+											<label for="" class=" form-control-label" th:text="${empresa.nit}"></label>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col col-md-3">
+											<label for="" class=" form-control-label">Direccion</label>
+										</div>
+										<div class="col-12 col-md-9">
+											<label for="" class=" form-control-label"
+												th:text="${empresa.direccion}"></label>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col col-md-3">
+											<label for="" class=" form-control-label">Telefono</label>
+										</div>
+										<div class="col-12 col-md-9">
+											<label for="" class=" form-control-label"
+												th:text="${empresa.telefono}"></label>
+										</div>
+									</div>
+
 								</div>
-								<div class="col-12 col-md-9">
-									<label for="" class=" form-control-label"
-										th:text="${empresa.nombre}"></label>
-								</div>
-							</div>
-							<div class="row form-group">
-								<div class="col col-md-3">
-									<label for="" class=" form-control-label">Nit</label>
-								</div>
-								<div class="col-12 col-md-9">
-									<label for="" class=" form-control-label"
-										th:text="${empresa.nit}"></label>
-								</div>
-							</div>
-							<div class="row form-group">
-								<div class="col col-md-3">
-									<label for="" class=" form-control-label">Direccion</label>
-								</div>
-								<div class="col-12 col-md-9">
-									<label for="" class=" form-control-label"
-										th:text="${empresa.direccion}"></label>
-								</div>
-							</div>
-							<div class="row form-group">
-								<div class="col col-md-3">
-									<label for="" class=" form-control-label">Telefono</label>
-								</div>
-								<div class="col-12 col-md-9">
-									<label for="" class=" form-control-label"
-										th:text="${empresa.telefono}"></label>
+								<div class="col">
+									<!-- CONTADOR -->
+									<div th:replace="plantilla/contador :: crear"></div>
+									<div th:replace="plantilla/contador :: modificar"></div>
+									<!-- ./CONTADOR -->
 								</div>
 							</div>
 
+
 						</div>
+
 						<div class="card-footer">
-							<button type="reset" class="hudsoft-btn-sm float-right">
-								<i class="fa fa-ban"></i> Modificar
-							</button>
+							<!--
+								<a th:if="${empresa.contador != null}" th:href="@{/contador/crear/}+${empresa.id}"
+								class="hudsoft-btn-sm">Modificar Contador</a>
+							<a th:if="${empresa.contador == null}" th:href="@{/contador/crear/}+${empresa.id}"
+								class="hudsoft-btn-sm">Agregar Contador</a>
+						-->
+						
+							<a th:href="@{/empresas/modificar/}+${empresa.id}" class="hudsoft-btn-sm text-center float-right">Modificar</a>
 						</div>
 					</div>
 					<div>
@@ -92,8 +111,8 @@
 								<div class="card">
 									<div class="card-body">
 
-										<span>Obras</span><br> <span>Total: </span> <span
-											class="count" th:text="${empresa.obra.size()}"></span>
+										<span>Obras</span><br> <span>Total: </span> <span class="count"
+											th:text="${empresa.obra.size()}"></span>
 
 									</div>
 								</div>
@@ -102,8 +121,8 @@
 								<div class="card">
 									<div class="card-body">
 
-										<span>Obreros</span><br> <span>Total: </span> <span
-											class="count" th:text="${total_obreros}"></span>
+										<span>Obreros</span><br> <span>Total: </span> <span class="count"
+											th:text="${total_obreros}"></span>
 
 									</div>
 								</div>
@@ -121,4 +140,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

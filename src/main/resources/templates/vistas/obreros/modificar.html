@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+	<div th:replace="/plantilla/template :: mensajes"></div>
+	<div class="d-flex" id="wrapper">
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">J4 SOFT</div>
+			<div class="list-group list-group-flush text-center">
+				<nav th:replace="plantilla/template :: menu_vertical"></nav>
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+
+			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+			<div class="container-fluid">
+
+
+				<!-- CONTENIDO DINAMICO -->
+				<div>
+					<h3>Información básica</h3>
+
+
+					<form th:action="@{/vistas/obreros/update}" method="post" th:object="${obrero}">
+						<div class="form-group row">
+							<label class="col-md-4" for="nombre">Nombre</label> <input class="form_registro" id="nombre"
+								th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.nombre')}"
+								th:errors="*{trabajador.nombre}"></small>
+						</div>
+
+
+						<div>
+							<label class="col-md-4" for="estado">Estado</label> <select
+								name="estado" id="estado">
+								<option selected>activo</option>
+								<option value="inactivo">inactivo</option>
+							</select>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-4" for="estado">Cedula</label> <input
+								class="form_registro" id="cedula"
+								th:field="${obrero.trabajador.cedula}" placeholder="Cédula"
+								value=""> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('trabajador.cedula')}"
+								th:errors="*{trabajador.cedula}"></small>
+						</div>
+						<div class="form-group row">
+							<label for="">fecha de ingreso</label>
+							<input type="date" th:field="${obrero.fechaIngreso}">
+						</div>
+						<div>
+							<label class="col-md-4" for="cargo">Cargo</label> <select
+								name="cargo" id="cargo">
+								<option selected>Business Development</option>
+								<option value="Accounting">Accounting</option>
+								<option value="Human Resources">Human Resources</option>
+								<option value="Research and Development">Research and
+									Development</option>
+							</select>
+						</div>
+						
+						<div class="row">
+							<!-- AFILIACIONES -->
+							<div th:replace="/plantilla/afiliacion :: arl"></div>
+							<div th:replace="/plantilla/afiliacion :: eps"></div>
+							<div th:replace="/plantilla/afiliacion :: afp"></div>
+							<!--/AFILIACIONES -->							 
+						</div>
+						
+						
+						<input type="hidden" th:field="${obrero.id}">
+						<input type="hidden" th:field="${obrero.trabajador.id}">
+						<input type="hidden" th:field="${obrero.obra.id}">
+						<!--
+							<input type="hidden" th:field="${obrero.trabajador.afiliadoArl.id}">
+						<input type="hidden" th:field="${obrero.trabajador.afiliadoEps.id}">
+						<input type="hidden" th:field="${obrero.trabajador.afiliadoFondoPension.id}">
+						-->
+						<div class="row mt-2">
+							<input type="hidden" name="id_obra" th:value="${obrero.obra.id}">
+							<button type="submit" class="hudsoft-btn-sm mx-auto">guardar</button>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+			<!-- ./CONTENIDO DINAMICO -->
+			<footer th:replace="plantilla/template :: footer"></footer>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper -->
+
+	<!-- JAVASCRIPT -->
+	<script type="text/javascript" th:src="@{/js/obreros/registrar.js}"></script>
+	<!-- ./JAVASCRIPT -->
+</body>
+</html>

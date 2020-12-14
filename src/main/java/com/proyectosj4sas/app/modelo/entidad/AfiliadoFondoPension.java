@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class AfiliadoFondoPension implements Serializable {
 
@@ -24,7 +26,9 @@ public class AfiliadoFondoPension implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "fondoPension")
 	private FondoPension fondoPension;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaIngreso;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaRetiro;
 	private static final long serialVersionUID = 1L;
 

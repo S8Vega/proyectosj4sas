@@ -2,7 +2,6 @@ package com.proyectosj4sas.app.controlador;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class EmpresaControlador {
 	private ObraServicioImpl ob;
 
 	@GetMapping("/")
-	public String listar(Model model) {System.out.println("$$$$$$$$$$$$");
+	public String listar(Model model) {
 		List<Empresa> empresas = empresaService.findAll();
 		model.addAttribute("titulo", "Empresas asociadas");
 		model.addAttribute("ruta_de_navegacion", "Empresas asociadas");
@@ -54,9 +53,8 @@ public class EmpresaControlador {
 	@GetMapping("/{id_empresa}/obras")
 	public String getObrasPorEmpresa(@PathVariable Long id_empresa,Model model) {
 		Empresa empresa=empresaService.findById(id_empresa);
-		List<Obra> obras_t =ob.findAll();
 		List<Obra> obras = new LinkedList<Obra>();
-		for (Obra obra : obras_t) {
+		for (Obra obra : ob.findAll()) {
 			if(obra.getEmpresa().getId()==id_empresa) {
 				obras.add(obra);
 			}
@@ -64,6 +62,7 @@ public class EmpresaControlador {
 		model.addAttribute("titulo", "Empresas asociadas");
 		model.addAttribute("ruta_de_navegacion", "Empresa Asociada");
 		model.addAttribute("total_obreros", empresa.totalObreros());
+		model.addAttribute("idEmpresa", id_empresa);
 		model.addAttribute("obras", obras);
 		return "/vistas/obras/listar";
 	}
@@ -74,6 +73,19 @@ public class EmpresaControlador {
 		model.addAttribute("ruta_de_navegacion", "Registro Empresa");
 		model.addAttribute("empresa", new Empresa());
 		return "/vistas/empresas/registrar";
+	}
+	@GetMapping("/modificar/{idEmpresa}")
+	public String modificar(@PathVariable Long idEmpresa,Model model) {
+		model.addAttribute("titulo", "Modificar Empresa");
+		model.addAttribute("ruta_de_navegacion", "Modificar Empresa");
+		model.addAttribute("empresa", empresaService.findById(idEmpresa));
+		return "/vistas/empresas/modificar";
+	}
+	@PostMapping("/guardar_modificado")
+	public String guardarModificado(@ModelAttribute Empresa empresa, RedirectAttributes flash) {
+		empresaService.save(empresa);
+		flash.addFlashAttribute("success", "Empresa Modificada correctamente");
+		return "redirect:/empresas/"+empresa.getId();
 	}
 	
 	@PostMapping("/guardar")
