@@ -1,5 +1,6 @@
-<!-- CREAR REPRESENTANTE -->
-<div th:if="${obra.representante == null}" th:fragment="crear" class="card">
+<div class="col-md-5" th:fragment="representante">
+    <!-- CREAR REPRESENTANTE -->
+<div th:if="${obra.representante == null}"  class="card">
     <div class="card-header hudsoft-thead-dark">
         <strong>Representante</strong>
     </div>
@@ -57,3 +58,4 @@
     </script>
 </div>
 <!-- ./MODIFICAR CONTADOR-->
+</div>

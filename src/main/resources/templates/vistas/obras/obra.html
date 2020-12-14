@@ -117,58 +117,9 @@
 					</div>
 
 					<!-- INFORMACION -->
-					<div class="row mx-auto">
-						<div class="col">
-							<div th:if="${obra.siso!=null}" class="card">
-								<div class="card-header hudsoft-thead-dark">
-									<div class="media-body">
-										<h4 class="text-light display-6" th:text="${obra.siso.trabajador.nombre}"></h4>
-										<strong>Siso</strong>
-									</div>
-								</div>
-								<div class="">
-									<section class="card">
-										<ul class="list-group list-group-flush">
-
-											<li class="list-group-item"><span>Cedula: </span> <span class=""
-													th:text="${obra.siso.trabajador.cedula}"></span></li>
-											<li class="list-group-item"><span>Telefono: </span> <span class=""
-													th:text="${obra.siso.telefono}"></span></li>
-											<li class="list-group-item"><span>Correo: </span> <span class=""
-													th:text="${obra.siso.correo}"></span></li>
-										</ul>
-									</section>
-
-
-								</div>
-							</div>
-						</div>
-						<div class="col">
-							<div th:replace="/plantilla/representante :: crear"></div>
-							<div th:replace="/plantilla/representante :: modificar"></div>
-							<!--
-								<div th:if="${obra.representante!=null}" class="card">
-								<div class="card-header hudsoft-thead-dark">
-									<div class="media-body">
-										<h4 class="text-light display-6" th:text="${obra.representante.nombre}"></h4>
-										<strong>Representante</strong>
-									</div>
-								</div>
-								<div class="">
-									<section class="card">
-										<ul class="list-group list-group-flush">
-
-											<li class="list-group-item"><span>Telefono: </span> <span class=""
-													th:text="${obra.representante.telefono}"></span></li>
-											<li class="list-group-item"><span>Correo: </span> <span class=""
-													th:text="${obra.representante.correo}"></span></li>
-										</ul>
-									</section>
-
-								</div>
-							</div>
-							-->
-						</div>
+					<div class="row">						
+							<div th:replace="/plantilla/representante :: representante"></div>
+							<div th:replace="/plantilla/siso :: siso"></div>			
 					</div>
 				</div>
 				<!-- ./INFORMACION -->
