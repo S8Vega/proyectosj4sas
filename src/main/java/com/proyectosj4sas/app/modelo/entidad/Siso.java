@@ -44,6 +44,12 @@ public class Siso implements Serializable {
 				+ ", correo=" + correo + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Siso other = (Siso) obj;
+		return telefono.equals(other.getTelefono()) && correo.equals(other.getCorreo());
+	}
+
 	public Long getId() {
 		return id;
 	}
