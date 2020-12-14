@@ -8,29 +8,29 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.proyectosj4sas.app.modelo.entidad.Contador;
-import com.proyectosj4sas.app.modelo.servicio.implementacion.ContadorServicioImpl;
+import com.proyectosj4sas.app.modelo.entidad.Obrero;
+import com.proyectosj4sas.app.modelo.servicio.implementacion.ObreroServicioImpl;
 
 @SpringBootTest
-class ContadorTest {
+class ObreroTest {
 
 	@Autowired
-	private ContadorServicioImpl servicio;
+	private ObreroServicioImpl servicio;
 
 	@Test
 	void test() {
-		Contador expected, actual;
-		ArrayList<Contador> listaExpected = (ArrayList<Contador>) servicio.findAll();
+		Obrero expected, actual;
+		// test: findAll
+		ArrayList<Obrero> listaExpected = (ArrayList<Obrero>) servicio.findAll();
 		for (int i = 0; i < 10; i++) {
-			expected = new Contador(null, null, "telefono: " + i, "correo: " + i, "nombre: " + i);
+			expected = new Obrero(null, null, "estado: " + i, null, "cargo: " + i, null, null);
 			// test: save
 			servicio.save(expected);
 			// test: findById
 			actual = servicio.findById(expected.getId());
 			assertEquals(expected, actual);
-			expected.setTelefono("telefono: " + (i + 1));
-			expected.setCorreo("correo: " + (i + 1));
-			expected.setNombre("nombre: " + (i + 1));
+			expected.setEstado("estado: " + (i + 1));
+			expected.setCargo("cargo: " + (i + 1));
 			// test: save
 			servicio.save(expected);
 			// test: findById
@@ -42,7 +42,8 @@ class ContadorTest {
 			actual = servicio.findById(expected.getId());
 			assertNull(actual);
 		}
-		ArrayList<Contador> listaActual = (ArrayList<Contador>) servicio.findAll();
+		// test: findAll
+		ArrayList<Obrero> listaActual = (ArrayList<Obrero>) servicio.findAll();
 		assertEquals(listaExpected, listaActual);
 	}
 }

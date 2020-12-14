@@ -49,6 +49,12 @@ public class Obrero implements Serializable {
 				+ cargo + ", fechaIngreso=" + fechaIngreso + ", fechaRetiro=" + fechaRetiro + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Obrero other = (Obrero) obj;
+		return estado.equals(other.getEstado()) && cargo.equals(other.getCargo());
+	}
+
 	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
