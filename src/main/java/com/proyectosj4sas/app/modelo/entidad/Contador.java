@@ -40,6 +40,13 @@ public class Contador implements Serializable {
 				+ ", nombre=" + nombre + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Contador other = (Contador) obj;
+		return telefono.equals(other.getTelefono()) && correo.equals(other.getCorreo())
+				&& nombre.equals(other.getNombre());
+	}
+
 	public Long getId() {
 		return id;
 	}
