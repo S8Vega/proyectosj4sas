@@ -74,12 +74,14 @@
 												th:onclick="'smodal(\'' + ${obrero.id} + '\');'"><i
 													class="far fa-eye"></i></a>
 
-											
-
-											<a th:href="@{/vistas/obreros/modificar/}+${obrero.id}" class="hudsoft-btn-sm">
-
-												<i class="fas fa-edit"></i>
-											</a></td>
+											<a th:href="@{/vistas/obreros/modificar/}+${obrero.id}"
+												class="hudsoft-btn-sm">
+												<i class="fas fa-edit"></i></a>
+											<a th:href="@{/vistas/obreros/eliminar/}+${obrero.id}"
+												class="hudsoft-btn-sm hudsoft-danger">
+												<i class="fas fa-trash"></i>
+											</a>
+										</td>
 
 									</tr>
 								</tbody>

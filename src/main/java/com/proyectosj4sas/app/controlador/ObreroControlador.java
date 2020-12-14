@@ -69,6 +69,17 @@ public class ObreroControlador {
 		model.addAttribute("idObra", idObra);
 		return "/vistas/obreros/registrar";
 	}
+	@GetMapping({ "/eliminar/{idObrero}" })
+	public String eliminar(@PathVariable Long idObrero, Model model, RedirectAttributes flash) {
+
+		Obrero obrero = obreroService.findById(idObrero);
+		long idObra = obrero.getObra().getId();
+		obreroService.deleteById(idObrero);
+		trabajadorService.deleteById(obrero.getTrabajador().getId());
+		flash.addFlashAttribute("success", "Obrero eliminado correctamente");
+		// model.addAttribute("idObra", idObra);
+		return "redirect:/obras/" + idObra;
+	}
 
 	@GetMapping({ "/modificar/{idObrero}" })
 	public String modificar(@PathVariable Long idObrero, Model model) {
@@ -134,42 +145,17 @@ public class ObreroControlador {
 
 	@PostMapping("/update")
 	public String guardarModificado(@ModelAttribute Obrero obrero, RedirectAttributes flash, Model model,
-			@RequestParam(name = "id_obra", required = false) Long idObra,
-			@RequestParam(name = "id_arl", required = false) Long idArl,
-			@RequestParam(name = "id_eps", required = false) Long idEps,
-			@RequestParam(name = "id_afp", required = false) Long idAfp,
-			@RequestParam(name = "codigo_afiliado_arl", required = false) String codigoAfiliadoArl,
-			@RequestParam(name = "codigo_afiliado_eps", required = false) String codigoAfiliadoEps,
-			@RequestParam(name = "codigo_afiliado_afp", required = false) String codigoAfiliadoAfp,
-			@RequestParam("fecha_registro_arl") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroArl,
-			@RequestParam("fecha_registro_eps") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroEps,
-			@RequestParam("fecha_registro_afp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaRegistroAfp) {
+			@RequestParam(name = "id_obra", required = false) Long idObra) {
 		System.out.println(idObra);
-		Obra obra = obraService.findById(idObra);
-
-		// Arl arl = arlService.findById(idArl);
-		// Eps eps = epsService.findById(idEps);
-		// FondoPension afp = afpService.findById(idAfp);
-
-		obrero.setObra(obra);
-		trabajadorService.save(obrero.getTrabajador());
-		obrero.setFechaIngreso(new Date());
-		Trabajador trabajador = obrero.getTrabajador();
-		/**
-		 * if (idArl != -1) {
-		 * 
-		 * AfiliadoArl afArl = new AfiliadoArl(codigoAfiliadoArl, trabajador, arl,
-		 * fechaRegistroArl); afiliadoArlService.save(afArl);
-		 * 
-		 * } if (idEps != -1) { AfiliadoEps afEps = new AfiliadoEps(codigoAfiliadoEps,
-		 * trabajador, eps, fechaRegistroEps); afiliadoEpsService.save(afEps); } if
-		 * (idAfp != -1) { AfiliadoFondoPension afAfp = new
-		 * AfiliadoFondoPension(codigoAfiliadoAfp, trabajador, afp, fechaRegistroAfp);
-		 * afiliadoAfpService.save(afAfp); }
-		 */
+		System.out.println(obrero.getId());
+		System.out.println(obrero);
+		Trabajador tr = trabajadorService.findById(obrero.getTrabajador().getId());
+		tr.setCedula(obrero.getTrabajador().getCedula());
+		tr.setNombre(obrero.getTrabajador().getNombre());
+		trabajadorService.save(tr);
 		obreroService.save(obrero);
 		flash.addFlashAttribute("success", "Obrero modificado correctamente");
-		return "redirect:/obras/" + obra.getId();
+		return "redirect:/obras/" + idObra;
 	}
 	@GetMapping("/create/afiliacion_arl/{idTrabajador}/{idObrero}")
 	public String crearAfiliacionArl(@PathVariable Long idTrabajador,@PathVariable Long idObrero,@ModelAttribute AfiliadoArl afiliacionArl, Model model){

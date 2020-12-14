@@ -81,5 +81,42 @@
 <!--/CARD DE AFILIACION EPS -->
 
 <!-- CARD DE AFILIACION AFP -->
-
+<div th:fragment="afp" class="col-md-4">
+    <div th:if="${obrero.trabajador.afiliadoFondoPension != null}" >
+        <div class="card">
+            <div class="card-header hudsoft-thead-dark">
+                <span>AFP</span>	
+            </div>
+            <div class="card-body">
+                <label for="codigo de afiliado">codigo de afiliado: <span class="text-info" th:text="${obrero.trabajador.afiliadoFondoPension.codigo}"></span></label>
+                
+                <label for=""> fecha de registro: <span class="text-info" th:text="${#calendars.format(obrero.trabajador.afiliadoFondoPension.fechaIngreso,'dd MMMM yyyy')}"></span></label>
+    
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm"th:href="@{/afiliaciones/afp/update/}+${obrero.trabajador.afiliadoFondoPension.id}+'/'+${obrero.id}">modificar</a>
+                </div>										
+            </div>
+        </div>
+      </div>
+      <div th:if="${obrero.trabajador.afiliadoFondoPension == null}"  >
+        <div class="card">
+            <div class="card-header hudsoft-thead-dark">
+                <span>AFP</span>	
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning col " role="alert">
+                    No cuenta con afiliacion a fondo de pension!
+                
+                  </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm" th:href="@{/afiliaciones/afp/create/}+${obrero.trabajador.id}+'/'+${obrero.id}">agregar</a>
+                </div>										
+            </div>
+        </div>
+      </div>
+</div>
 <!--/CARD DE AFILIACION AFP -->

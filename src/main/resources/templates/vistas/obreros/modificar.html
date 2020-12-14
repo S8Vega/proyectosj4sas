@@ -69,10 +69,19 @@
 							<!-- AFILIACIONES -->
 							<div th:replace="/plantilla/afiliacion :: arl"></div>
 							<div th:replace="/plantilla/afiliacion :: eps"></div>
+							<div th:replace="/plantilla/afiliacion :: afp"></div>
 							<!--/AFILIACIONES -->							 
 						</div>
 						
+						
 						<input type="hidden" th:field="${obrero.id}">
+						<input type="hidden" th:field="${obrero.trabajador.id}">
+						<input type="hidden" th:field="${obrero.obra.id}">
+						<!--
+							<input type="hidden" th:field="${obrero.trabajador.afiliadoArl.id}">
+						<input type="hidden" th:field="${obrero.trabajador.afiliadoEps.id}">
+						<input type="hidden" th:field="${obrero.trabajador.afiliadoFondoPension.id}">
+						-->
 						<div class="row mt-2">
 							<input type="hidden" name="id_obra" th:value="${obrero.obra.id}">
 							<button type="submit" class="hudsoft-btn-sm mx-auto">guardar</button>
