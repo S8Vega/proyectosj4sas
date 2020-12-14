@@ -37,7 +37,11 @@
 						</div>
 						<div class="card-body card-block">
 
-							<table id="dtBasicExample"
+							<div th:if="${ #lists.isEmpty(obreros)}" class="alert alert-primary mx-auto" role="alert">
+								No hay obreros asignados a esta obra
+							</div>
+
+							<table th:if="${not #lists.isEmpty(obreros)}" id="dtBasicExample"
 								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
 								<thead class="hudsoft-thead-dark">
 									<tr class="text-center">
@@ -55,20 +59,25 @@
 										<td name="nombre" th:text="${obrero.trabajador.nombre}"></td>
 										<td name="cedula" th:text="${obrero.trabajador.cedula}"></td>
 										<td>
-											<span th:if="${obrero.estado} == 'activo'" class="hudsoft-badge-pill"> <i
-													class="fas fa-check"></i>
+											<span th:if="${obrero.estado} == 'activo'" class="hudsoft-badge-pill">
 												activo
 											</span>
 											<span th:if="${obrero.estado} != 'activo'" class="hudsoft-badge-pill-danger"
-												th:text="${obrero.estado}"> <i class="fas fa-times"></i> inactivo
+												th:text="${obrero.estado}"> </i> inactivo
 											</span>
 										</td>
 
 
 										<td name="cargo" th:text="${obrero.cargo}"></td>
-										<td><a class="hudsoft-btn-sm"
+										<td>
+											<a class="hudsoft-btn-sm"
 												th:onclick="'smodal(\'' + ${obrero.id} + '\');'"><i
-													class="far fa-eye"></i></a> <a href="" class="hudsoft-btn-sm">
+													class="far fa-eye"></i></a>
+
+											
+
+											<a th:href="@{/vistas/obreros/modificar/}+${obrero.id}" class="hudsoft-btn-sm">
+
 												<i class="fas fa-edit"></i>
 											</a></td>
 
@@ -77,9 +86,9 @@
 							</table>
 						</div>
 						<div class="card-footer">
-							<a th:href="@{/representantes/registrar/}+${obra.id}"
-								class="hudsoft-btn-sm float-right">Agregar Representante</a>
-							<a th:href="@{/constructoras/obras/}+${obra.id}"
+
+
+							<a th:if="${not #lists.isEmpty(obra.obrero)}" th:href="@{/constructoras/obras/}+${obra.id}"
 								class="hudsoft-btn-sm float-right">Afiliaciones</a> <a
 								th:href="@{/vistas/obreros/crear/}+${obra.id}"
 								class="hudsoft-btn-sm float-right mr-1">Agregar obrero</a>
@@ -108,7 +117,7 @@
 					<!-- INFORMACION -->
 					<div class="row mx-auto">
 						<div class="col">
-							<div class="card">
+							<div th:if="${obra.siso!=null}" class="card">
 								<div class="card-header hudsoft-thead-dark">
 									<div class="media-body">
 										<h4 class="text-light display-6" th:text="${obra.siso.trabajador.nombre}"></h4>
@@ -133,7 +142,10 @@
 							</div>
 						</div>
 						<div class="col">
-							<div class="card">
+							<div th:replace="/plantilla/representante :: crear"></div>
+							<div th:replace="/plantilla/representante :: modificar"></div>
+							<!--
+								<div th:if="${obra.representante!=null}" class="card">
 								<div class="card-header hudsoft-thead-dark">
 									<div class="media-body">
 										<h4 class="text-light display-6" th:text="${obra.representante.nombre}"></h4>
@@ -153,6 +165,7 @@
 
 								</div>
 							</div>
+							-->
 						</div>
 					</div>
 				</div>
@@ -247,7 +260,6 @@
 	</div>
 	<script type="text/javascript">
 		function smodal(id) {
-			console.log(id);
 			let fila_trabajador = document.getElementById("td_" + id);
 			fila_trabajador.getElementsByTagName("td");
 			let nombre = fila_trabajador.getElementsByTagName("td")["nombre"].innerText;

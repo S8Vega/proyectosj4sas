@@ -74,6 +74,19 @@ public class EmpresaControlador {
 		model.addAttribute("empresa", new Empresa());
 		return "/vistas/empresas/registrar";
 	}
+	@GetMapping("/modificar/{idEmpresa}")
+	public String modificar(@PathVariable Long idEmpresa,Model model) {
+		model.addAttribute("titulo", "Modificar Empresa");
+		model.addAttribute("ruta_de_navegacion", "Modificar Empresa");
+		model.addAttribute("empresa", empresaService.findById(idEmpresa));
+		return "/vistas/empresas/modificar";
+	}
+	@PostMapping("/guardar_modificado")
+	public String guardarModificado(@ModelAttribute Empresa empresa, RedirectAttributes flash) {
+		empresaService.save(empresa);
+		flash.addFlashAttribute("success", "Empresa Modificada correctamente");
+		return "redirect:/empresas/"+empresa.getId();
+	}
 	
 	@PostMapping("/guardar")
 	public String guardar(@ModelAttribute Empresa empresa, RedirectAttributes flash) {

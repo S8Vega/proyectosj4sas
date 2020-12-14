@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
+import com.proyectosj4sas.app.modelo.entidad.Trabajador;
 
 public interface IObreroDao extends CrudRepository<Obrero, Long> {
 
@@ -18,5 +19,8 @@ public interface IObreroDao extends CrudRepository<Obrero, Long> {
 
 	@Query(value = "{call lista_obreros_sin_afp(:idIn)}", nativeQuery = true)
 	List<Obrero> listaObrerosSinAfp(@Param("idIn") Long idObra);
+
+	@Query(value = "{call get_trabajador(:idIn)}", nativeQuery = true)
+	Trabajador getMyTrabajador(@Param("idIn") Long idObrero);
 
 }

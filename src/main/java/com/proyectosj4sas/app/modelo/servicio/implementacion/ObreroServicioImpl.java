@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.proyectosj4sas.app.modelo.dao.interfaz.IObreroDao;
 import com.proyectosj4sas.app.modelo.entidad.Obrero;
+import com.proyectosj4sas.app.modelo.entidad.Trabajador;
 import com.proyectosj4sas.app.modelo.servicio.interfaz.IServicio;
 
 @Service
@@ -49,6 +50,9 @@ public class ObreroServicioImpl implements IServicio<Obrero, Long> {
 	}
 	public List<Obrero> listaObrerosSinAfp(Long idObra){
 		return obreroDao.listaObrerosSinAfp(idObra);		
+	}
+	public Trabajador getMyTrabajador(Long idObrero){
+		return obreroDao.getMyTrabajador(idObrero);		
 	}
 
 	

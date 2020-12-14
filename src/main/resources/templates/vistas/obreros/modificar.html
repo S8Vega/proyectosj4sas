@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="/plantilla/template :: head">
 </head>
 
 <body>
-
+	<div th:replace="/plantilla/template :: mensajes"></div>
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar -->
 		<div class="bg-light border-right" id="sidebar-wrapper">
@@ -30,14 +30,11 @@
 					<h3>Información básica</h3>
 
 
-					<form th:action="@{/vistas/obreros/guardar}" method="post"
-						th:object="${obrero}">
+					<form th:action="@{/vistas/obreros/update}" method="post" th:object="${obrero}">
 						<div class="form-group row">
-							<label class="col-md-4" for="nombre">Nombre</label> <input
-								class="form_registro" id="nombre"
+							<label class="col-md-4" for="nombre">Nombre</label> <input class="form_registro" id="nombre"
 								th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
-							<small class="form-text text-danger"
-								th:if="${#fields.hasErrors('trabajador.nombre')}"
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.nombre')}"
 								th:errors="*{trabajador.nombre}"></small>
 						</div>
 
@@ -67,47 +64,25 @@
 									Development</option>
 							</select>
 						</div>
-
-						<div id="arl">
-
-
-
-							<label class="col-md-4" for="afiliadoArl">ARL</label> <select
-								id="id_arl" name="id_arl">
-							</select> <input class="form_registro" name="codigo_afiliado_arl"
-								placeholder="Codigo Afiliado ARL"> <input
-								class="form_registro" type="date" name="fecha_registro_arl">
-						</div>
-
-
-						<div>
-							<label class="col-md-4" for="afiliadoEps">EPS</label> <select
-								id="id_eps" name="id_eps">
-
-
-							</select> <input class="form_registro" name="codigo_afiliado_eps"
-								placeholder="Codigo Afiliado EPS"> <input
-								class="form_registro" type="date" name="fecha_registro_eps">
-						</div>
-						<div>
-							<label class="col-md-4" for="afiliadoFondoPension">Fondo
-								de Pension</label> <select name="id_afp" id="id_afp">
-
-
-							</select> <input class="form_registro" name="codigo_afiliado_afp"
-								placeholder="Codigo Afiliado ARL"> <input
-								class="form_registro" type="date" name="fecha_registro_afp">
-						</div>
-
+						
 						<div class="row">
-							<input type="hidden" name="id_obra" th:value="${idObra}">
-							<button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
+							<!-- AFILIACIONES -->
+							<div th:replace="/plantilla/afiliacion :: arl"></div>
+							<div th:replace="/plantilla/afiliacion :: eps"></div>
+							<!--/AFILIACIONES -->							 
+						</div>
+						
+						<input type="hidden" th:field="${obrero.id}">
+						<div class="row mt-2">
+							<input type="hidden" name="id_obra" th:value="${obrero.obra.id}">
+							<button type="submit" class="hudsoft-btn-sm mx-auto">guardar</button>
 
 						</div>
 
 					</form>
 				</div>
 			</div>
+
 			<!-- ./CONTENIDO DINAMICO -->
 			<footer th:replace="plantilla/template :: footer"></footer>
 		</div>

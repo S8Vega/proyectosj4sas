@@ -39,5 +39,7 @@ public class RepresentanteServicioImpl implements IServicio<Representante, Long>
 	public void deleteById(Long id) {
 		representanteDao.deleteById(id);
 	}
-
+	public List<Representante> nuevoRepresentante(){
+		return representanteDao.nuevoRepresentante();		
+	}
 }

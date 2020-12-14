@@ -98,6 +98,7 @@ public class ObraControlador {
 
 	@GetMapping("/constructoras/obras/{id}")
 	public void reporteArl(@PathVariable Long id, HttpServletResponse response) throws IOException {
+
 		response.setContentType("application/octet-stream");
 
 		String headerKey = "Content-Disposition";
@@ -129,4 +130,5 @@ public class ObraControlador {
 		}
 		return map;
 	}
+	
 }
