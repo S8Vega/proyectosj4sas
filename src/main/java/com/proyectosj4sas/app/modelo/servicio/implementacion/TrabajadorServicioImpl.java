@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proyectosj4sas.app.modelo.dao.interfaz.ITrabajadorDao;
+import com.proyectosj4sas.app.modelo.entidad.AfiliadoArl;
 import com.proyectosj4sas.app.modelo.entidad.Trabajador;
 import com.proyectosj4sas.app.modelo.servicio.interfaz.IServicio;
 
@@ -38,6 +39,10 @@ public class TrabajadorServicioImpl implements IServicio<Trabajador, Long> {
 	@Transactional
 	public void deleteById(Long id) {
 		trabajadorDao.deleteById(id);
+	}
+
+	public Long getAfiliacionArl(Long idTrabajador){
+		return trabajadorDao.getAfiliacionArl(idTrabajador);
 	}
 
 }

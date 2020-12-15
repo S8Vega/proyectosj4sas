@@ -93,9 +93,8 @@
 							<a th:if="${empresa.contador == null}" th:href="@{/contador/crear/}+${empresa.id}"
 								class="hudsoft-btn-sm">Agregar Contador</a>
 						-->
-							<button type="reset" class="hudsoft-btn-sm float-right">
-								<i class="fa fa-ban"></i> Modificar
-							</button>
+						
+							<a th:href="@{/empresas/modificar/}+${empresa.id}" class="hudsoft-btn-sm text-center float-right">Modificar</a>
 						</div>
 					</div>
 					<div>

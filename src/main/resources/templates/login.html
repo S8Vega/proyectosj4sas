@@ -32,9 +32,9 @@
 						<div class="cont_btn_login">
 							<button id="btn_login" class="btn_login">Iniciar Sesión</button>
 						</div>
-						</form>
+					</form>
 					<div class="text_recuperar">
-						¿Olvidaste tu contraseña? <a class="link_recuperar" href="">
+						¿Olvidaste tu contraseña? <a class="link_recuperar" th:href="@{/users/password-reset-request/}">
 							Recuperar</a>
 					</div>
 
@@ -45,10 +45,11 @@
 				<div class="txt_logotipo">PROYECTOS E INGENIERÍA J4 S.A.S</div>
 			</div>
 		</div>
-	</div>
-	<script type="text/javascript" th:src="@{/js/util.js}">
 	
-	</script>
+	</div>
+	<script type="text/javascript" th:src="@{/js/util.js}"></script>
+	<script type="text/javascript" th:src="@{/js/login/login.js}"></script>
+
 </body>
 
 </html>

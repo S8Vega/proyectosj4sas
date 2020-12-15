@@ -11,4 +11,5 @@ public interface IServicio<T, Id> {
 	public void save(T t);
 
 	public void deleteById(Id id);
+//	public T findByEmail(String email);
 }
