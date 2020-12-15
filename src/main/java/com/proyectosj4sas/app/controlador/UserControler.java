@@ -26,7 +26,6 @@ import com.proyectosj4sas.app.util.RequestOperationName;
 import com.proyectosj4sas.app.util.RequestOperationStatus;
 import com.proyectosj4sas.app.util.ServicioEliminarToken;
 
-//@RestController()
 @Controller
 @RequestMapping("/users")
 public class UserControler {
@@ -36,13 +35,15 @@ public class UserControler {
 	public UsuarioServicioImpl userService;
 	@Autowired
 	PasswordResetTokenRepository passwordResetTokenRepository;
+
 	@PostMapping("/password-reset-request")
-	public String requestReset(@ModelAttribute PasswordResetRequestModel passwordResetRequestModel,Model model,
+	public String requestReset(@ModelAttribute PasswordResetRequestModel passwordResetRequestModel, Model model,
 			RedirectAttributes flash) {
-		boolean status= userService.requestPasswordReset(passwordResetRequestModel.getEmail());
-		
-		if(status) {
-			return "index";
+		boolean status = userService.requestPasswordReset(passwordResetRequestModel.getEmail());
+
+		if (status) {
+			model.addAttribute("msg", "se ha enviado un email con un enlace para efectuar tu cambio de clave!");
+			return "msg";
 		}
 		model.addAttribute("msg", "el email no se encuemtra registrado!");
 		return "msg";
@@ -56,42 +57,40 @@ public class UserControler {
 		model.addAttribute("msg", "ingresa email para enviarte un enlace de cambio de clave!");
 		return "reset_password";
 	}
-	
 
 	@GetMapping("/password-update-request/{token}")
-	public String updatePasword(@PathVariable String token,Model model, RedirectAttributes flash) {
-		System.out.println(token+"mytoken");
-		//servicioEliminarToken.atender(passwordResetTokenRepository.findByToken(token));
+	public String updatePasword(@PathVariable String token, Model model, RedirectAttributes flash) {
+		System.out.println(token + "mytoken");
+		// servicioEliminarToken.atender(passwordResetTokenRepository.findByToken(token));
 		flash.addFlashAttribute("info", "ingresa tus datos para actualizar tu clave de acceso!");
 		model.addAttribute("msg", "ingresa tu nueva clave!");
 		model.addAttribute("token", token);
 		return "update_password";
 	}
+
 	@PostMapping("/password-update-request")
-	public String requestReset(Model model,
-			@RequestParam(name = "password", required = true) String password,
+	public String requestReset(Model model, @RequestParam(name = "password", required = true) String password,
 			@RequestParam(name = "password_confirm", required = true) String password_confirm,
-			@RequestParam(name = "token", required = true) String token,
-			RedirectAttributes flash) {
-		
-		if(password.equals(password_confirm)) {
+			@RequestParam(name = "token", required = true) String token, RedirectAttributes flash) {
+
+		if (password.equals(password_confirm)) {
 			PasswordResetTokenEntity tokenEntity = passwordResetTokenRepository.findByToken(token);
-			if(tokenEntity==null) {
+			if (tokenEntity == null) {
 				model.addAttribute("msg", "el tiempo ha expirado!");
 				return "msg";
 			}
 			System.out.println(tokenEntity);
-			Usuario usuario =userService.findById(tokenEntity.getUsuario().getId());
+			Usuario usuario = userService.findById(tokenEntity.getUsuario().getId());
 			System.out.println("id de my usuario");
 			System.out.println(usuario.getEmail());
 			usuario.setClave(password);
 			userService.save(usuario);
 			passwordResetTokenRepository.deleteById(tokenEntity.getId());
-		}else {
+		} else {
 			model.addAttribute("msg", "las claves no coincidieron!");
 			return "msg";
 		}
-		
+
 		model.addAttribute("info", "las claves se han cambiado correctamente!");
 		return "login";
 

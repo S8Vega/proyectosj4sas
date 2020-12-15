@@ -1,15 +1,9 @@
 package com.proyectosj4sas.app.modelo.servicio.implementacion;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +14,7 @@ import com.proyectosj4sas.app.modelo.entidad.Usuario;
 import com.proyectosj4sas.app.modelo.servicio.interfaz.IServicio;
 import com.proyectosj4sas.app.util.EmailBody;
 import com.proyectosj4sas.app.util.EmailPort;
-import com.proyectosj4sas.app.util.HudsoftSES;
 import com.proyectosj4sas.app.util.ServicioEliminarToken;
-import com.proyectosj4sas.app.util.Utils;
 
 @Service
 public class UsuarioServicioImpl implements IServicio<Usuario, Long> {
@@ -71,7 +63,7 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> {
 		
 		
 		boolean returnValue = false;
-		Usuario usuario = usuarioDao.findByEmail(email);	//verifico si existe el usuario
+		Usuario usuario = usuarioDao.findByEmail(email);
 		if(usuario == null) {
 			System.out.println("no existe");
 			return returnValue;
@@ -79,24 +71,87 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> {
 			PasswordResetTokenEntity tokenEntity = new PasswordResetTokenEntity();
 			 tokenEntity.setToken(token);
 			 tokenEntity.setUsuario(usuario);
+			 
 			 passwordResetTokenRepository.save(tokenEntity);
 			 CompletableFuture<String> atencion1 = servicioEliminarToken.atender(passwordResetTokenRepository.findByToken(token));
 			 CompletableFuture.completedFuture(atencion1);
-			 
-			 //ServicioEliminarToken sEliminar = new ServicioEliminarToken();
-			 //sEliminar.atender(passwordResetTokenRepository.findByToken(tokenEntity.getToken()));
-			System.out.println("si existe");
-			EmailBody emailBody = new EmailBody();
+
+			 EmailBody emailBody = new EmailBody();
 			emailBody.setEmail(email);
 			emailBody.setSubject("hudsoft solicitud de cambio de clave");
-			emailBody.setContent("<div style=\"background-color:cyan\">\n"
-					+ "  <h4 style=\"color:orange\">\n"
-					+ "    Hola Usuario!\n"
-					+ "  </h4>\n"
-					+ "  <p>\n"
-					+ "    un saludo <a href=\"http://localhost:8080/users/password-update-request/"+token+"\">link</a>\n"
-					+ "  </p>\n"
-					+ "</div>");
+			emailBody.setContent("\n"
+					+ "<body style=\"margin: 0; padding: 0;\">\n"
+					+ "	<table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n"
+					+ "		<tr>\n"
+					+ "			<td style=\"padding: 20px 0 0px 0;\">\n"
+					+ "\n"
+					+ "<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse: collapse; border: 1px solid #cccccc;\">\n"
+					+ "	<tr>\n"
+					+ "		<td align=\"center\" bgcolor=\"#70bbd9\" style=\"padding: 40px 0 30px 0;\">\n"
+					+ "			<img src=\"https://i.ibb.co/sgK8wBC/isotipo.png\" alt=\"Creating Email Magic.\" width=\"300\" height=\"230\" style=\"display: block;\" />\n"
+					+ "		</td>\n"
+					+ "	</tr>\n"
+					+ "	<tr>\n"
+					+ "		<td bgcolor=\"#ffffff\" style=\"padding: 40px 30px 40px 30px;\">\n"
+					+ "			<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse: collapse;\">\n"
+					+ "				<tr>\n"
+					+ "					<td style=\"color: #153643; font-family: Arial, sans-serif;\">\n"
+					+ "						<h1 style=\"font-size: 24px; margin: 0;\">PROJECTOS E INGENIERIA J4 S.A.S</h1>\n"
+					+ "					</td>\n"
+					+ "				</tr>\n"
+					+ "			\n"
+					+ "                    <td style=\"color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;\">\n"
+					+ "                        <h3 style=\"font-size: 16px; margin: 0;\">Solicitud de cambio de clave:</h3>\n"
+					+ "                        <p style=\"margin: 0;\">\n"
+					+ "                            Hola, "
+					+  usuario.getAlias()
+					+ "                                  !\n"
+					+ "                            Alguien ha solicitado restablecer su clave de acceso a  nuestro sitio web. Si no fue usted, ignórelo. de lo contrario, haga clic en el enlace de abajo para establecer una nueva clave:\n"
+					+ "                            http://localhost:8080/verification-service/password-reset.html?token="
+					+ token+"\n"
+					+ "                            Haga clic en este enlace para restablecer la clave.\n"
+					+ "                            Gracias\n"
+					+ "                        </p>\n"
+					+ "					</td>\n"
+					+ "				</tr>\n"
+					+ "			</table>\n"
+					+ "		</td>\n"
+					+ "	</tr>\n"
+					+ "	<tr>\n"
+					+ "		<td bgcolor=\"#36A4C6\" style=\"padding: 30px 30px;\">\n"
+					+ "    		<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse: collapse;\">\n"
+					+ "				<tr>\n"
+					+ "					<td style=\"color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;\">\n"
+					+ "						<p style=\"margin: 0;\">&reg; Hudsoft, Norte de Santander 2020<br/>\n"
+					+ "					</td>\n"
+					+ "					<td align=\"right\">\n"
+					+ "						<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: collapse;\">\n"
+					+ "							<tr>\n"
+					+ "								<td>\n"
+					+ "									<a href=\"#\">\n"
+					+ "										<img src=\"https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logoufps.png\" alt=\"UFPS.\" width=\"38\" height=\"38\" style=\"display: block;\" border=\"0\" />\n"
+					+ "									</a>\n"
+					+ "								</td>\n"
+					+ "								<td style=\"font-size: 0; line-height: 0;\" width=\"20\">&nbsp;</td>\n"
+					+ "								<td>\n"
+					+ "									<a href=\"#\">\n"
+					+ "										<img src=\"https://i.ibb.co/vqjpkSZ/hudsoft.png\" alt=\"HUDSOFT.\" width=\"38\" height=\"38\" style=\"display: block;\" border=\"0\" />\n"
+					+ "									</a>\n"
+					+ "								</td>\n"
+					+ "							</tr>\n"
+					+ "						</table>\n"
+					+ "					</td>\n"
+					+ "				</tr>\n"
+					+ "			</table>\n"
+					+ "		</td>\n"
+					+ "	</tr>\n"
+					+ "</table>\n"
+					+ "\n"
+					+ "			</td>\n"
+					+ "		</tr>\n"
+					+ "	</table>\n"
+					+ "</body>");
+
 			boolean status = emailPort.sendEmail(emailBody);
 			if(status) {
 				System.out.println("enviado");
