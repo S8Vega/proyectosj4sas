@@ -38,6 +38,12 @@ public class FondoPension implements Serializable {
 				+ afiliadoFondoPension + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		FondoPension other = (FondoPension) obj;
+		return nombre.equals(other.getNombre()) && codigo.equals(other.getCodigo());
+	}
+
 	public Long getId() {
 		return id;
 	}
