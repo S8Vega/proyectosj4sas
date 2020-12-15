@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.proyectosj4sas.app.auth.handler.LoginSuccessHandler;
+import com.proyectosj4sas.app.security.SecurityConstants;
 
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,7 +27,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+		http.authorizeRequests().antMatchers("/css/**", "/js/**", "/img/**","/users/password-reset-request/**","/users/password-update-request/**").permitAll()
 				.antMatchers("/", "/arl/**", "/empresas/**", "/empresas/{id}", "/constructoras/obras/{id}",
 						"/views/constructoras/listar/**", "/obras/estados/**", "/vistas/obreros/form")
 				.hasAnyRole("ADMIN").anyRequest().authenticated().and().formLogin().successHandler(successHandler)
