@@ -37,6 +37,12 @@ public class Eps implements Serializable {
 		return "Eps [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", afiliadoEps=" + afiliadoEps + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Eps other = (Eps) obj;
+		return nombre.equals(other.getNombre()) && codigo.equals(other.getCodigo());
+	}
+
 	public Long getId() {
 		return id;
 	}
