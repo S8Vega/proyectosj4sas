@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.proyectosj4sas.app.modelo.servicio.implementacion.UsuarioServicioImpl;
 
 @SpringBootApplication
@@ -50,8 +49,6 @@ public class Proyectosj4sasApplication implements CommandLineRunner {
 //		  u.setEnable(true);		  
 //		  
 //		  userService.save(u);
-		 
 
 	}
-
 }

@@ -113,6 +113,7 @@ input:focus {
     display: inline-block;
     width: 52%;
     height: 35px;
+    font-size: 0.8rem;
     margin-top: 6%;
     border-radius: 6pt;
     background-color: #ef8f21;
@@ -136,7 +137,7 @@ input:focus {
 .caja2 {
     position: relative;
     width: 60%;
-    height: 100%;
+    height: 70%;
     text-align: center;
     display: inline-block;
 }
@@ -145,7 +146,7 @@ input:focus {
     position: absolute;
     font-size: 2.5em;
     color: white;
-    top: 80%;
+    top: 70%;
     left: 11%;
     animation-delay: 5s;
     animation: animationInLogotipe 1.5s;

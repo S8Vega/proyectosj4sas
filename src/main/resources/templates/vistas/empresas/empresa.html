@@ -2,143 +2,157 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="/plantilla/template :: head">
+    <style>
+        #label_resultado {
+            border-right: 1px solid #ccc;
+        }
+        
+        #card_info {
+            animation: in_info 2s alternate ease-in;
+        }
+        
+        #card_info :hover {
+            background: green;
+        }
+        
+        @keyframes in_info {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.5);
+            }
+        }
+    </style>
 </head>
 
 <body>
-	<div th:replace="/plantilla/template :: mensajes"></div>
+    <div th:replace="/plantilla/template :: mensajes"></div>
 
-	<div class="d-flex" id="wrapper">
+    <div class="d-flex" id="wrapper">
 
-		<!-- Sidebar -->
-		<div class="bg-light border-right" id="sidebar-wrapper">
-			<div class="sidebar-heading">J4 SOFT</div>
-			<div class="list-group list-group-flush text-center">
-
-
-				<nav th:replace="plantilla/template :: menu_vertical"></nav>
-
-			</div>
-		</div>
-		<!-- /#sidebar-wrapper -->
-
-		<!-- Page Content -->
-		<div id="page-content-wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">J4 SOFT</div>
+            <div class="list-group list-group-flush text-center">
 
 
-			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+                <nav th:replace="plantilla/template :: menu_vertical"></nav>
 
-			<div class="container-fluid">
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-
-				<div class="mt-2">
-					<div class="card">
-						<div class="card-header hudsoft-thead-dark">Informacion de
-							Empresa</div>
-						<div class="card-body card-block">
-
-							<div class="row">
-								<div class="col-8">
-									<div class="row form-group">
-										<div class="col col-md-3">
-											<label for="" class=" form-control-label">Nombre</label>
-										</div>
-										<div class="col-12 col-md-9">
-											<label for="" class=" form-control-label"
-												th:text="${empresa.nombre}"></label>
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col col-md-3">
-											<label for="" class=" form-control-label">Nit</label>
-										</div>
-										<div class="col-12 col-md-9">
-											<label for="" class=" form-control-label" th:text="${empresa.nit}"></label>
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col col-md-3">
-											<label for="" class=" form-control-label">Direccion</label>
-										</div>
-										<div class="col-12 col-md-9">
-											<label for="" class=" form-control-label"
-												th:text="${empresa.direccion}"></label>
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col col-md-3">
-											<label for="" class=" form-control-label">Telefono</label>
-										</div>
-										<div class="col-12 col-md-9">
-											<label for="" class=" form-control-label"
-												th:text="${empresa.telefono}"></label>
-										</div>
-									</div>
-
-								</div>
-								<div class="col">
-									<!-- CONTADOR -->
-									<div th:replace="plantilla/contador :: crear"></div>
-									<div th:replace="plantilla/contador :: modificar"></div>
-									<!-- ./CONTADOR -->
-								</div>
-							</div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
 
 
-						</div>
+            <nav th:replace="plantilla/template :: menu_horizontal"></nav>
 
-						<div class="card-footer">
-							<!--
+            <div class="container-fluid">
+
+
+                <div class="mt-2">
+                    <div class="card">
+                        <div class="card-header hudsoft-thead-dark">Información de Empresa
+                        </div>
+                        <div class="card-body card-block">
+
+                            <div class="row ml-4">
+                                <div class="col-8">
+                                    <div class="row form-group mt-5">
+                                        <div id="label_resultado" class="col-12 col-md-9">
+                                            <label for="" class=" form-control-label text-secondary display-3" th:text="${empresa.nombre}"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mt-4">
+                                        <div class="col col-md-3">
+                                            <label for="" class=" form-control-label">Nit:</label>
+                                        </div>
+                                        <div class="col-12 col-md-9" id="label_resultado">
+                                            <label for="" class=" form-control-label text-secondary" th:text="${empresa.nit}"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="" class=" form-control-label">Dirección:</label>
+                                        </div>
+                                        <div class="col-12 col-md-9" id="label_resultado">
+                                            <label for="" class=" form-control-label text-secondary" th:text="${empresa.direccion}"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="" class=" form-control-label ">Teléfono:</label>
+                                        </div>
+                                        <div class="col-12 col-md-9" id="label_resultado">
+                                            <label for="" class=" form-control-label text-secondary" th:text="${empresa.telefono}"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col">
+                                    <!-- CONTADOR -->
+                                    <div th:replace="plantilla/contador :: crear"></div>
+                                    <div th:replace="plantilla/contador :: modificar"></div>
+                                    <!-- ./CONTADOR -->
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-footer">
+                            <!--
 								<a th:if="${empresa.contador != null}" th:href="@{/contador/crear/}+${empresa.id}"
 								class="hudsoft-btn-sm">Modificar Contador</a>
 							<a th:if="${empresa.contador == null}" th:href="@{/contador/crear/}+${empresa.id}"
 								class="hudsoft-btn-sm">Agregar Contador</a>
 						-->
-						
-							<a th:href="@{/empresas/modificar/}+${empresa.id}" class="hudsoft-btn-sm text-center float-right">Modificar</a>
-						</div>
-					</div>
-					<div>
 
-						<div class="mt-2">
-							<h4>
-								<span class="badge badge-secondary hudsoft-badge-important">Informacion</span>
-							</h4>
-						</div>
+                            <a th:href="@{/empresas/modificar/}+${empresa.id}" class="hudsoft-btn-sm text-center float-right">Modificar</a>
+                        </div>
+                    </div>
+                    <div>
 
-						<!-- INFORMACION -->
-						<div class="row mx-auto">
-							<div class="col-md-2">
-								<div class="card">
-									<div class="card-body">
+                        <div class="mt-2">
+                            <h4>
+                                <span class="badge badge-secondary hudsoft-badge-important">Informacion</span>
+                            </h4>
+                        </div>
 
-										<span>Obras</span><br> <span>Total: </span> <span class="count"
-											th:text="${empresa.obra.size()}"></span>
+                        <!-- INFORMACION -->
+                        <div class="row mx-auto">
+                            <div id="card_info" class="col-md-3 shadow p-3 mb-5 bg-white rounded m-2">
+                                <div class="card">
+                                    <div class="card-body">
 
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="card">
-									<div class="card-body">
+                                        <span>Obras</span><span>Total: </span> <span class="count" th:text="${empresa.obra.size()}"></span>
 
-										<span>Obreros</span><br> <span>Total: </span> <span class="count"
-											th:text="${total_obreros}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="card_info" class="col-md-3 shadow p-3 mb-5 bg-white rounded m-2">
+                                <div class="card">
+                                    <div class="card-body">
 
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- ./INFORMACION -->
+                                        <span>Obreros</span><span>Total: </span> <span class="count" th:text="${total_obreros}"></span>
 
-				</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./INFORMACION -->
 
-				<footer th:replace="plantilla/template :: footer"></footer>
-			</div>
-			<!-- /#page-content-wrapper -->
+                </div>
 
-		</div>
-	</div>
+                <footer th:replace="plantilla/template :: footer"></footer>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
+    </div>
 </body>
 
 </html>
