@@ -65,7 +65,7 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 + "    <a href=\"http://localhost:8080/users/password-update-request/$tokenValue\">Click Aqui</a>\n"
 			+"\n"
 			+ "                            Haga clic en este enlace para restablecer la clave.\n"
-			+ "                            Gracias/\n"
+			+ "                            Gracias\n"
 			+ "                        </p>\n"
 			+ "					</td>\n"
 			+ "				</tr>\n"
