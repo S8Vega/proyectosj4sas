@@ -6,27 +6,20 @@
 </head>
 
 <body>
-	<style type="text/css">
-		.notificaciones {
-				
-			animation-direction: alternate;
-			animation-name: notificacion;
-			animation-duration: 5s;
-			
-			width: 100%;
-			animation-fill-mode: forwards;
-		}
-
-		@keyframes notificacion {
-			form {
-			
-			
-				
-			}
-
-			to {
-				margin-top: -68px;
-			/*	
+    <style type="text/css">
+        .notificaciones {
+            animation-direction: alternate;
+            animation-name: notificacion;
+            animation-duration: 5s;
+            width: 100%;
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes notificacion {
+            form {}
+            to {
+                margin-top: -68px;
+                /*	
 				right: 0;
 				
 				visibility: hidden;
@@ -37,211 +30,194 @@
 				padding: 0;
 				border: 0;
 				line-height: 0;*/
-				overflow: hidden;
-				/* sólo en caso de elementos inline-block */
-				
-			}
+                overflow: hidden;
+                /* sólo en caso de elementos inline-block */
+            }
+        }
+    </style>
 
 
 
-		}
-	</style>
-	
+    <div th:replace="/plantilla/template :: mensajes"></div>
+
+    <div class="d-flex" id="wrapper">
 
 
-	<div th:replace="/plantilla/template :: mensajes" ></div>
-
-	<div class="d-flex" id="wrapper">
-
-
-		<!-- Sidebar -->
-		<div class="bg-light border-right" id="sidebar-wrapper">
-			<div class="sidebar-heading">J4 SOFT</div>
-			<div class="list-group list-group-flush text-center">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">J4 SOFT</div>
+            <div class="list-group list-group-flush text-center">
 
 
-				<nav th:replace="plantilla/template :: menu_vertical"></nav>
+                <nav th:replace="plantilla/template :: menu_vertical"></nav>
 
-			</div>
-		</div>
-		<!-- /#sidebar-wrapper -->
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-		<!-- Page Content -->
-		<div id="page-content-wrapper">
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
 
 
-			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+            <nav th:replace="plantilla/template :: menu_horizontal"></nav>
 
-			<div class="container-fluid">
+            <div class="container-fluid">
 
-				<!-- CONTENIDO DINAMICO -->
-				<div class="mt-2">
-					<div class="card">
-						<div class="card-header hudsoft-thead-dark">Obras</div>
-						<div class="card-body card-block">
-							<div class="alert alert-info my-4" th:if="${obras.isEmpty()}">
-								<span>No hay obreros para mostrar aun.</span>
-							</div>
-							<table id="dtBasicExample" th:if="${!obras.isEmpty()}"
-								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
-								<thead class="hudsoft-thead-dark">
-									<tr class="text-center">
-										<th scope="col">#</th>
-										<th scope="col">Nombre</th>
-										<th scope="col">Direccion</th>
-										<th scope="col">Estado</th>
-										<th scope="col">SISO</th>
-										<th scope="col">Representante</th>
-										<th scope="col">Obreros</th>
-										<th scope="col">Opciones</th>
-									</tr>
-								</thead>
-								<tbody class="">
-									<tr th:each="obra: ${obras}" class="text-center" th:id="'td_'+ ${obra.id}">
-										<th th:text="${obra.id}"></th>
-										<td th:text="${obra.nombre}" name="nombre"></td>
-										<td th:text="${obra.direccion}"></td>
-										<td name="estado" ><span   th:if="${obra.estado} == 'activo'"
-												th:onclick="'smodal(\'' + ${obra.id} + '\');'" id="estado"
-												class="hudsoft-badge-pill" style="cursor:pointer"> activo
+                <!-- CONTENIDO DINAMICO -->
+                <div class="mt-2">
+                    <div class="card">
+                        <div class="card-header hudsoft-thead-dark">Obras</div>
+                        <div class="card-body card-block">
+                            <div class="alert alert-info my-4" th:if="${obras.isEmpty()}">
+                                <span>No hay obreros para mostrar aun.</span>
+                            </div>
+                            <table id="dtBasicExample" th:if="${!obras.isEmpty()}" class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
+                                <thead class="hudsoft-thead-dark">
+                                    <tr class="text-center">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Dirección</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">SISO</th>
+                                        <th scope="col">Representante</th>
+                                        <th scope="col">Obreros</th>
+                                        <th scope="col">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    <tr th:each="obra: ${obras}" class="text-center" th:id="'td_'+ ${obra.id}">
+                                        <th th:text="${obra.id}"></th>
+                                        <td th:text="${obra.nombre}" name="nombre"></td>
+                                        <td th:text="${obra.direccion}"></td>
+                                        <td name="estado"><span th:if="${obra.estado} == 'activo'" th:onclick="'smodal(\'' + ${obra.id} + '\');'" id="estado" class="hudsoft-badge-pill" style="cursor:pointer"> activo
 											</span>
 
-											<span th:if="${obra.estado} == 'inactivo'"
-												th:onclick="'smodal(\'' + ${obra.id} + '\');'"
-												class="hudsoft-badge-pill-danger"  style="cursor:pointer"> inactivo
+                                            <span th:if="${obra.estado} == 'inactivo'" th:onclick="'smodal(\'' + ${obra.id} + '\');'" class="hudsoft-badge-pill-danger" style="cursor:pointer"> inactivo
 											</span></td>
 
-											<td th:if="${obra.siso} == null">#Indefinido</td>
-											<td th:if="${obra.siso} != null" th:text="${obra.siso.trabajador.nombre}"></td>
-									
-											<td  th:if="${obra.representante} == null" >#Indefinido</td>
-											<td  th:if="${obra.representante} != null" th:text="${obra.representante.nombre}">sin asignar</td>
-									
-										<td th:text="${obra.obrero.size()}"></td>
-										<td><a th:href="@{/obras/}+${obra.id}" class="hudsoft-btn-sm"> <i
-													class="far fa-eye"> </i></a></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="card-footer">
-							<a th:href="@{/obras/registrar/}+${idEmpresa}" class="hudsoft-btn-sm float-right mr-1	">Agregar
+                                        <td th:if="${obra.siso} == null">#Indefinido</td>
+                                        <td th:if="${obra.siso} != null" th:text="${obra.siso.trabajador.nombre}"></td>
+
+                                        <td th:if="${obra.representante} == null">#Indefinido</td>
+                                        <td th:if="${obra.representante} != null" th:text="${obra.representante.nombre}">sin asignar</td>
+
+                                        <td th:text="${obra.obrero.size()}"></td>
+                                        <td>
+                                            <a th:href="@{/obras/}+${obra.id}" class="hudsoft-btn-sm"> <i class="far fa-eye"> </i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <a th:href="@{/obras/registrar/}+${idEmpresa}" class="hudsoft-btn-sm float-right mr-1	">Agregar
 								Obra</a>
 
-						</div>
-					</div>
-					<!-- ./CONTENIDO DINAMICO -->
+                        </div>
+                    </div>
+                    <!-- ./CONTENIDO DINAMICO -->
 
 
 
-					<div class="mt-2">
-						<h4>
-							<span class="badge badge-secondary hudsoft-badge-important">Informacion</span>
-						</h4>
-					</div>
+                    <div class="mt-2">
+                        <h4>
+                            <span class="badge badge-secondary hudsoft-badge-important">Informacion</span>
+                        </h4>
+                    </div>
 
-					<!-- INFORMACION -->
-					<div class="row mx-auto">
-						<div class="col-md-2">
-							<div class="card">
-								<div class="card-body">
-									<span>Obras</span><br> <span>Total: </span> <span class="count"
-										th:text="${obras.size()}"></span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="card">
-								<div class="card-body">
-									<span>Obreros</span><br> <span>Total: </span> <span class="count"
-										th:text="${total_obreros}"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- ./INFORMACION -->
+                    <!-- INFORMACION -->
+                    <div class="row mx-auto">
+                        <div class="col-md-3 shadow p-3 mb-5 bg-white rounded m-2">
+                            <div class="card ">
+                                <div class="card-body">
+                                    <span>Obras</span> <span>Total: </span> <span class="count" th:text="${obras.size()}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 shadow p-3 mb-5 bg-white rounded m-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <span>Obreros</span> <span>Total: </span> <span class="count" th:text="${total_obreros}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./INFORMACION -->
 
 
-				<!-- MODAL -->
-				<div class="modal fade" id="modal_trabajador" role="dialog" th:aria-labelledby="ttt" aria-hidden="true">
-					<div class="modal-dialog modal-lg" role="document">
-						<div class="modal-content">
-							<div class="card-header hudsoft-thead-dark">
-								<div class="media-body">
-									<div>
+                <!-- MODAL -->
+                <div class="modal fade" id="modal_trabajador" role="dialog" th:aria-labelledby="ttt" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="card-header hudsoft-thead-dark">
+                                <div class="media-body">
+                                    <div>
 
 
-										<div class="float-left">
-											<h4 class="text-light display-6">Obra</h4>
-											<strong><span id="obra_nombre"></span></strong>
-										</div>
-										<a class="hudsoft-btn-sm float-right" data-dismiss="modal"
-											onclick="javascript:limpiarSession();" aria-label="Close"> <i
-												class="m-1 fas fa-times"></i>
-										</a>
-									</div>
+                                        <div class="float-left">
+                                            <h4 class="text-light display-6">Obra</h4>
+                                            <strong><span id="obra_nombre"></span></strong>
+                                        </div>
+                                        <a class="hudsoft-btn-sm float-right" data-dismiss="modal" onclick="javascript:limpiarSession();" aria-label="Close"> <i class="m-1 fas fa-times"></i>
+                                        </a>
+                                    </div>
 
-								</div>
+                                </div>
 
 
-							</div>
+                            </div>
 
 
-							<div class="modal-body">
+                            <div class="modal-body">
 
-								<section class="card">
+                                <section class="card">
 
 
-									<ul class="list-group list-group-flush">
+                                    <ul class="list-group list-group-flush">
 
-										<li class="list-group-item" id="li_estado"><span>Estado: </span> <span
-												id="trabajador_cedula"></span>
-											<select onchange="javascript:ShowSelected();" name="estado"
-												id="select_estado_a_modificar">
+                                        <li class="list-group-item" id="li_estado"><span>Estado: </span> <span id="trabajador_cedula"></span>
+                                            <select onchange="javascript:ShowSelected();" name="estado" id="select_estado_a_modificar">
 												<option>activo</option>
 												<option value="inactivo">inactivo</option>
 											</select>
-										</li>
+                                        </li>
 
 
-									</ul>
+                                    </ul>
 
 
 
-								</section>
+                                </section>
 
-							</div>
-							<div class="modal-footer">
-								<a href="" class="hudsoft-btn-sm" data-toggle="modal"
-									onclick="javascript:limpiarSession();" data-target="#modal_trabajador">Cerrar</a> <a
-									id="btn_cambiar_estado" class="hudsoft-btn-sm" data-dismiss="modal">Guardar
+                            </div>
+                            <div class="modal-footer">
+                                <a href="" class="hudsoft-btn-sm" data-toggle="modal" onclick="javascript:limpiarSession();" data-target="#modal_trabajador">Cerrar</a> <a id="btn_cambiar_estado" class="hudsoft-btn-sm" data-dismiss="modal">Guardar
 									Cambios</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- ./MODAL -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./MODAL -->
 
-				<!-- FORMULARIO DINAMICO -->
-				<div id="form_dinamico">
-					<form id="formulario">
+                <!-- FORMULARIO DINAMICO -->
+                <div id="form_dinamico">
+                    <form id="formulario">
 
-						<input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}"
-							th:value="${_csrf.token}" />
-					</form>
-				</div>
-				<!-- ./FORMULARIO DINAMICO -->
-
+                        <input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    </form>
+                </div>
+                <!-- ./FORMULARIO DINAMICO -->
 
 
-				<footer th:replace="plantilla/template :: footer"></footer>
-			</div>
-		</div>
-	</div>
-	<!-- JAVASCRIPT -->
-	<script type="text/javascript" th:src="@{/js/obras/listar.js}"></script>
-	<!-- ./JAVASCRIPT -->
+
+                <footer th:replace="plantilla/template :: footer"></footer>
+            </div>
+        </div>
+    </div>
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript" th:src="@{/js/obras/listar.js}"></script>
+    <!-- ./JAVASCRIPT -->
 </body>
 
 </html>
