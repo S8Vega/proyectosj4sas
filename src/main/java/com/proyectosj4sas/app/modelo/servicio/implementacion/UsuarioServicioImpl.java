@@ -108,8 +108,10 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 			+ "</body>";
 	@Autowired
 	private EmailPort emailPort;
+	
 	@Autowired
 	private IUsuarioDao usuarioDao;
+	
 	@Autowired
 	ServicioEliminarToken servicioEliminarToken;
 
