@@ -47,7 +47,7 @@
 									<tr class="text-center">
 										<th scope="col">#</th>
 										<th scope="col">Nombre</th>
-										<th scope="col">Cedula</th>
+										<th scope="col">Cédula</th>
 										<th scope="col">Estado</th>
 										<th scope="col">Cargo</th>
 										<th scope="col">Opciones</th>
@@ -59,10 +59,10 @@
 										<td name="nombre" th:text="${obrero.trabajador.nombre}"></td>
 										<td name="cedula" th:text="${obrero.trabajador.cedula}"></td>
 										<td>
-											<span th:if="${obrero.estado} == 'activo'" class="hudsoft-badge-pill">
+											<span th:if="${obrero.estado} == 'activo'" class="hudsoft-badge-pill" style="cursor:pointer">
 												activo
 											</span>
-											<span th:if="${obrero.estado} != 'activo'" class="hudsoft-badge-pill-danger"
+											<span th:if="${obrero.estado} != 'activo'" class="hudsoft-badge-pill-danger " style="cursor:pointer"
 												th:text="${obrero.estado}"> </i> inactivo
 											</span>
 										</td>
@@ -155,13 +155,13 @@
 
 									<ul class="list-group list-group-flush">
 
-										<li class="list-group-item"><span>Cedula: </span> <span
+										<li class="list-group-item"><span>Cédula: </span> <span
 												id="trabajador_cedula"></span></li>
 
 										<li class="list-group-item">
 											<div class="row" th:fragment="menu_inferior">
 												<div class="col">
-													<span class="align-middle">Verificacion</span>
+													<span class="align-middle">Verificación</span>
 												</div>
 												<div class="col">
 													<a
