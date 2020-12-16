@@ -52,32 +52,32 @@
 
 
                 <!-- CONTENIDO DINAMICO -->
-                <div>
-                    <h3>Llena los campos necesarios</h3>
+                <div class="mt-4 border p-3">
+                    <h4 >Llena los campos necesarios</h4>
 
 
                     <form th:action="@{/empresas/guardar_modificado}" method="post" th:object="${empresa}">
-                        <div class="form-group row">
-                            <label class="col-md-4" for="">Nombre</label> 
-                            <input class="form_registro" id="nombre"  th:field="${empresa.nombre}" placeholder="Nombre">
+                        <div class="form-group row mt-4">
+                            <label class="col-md-4 float-left" for="">NOMBRE:</label> 
+                            <input class="form_registro text-secondary" id="nombre"  th:field="${empresa.nombre}" >
                             <small class="form-text text-danger" ></small>
                         </div>
 
 
                         <div>
-                            <label class="col-md-4" for="">NIT</label>
-                            <input class="form_registro" id="nit" th:field="${empresa.nit}" placeholder="123-456-235425-2">
+                            <label class="col-md-4 " for="">NIT:</label>
+                            <input class="form_registro text-secondary" id="nit" th:field="${empresa.nit}" >
                             <small class="form-text text-danger" ></small>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4" for="">DIRECCIÓN</label> 
-                            <input class="form_registro" id="direccion" th:field="${empresa.direccion}" placeholder="Calle 0A #1" value=""> 
+                            <label class="col-md-4" for="">DIRECCIÓN:</label> 
+                            <input class="form_registro text-secondary" id="direccion" th:field="${empresa.direccion}" value=""> 
                             <small class="form-text text-danger"
                                 ></small>
                         </div>
-                        <div>
-                            <label class="col-md-4" for="">TELÉFONO</label>
-                            <input class="form_registro" th:type="tel" id="telefono"  th:field="${empresa.telefono}"placeholder="+57 310 555 55 55">
+                        <div class="">
+                            <label class="col-md-4" for="">TELÉFONO:</label>
+                            <input class="form_registro text-secondary" th:type="tel" id="telefono"  th:field="${empresa.telefono}">
                         </div>
                      <!--    <div>
                             <label class="col-md-4" for="cargo">Asigna un contador a la obra</label>
@@ -93,7 +93,7 @@
                         <div class="row">
                             <!-- <input name="id_secret" value="56"> -->
                             <!-- <input type="hidden" name="id_obra" th:value="${idObra}"> -->
-                            <button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
+                            <button type="submit" class="hudsoft-btn-sm mx-auto mt-4">Actualizar</button>
 
                         </div>
 

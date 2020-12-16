@@ -80,7 +80,7 @@
 						<div class="card-header hudsoft-thead-dark">Obras</div>
 						<div class="card-body card-block">
 							<div class="alert alert-info my-4" th:if="${obras.isEmpty()}">
-								<span>No hay obreros para mostrar aun.</span>
+								<span>No hay obreros para mostrar aún.</span>
 							</div>
 							<table id="dtBasicExample" th:if="${!obras.isEmpty()}"
 								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
@@ -88,9 +88,9 @@
 									<tr class="text-center">
 										<th scope="col">#</th>
 										<th scope="col">Nombre</th>
-										<th scope="col">Direccion</th>
+										<th scope="col">Dirección</th>
 										<th scope="col">Estado</th>
-										<th scope="col">siso</th>
+										<th scope="col">SISO</th>
 										<th scope="col">Representante</th>
 										<th scope="col">Obreros</th>
 										<th scope="col">Opciones</th>
@@ -103,18 +103,18 @@
 										<td th:text="${obra.direccion}"></td>
 										<td name="estado"><span th:if="${obra.estado} == 'activo'"
 												th:onclick="'smodal(\'' + ${obra.id} + '\');'" id="estado"
-												class="hudsoft-badge-pill"> activo
+												class="hudsoft-badge-pill" style="cursor:pointer"> activo
 											</span>
 
 											<span th:if="${obra.estado} == 'inactivo'"
 												th:onclick="'smodal(\'' + ${obra.id} + '\');'"
-												class="hudsoft-badge-pill-danger"> inactivo
+												class="hudsoft-badge-pill-danger" style="cursor:pointer"> inactivo
 											</span></td>
 
-											<td th:if="${obra.siso} == null">sin asignar</td>
+											<td th:if="${obra.siso} == null">#Indefinido</td>
 											<td th:if="${obra.siso} != null" th:text="${obra.siso.trabajador.nombre}"></td>
 									
-											<td  th:if="${obra.representante} == null" >sin asignar</td>
+											<td  th:if="${obra.representante} == null" >#Indefinido</td>
 											<td  th:if="${obra.representante} != null" th:text="${obra.representante.nombre}">sin asignar</td>
 									
 										<td th:text="${obra.obrero.size()}"></td>
@@ -138,7 +138,7 @@
 
 					<div class="mt-2">
 						<h4>
-							<span class="badge badge-secondary hudsoft-badge-important">Informacion</span>
+							<span class="badge badge-secondary hudsoft-badge-important">Información</span>
 						</h4>
 					</div>
 
