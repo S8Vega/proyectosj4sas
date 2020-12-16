@@ -1,7 +1,6 @@
 package com.proyectosj4sas.app.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,35 +8,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyectosj4sas.app.modelo.dao.interfaz.PasswordResetTokenRepository;
 import com.proyectosj4sas.app.modelo.entidad.PasswordResetTokenEntity;
 import com.proyectosj4sas.app.modelo.entidad.Usuario;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.UsuarioServicioImpl;
-import com.proyectosj4sas.app.util.EmailBody;
-import com.proyectosj4sas.app.util.EmailPort;
-import com.proyectosj4sas.app.util.OperationStatusModel;
 import com.proyectosj4sas.app.util.PasswordResetRequestModel;
-import com.proyectosj4sas.app.util.RequestOperationName;
-import com.proyectosj4sas.app.util.RequestOperationStatus;
 import com.proyectosj4sas.app.util.ServicioEliminarToken;
 
 @Controller
 @RequestMapping("/users")
 public class UsuarioControlador {
+
 	@Autowired
 	ServicioEliminarToken servicioEliminarToken;
+
 	@Autowired
 	public UsuarioServicioImpl userService;
+
 	@Autowired
 	PasswordResetTokenRepository passwordResetTokenRepository;
+
 	@Autowired
 	public BCryptPasswordEncoder passwordEncoder;
+
 	@PostMapping("/password-reset-request")
 	public String requestReset(@ModelAttribute PasswordResetRequestModel passwordResetRequestModel, Model model,
 			RedirectAttributes flash) {
@@ -45,10 +42,10 @@ public class UsuarioControlador {
 
 		if (status) {
 			model.addAttribute("msg", "se ha enviado un email con un enlace para efectuar tu cambio de clave!");
-		}else {
-			model.addAttribute("msg", "el email no se encuemtra registrado!");
+		} else {
+			model.addAttribute("msg", "el email proporcionado no se encuentra registrado!");
 		}
-		
+
 		return "msg";
 
 	}
@@ -63,8 +60,6 @@ public class UsuarioControlador {
 
 	@GetMapping("/password-update-request/{token}")
 	public String updatePasword(@PathVariable String token, Model model, RedirectAttributes flash) {
-		System.out.println(token + "mytoken");
-		// servicioEliminarToken.atender(passwordResetTokenRepository.findByToken(token));
 		flash.addFlashAttribute("info", "ingresa tus datos para actualizar tu clave de acceso!");
 		model.addAttribute("msg", "ingresa tu nueva clave!");
 		model.addAttribute("token", token);
@@ -82,29 +77,10 @@ public class UsuarioControlador {
 				model.addAttribute("msg", "el tiempo ha expirado!");
 				return "msg";
 			}
-			System.out.println(tokenEntity);
-			//Usuario usuario = userService.findById(tokenEntity.getUsuario().getId());
-			
-			
-			
-			
-			  //String password = "amanecer"; 
-			  String passwordEncriptada =			  passwordEncoder.encode(password);
-			  
-			  Usuario u = userService.findById(tokenEntity.getUsuario().getId());
-			  //u.setEmail("antareslastname@gmail.com");
-			  u.setPassword(passwordEncriptada); 
-			  //u.setUsername("gloria botello");
-			  //u.setEnable(true);
-			  
-			  
-			  userService.save(u);
-			 
-			
-				/*
-				 * 
-				 * usuario.setPassword(password); userService.save(usuario);
-				 */
+
+			Usuario u = userService.findById(tokenEntity.getUsuario().getId());
+			u.setPassword(passwordEncoder.encode(password));
+			userService.save(u);
 			passwordResetTokenRepository.deleteById(tokenEntity.getId());
 		} else {
 			model.addAttribute("msg", "las claves no coincidieron!");

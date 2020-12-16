@@ -24,26 +24,31 @@ public class Usuario implements Serializable {
 	private String password;
 	@Column(unique = true)
 	private String email;
-	
+
 	private boolean enable;
-	@JoinColumn(name="usuario_id")
-	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name = "usuario_id")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Role> roles;
 	private static final long serialVersionUID = 1L;
 
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String alias, String clave, String email) {
+	public Usuario(Long id, String username, String password, String email) {
 		this.id = id;
-		this.username = alias;
-		this.password = clave;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
+	public Usuario(String username, String password, String email) {
+		this.username = username;
+		this.password = password;
 		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", alias=" + username + ", clave=" + password + ", email=" + email + "]";
+		return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
 	}
 
 	public List<Role> getRoles() {

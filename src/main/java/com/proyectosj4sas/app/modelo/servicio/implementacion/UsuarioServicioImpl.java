@@ -1,6 +1,5 @@
 package com.proyectosj4sas.app.modelo.servicio.implementacion;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -28,10 +27,10 @@ import com.proyectosj4sas.app.util.ServicioEliminarToken;
 
 @Service
 public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetailsService{
+	
 	@Autowired
 	public BCryptPasswordEncoder passwordEncoder;
 	
-	private String fin_mensaje ="Gracias!";
 	private String TEXT_BODY = "\n"
 			+ "<body style=\"margin: 0; padding: 0;\">\n"
 			+ "	<table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n"
@@ -58,16 +57,15 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 			+ "                        <p style=\"margin: 0;\">\n"
 			+ "                            Hola, $username"
 			+ "                                  !\n"
-			+ "                            Alguien ha solicitado restablecer su clave de acceso a  nuestro sitio web. Si no fue usted, ignórelo. de lo contrario, haga clic en el enlace de abajo para establecer una nueva clave:\n"
+			+ "                            Alguien ha solicitado restablecer su clave de acceso a  nuestro sitio web. Si no fue usted, ignórelo. de lo contrario, haga click en el enlace de abajo para establecer una nueva clave:\n"
 			
 			
 			
 			
 + "    <a href=\"http://localhost:8080/users/password-update-request/$tokenValue\">Click Aqui</a>\n"
-			//+ "                            http://localhost:8080/users/password-update-request/?token=$tokenValue"
 			+"\n"
 			+ "                            Haga clic en este enlace para restablecer la clave.\n"
-			+ "                            Gracias/$msg\n"
+			+ "                            Gracias/\n"
 			+ "                        </p>\n"
 			+ "					</td>\n"
 			+ "				</tr>\n"
@@ -144,13 +142,7 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 	
 	public boolean requestPasswordReset(String email) {
 		
-//		 SecureRandom random = new SecureRandom(); 
-//		 byte bytes[] = new byte[20]; 
-//		 random.nextBytes(bytes); 
-//		 String token = bytes.toString(); 
-//		String password = ""; 
 		String  token =	SecureTokenGenerator.nextToken();
-		 
 		
 		
 		boolean returnValue = false;
@@ -168,16 +160,14 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 
 			 EmailBody emailBody = new EmailBody();
 
-			// String myEmail = usuario.getEmail();
+
 			emailBody.setEmail(usuario.getEmail());
 			emailBody.setSubject("hudsoft solicitud de cambio de clave");
 			
 			String content = TEXT_BODY.replace("$tokenValue", token);
 			content=content.replace("$username", usuario.getUsername());
-			content=content.replace("$msg", fin_mensaje);
 			emailBody.setContent(content);
 			return emailPort.sendEmail(emailBody);
-//return true;
 		}
 	
 	}
@@ -186,7 +176,6 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuarioDao.findByUsername(username);
-		//Usuario usuario = usuarioDao.findByEmail(username);
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		for (Role rol : usuario.getRoles()) {
 			authorities.add(new SimpleGrantedAuthority(rol.getAuthority()));
