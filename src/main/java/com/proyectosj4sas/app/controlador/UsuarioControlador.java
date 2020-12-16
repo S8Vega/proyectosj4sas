@@ -1,40 +1,39 @@
 package com.proyectosj4sas.app.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyectosj4sas.app.modelo.dao.interfaz.PasswordResetTokenRepository;
 import com.proyectosj4sas.app.modelo.entidad.PasswordResetTokenEntity;
 import com.proyectosj4sas.app.modelo.entidad.Usuario;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.UsuarioServicioImpl;
-import com.proyectosj4sas.app.util.EmailBody;
-import com.proyectosj4sas.app.util.EmailPort;
-import com.proyectosj4sas.app.util.OperationStatusModel;
 import com.proyectosj4sas.app.util.PasswordResetRequestModel;
-import com.proyectosj4sas.app.util.RequestOperationName;
-import com.proyectosj4sas.app.util.RequestOperationStatus;
 import com.proyectosj4sas.app.util.ServicioEliminarToken;
 
 @Controller
 @RequestMapping("/users")
-public class UserControler {
+public class UsuarioControlador {
+
 	@Autowired
 	ServicioEliminarToken servicioEliminarToken;
+
 	@Autowired
 	public UsuarioServicioImpl userService;
+
 	@Autowired
 	PasswordResetTokenRepository passwordResetTokenRepository;
+
+	@Autowired
+	public BCryptPasswordEncoder passwordEncoder;
 
 	@PostMapping("/password-reset-request")
 	public String requestReset(@ModelAttribute PasswordResetRequestModel passwordResetRequestModel, Model model,
@@ -43,9 +42,10 @@ public class UserControler {
 
 		if (status) {
 			model.addAttribute("msg", "se ha enviado un email con un enlace para efectuar tu cambio de clave!");
-			return "msg";
+		} else {
+			model.addAttribute("msg", "el email proporcionado no se encuentra registrado!");
 		}
-		model.addAttribute("msg", "el email no se encuemtra registrado!");
+
 		return "msg";
 
 	}
@@ -60,8 +60,6 @@ public class UserControler {
 
 	@GetMapping("/password-update-request/{token}")
 	public String updatePasword(@PathVariable String token, Model model, RedirectAttributes flash) {
-		System.out.println(token + "mytoken");
-		// servicioEliminarToken.atender(passwordResetTokenRepository.findByToken(token));
 		flash.addFlashAttribute("info", "ingresa tus datos para actualizar tu clave de acceso!");
 		model.addAttribute("msg", "ingresa tu nueva clave!");
 		model.addAttribute("token", token);
@@ -79,12 +77,10 @@ public class UserControler {
 				model.addAttribute("msg", "el tiempo ha expirado!");
 				return "msg";
 			}
-			System.out.println(tokenEntity);
-			Usuario usuario = userService.findById(tokenEntity.getUsuario().getId());
-			System.out.println("id de my usuario");
-			System.out.println(usuario.getEmail());
-			usuario.setClave(password);
-			userService.save(usuario);
+
+			Usuario u = userService.findById(tokenEntity.getUsuario().getId());
+			u.setPassword(passwordEncoder.encode(password));
+			userService.save(u);
 			passwordResetTokenRepository.deleteById(tokenEntity.getId());
 		} else {
 			model.addAttribute("msg", "las claves no coincidieron!");
