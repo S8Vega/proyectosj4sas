@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.proyectosj4sas.app.auth.handler.LoginSuccessHandler;
+import com.proyectosj4sas.app.modelo.servicio.implementacion.UsuarioServicioImpl;
 import com.proyectosj4sas.app.security.SecurityConstants;
 
 @Configuration
@@ -19,31 +20,48 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private LoginSuccessHandler successHandler;
-
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	@Autowired
+	public UsuarioServicioImpl userService;
+	@Autowired
+	public BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/css/**", "/js/**", "/img/**","/users/password-reset-request/**","/users/password-update-request/**").permitAll()
-				.antMatchers("/", "/arl/**", "/empresas/**", "/empresas/{id}", "/constructoras/obras/{id}",
-						"/views/constructoras/listar/**", "/obras/estados/**", "/vistas/obreros/form")
-				.hasAnyRole("ADMIN").anyRequest().authenticated().and().formLogin().successHandler(successHandler)
-				.loginPage("/login").permitAll().and().logout().permitAll().and().exceptionHandling()
-				.accessDeniedPage("/error_403");
+		.antMatchers("/", "/arl/**", "/empresas/**", "/empresas/{id}", "/constructoras/obras/{id}",
+				"/views/constructoras/listar/**", "/obras/estados/**", "/vistas/obreros/form")
+		.authenticated().and().formLogin().successHandler(successHandler)
+		.loginPage("/login").permitAll().and().logout().permitAll().and().exceptionHandling()
+		.accessDeniedPage("/error_403");
+		/*
+		 * http.authorizeRequests() .antMatchers("/css/**", "/js/**", "/img/**",
+		 * "/users/password-reset-request/**", "/users/password-update-request/{token}")
+		 * .permitAll() // http.authorizeRequests() .antMatchers("/", "/arl/**",
+		 * "/empresas/**", "/empresas/{id}", "/constructoras/obras/{id}",
+		 * "/views/constructoras/listar/**", "/obras/estados/**",
+		 * "/vistas/obreros/form")
+		 * .permitAll().anyRequest().authenticated().and().formLogin().successHandler(
+		 * successHandler)
+		 * .loginPage("/login").permitAll().and().logout().permitAll().and().
+		 * exceptionHandling() .accessDeniedPage("/error_403");
+		 */
+
+		/*
+		 * http.authorizeRequests() .antMatchers("/css/**", "/js/**",
+		 * "/img/**","/users/password-reset-request/**",
+		 * "/users/password-update-request/{token}").permitAll() .antMatchers("/",
+		 * "/arl/**", "/empresas/**", "/empresas/{id}", "/constructoras/obras/{id}",
+		 * "/views/constructoras/listar/**", "/obras/estados/**",
+		 * "/vistas/obreros/form") //.hasAnyRole("ADMIN") // .anyRequest()
+		 * //.authenticated() //.and() .formLogin().successHandler(successHandler)
+		 * .loginPage("/login").permitAll().and().logout().permitAll().and().
+		 * exceptionHandling() .accessDeniedPage("/error_403");
+		 */
 	}
 
 	@Autowired
-	public void ConfigurerGlobal(AuthenticationManagerBuilder builder) throws Exception {
-		PasswordEncoder encoder = passwordEncoder();
-		UserBuilder users = User.builder().passwordEncoder(password -> {
-			return encoder.encode(password);
-		});
-
-		builder.inMemoryAuthentication()
-				.withUser(users.username("adminGloria").password("adminBotello123").roles("ADMIN"));
+	public void ConfigurerGlobal(AuthenticationManagerBuilder build) throws Exception {
+		build.userDetailsService(userService).passwordEncoder(passwordEncoder);
 	}
 
 }

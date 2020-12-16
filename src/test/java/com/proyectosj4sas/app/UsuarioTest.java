@@ -27,17 +27,17 @@ class UsuarioTest {
 			servicio.save(expected);
 			// test: findById
 			actual = servicio.findById(expected.getId());
-			assertEquals(expected.getAlias(), actual.getAlias());
-			assertEquals(expected.getClave(), actual.getClave());
+			assertEquals(expected.getUsername(), actual.getUsername());
+			assertEquals(expected.getPassword(), actual.getPassword());
 			assertEquals(expected.getEmail(), actual.getEmail());
-			expected.setAlias("alias: " + (i + 1));
-			expected.setClave("clave: " + (i + 1));
+			expected.setUsername("alias: " + (i + 1));
+			expected.setPassword("clave: " + (i + 1));
 			expected.setEmail("email: " + (i + 1));
 			// test: save
 			servicio.save(expected);
 			actual = servicio.findById(expected.getId());
-			assertEquals(expected.getAlias(), actual.getAlias());
-			assertEquals(expected.getClave(), actual.getClave());
+			assertEquals(expected.getUsername(), actual.getUsername());
+			assertEquals(expected.getPassword(), actual.getPassword());
 			assertEquals(expected.getEmail(), actual.getEmail());
 			// test: deleteById
 			servicio.deleteById(expected.getId());
@@ -50,8 +50,8 @@ class UsuarioTest {
 		for (int i = 0; i < listaExpected.size(); i++) {
 			expected = listaExpected.get(i);
 			actual = listaActual.get(i);
-			assertEquals(expected.getAlias(), actual.getAlias());
-			assertEquals(expected.getClave(), actual.getClave());
+			assertEquals(expected.getUsername(), actual.getUsername());
+			assertEquals(expected.getPassword(), actual.getPassword());
 			assertEquals(expected.getEmail(), actual.getEmail());
 		}
 	}

@@ -2,6 +2,7 @@ package com.proyectosj4sas.app.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,14 +29,15 @@ import com.proyectosj4sas.app.util.ServicioEliminarToken;
 
 @Controller
 @RequestMapping("/users")
-public class UserControler {
+public class UsuarioControlador {
 	@Autowired
 	ServicioEliminarToken servicioEliminarToken;
 	@Autowired
 	public UsuarioServicioImpl userService;
 	@Autowired
 	PasswordResetTokenRepository passwordResetTokenRepository;
-
+	@Autowired
+	public BCryptPasswordEncoder passwordEncoder;
 	@PostMapping("/password-reset-request")
 	public String requestReset(@ModelAttribute PasswordResetRequestModel passwordResetRequestModel, Model model,
 			RedirectAttributes flash) {
@@ -43,9 +45,10 @@ public class UserControler {
 
 		if (status) {
 			model.addAttribute("msg", "se ha enviado un email con un enlace para efectuar tu cambio de clave!");
-			return "msg";
+		}else {
+			model.addAttribute("msg", "el email no se encuemtra registrado!");
 		}
-		model.addAttribute("msg", "el email no se encuemtra registrado!");
+		
 		return "msg";
 
 	}
@@ -80,11 +83,28 @@ public class UserControler {
 				return "msg";
 			}
 			System.out.println(tokenEntity);
-			Usuario usuario = userService.findById(tokenEntity.getUsuario().getId());
-			System.out.println("id de my usuario");
-			System.out.println(usuario.getEmail());
-			usuario.setClave(password);
-			userService.save(usuario);
+			//Usuario usuario = userService.findById(tokenEntity.getUsuario().getId());
+			
+			
+			
+			
+			  //String password = "amanecer"; 
+			  String passwordEncriptada =			  passwordEncoder.encode(password);
+			  
+			  Usuario u = userService.findById(tokenEntity.getUsuario().getId());
+			  //u.setEmail("antareslastname@gmail.com");
+			  u.setPassword(passwordEncriptada); 
+			  //u.setUsername("gloria botello");
+			  //u.setEnable(true);
+			  
+			  
+			  userService.save(u);
+			 
+			
+				/*
+				 * 
+				 * usuario.setPassword(password); userService.save(usuario);
+				 */
 			passwordResetTokenRepository.deleteById(tokenEntity.getId());
 		} else {
 			model.addAttribute("msg", "las claves no coincidieron!");

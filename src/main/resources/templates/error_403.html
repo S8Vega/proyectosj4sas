@@ -3,7 +3,7 @@
 <head th:replace="/plantilla/template :: head"></head>
 <body>
 
-	<header th:replace="layout/layout :: header"></header>
+	<header th:replace="plantilla/template :: head"></header>
 
 	<div class="container py-4">
 
@@ -14,7 +14,7 @@
 					Los sentimos <span th:text="${#authentication.name}"></span>,
 					NO tienes permisos para acceder a este recurso.
 				</h5>
-				<a th:href="@{/listar}" class="btn btn-outline-light" role="button">Ir
+				<a th:href="@{/login}" class="btn btn-outline-light" role="button">Ir
 					al inicio</a>
 
 			</div>
