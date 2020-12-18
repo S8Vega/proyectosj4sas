@@ -23,11 +23,19 @@
 			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
 
 			<div class="container-fluid">
-
+				<div class="row">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 col-md-6">
+						<br>
+					</div>
+					<div class="col-lg-10 col-md-6 border ml-5 p-4 shadow p-3 mb-5 bg-white rounded">
+						<img th:src="@{/img/icons/r.svg}" class="col-md-4" style="float: right;">
 
 				<!-- CONTENIDO DINAMICO -->
 				<div>
-					<h3>Completa los campos</h3>
+					<div class="form-group row">
+						<h3 class="col-md-6" for="nombre">Completa los campos:</h3>
+					</div>
 
 
 					<form th:action="@{/representantes/guardar_modificado}" th:object="${representante}" method="POST">
@@ -55,6 +63,8 @@
 			
 				</form>
 				</div>
+				</div>
+			</div>
 			</div>
 			<!-- ./CONTENIDO DINAMICO -->
 			<footer th:replace="plantilla/template :: footer"></footer>
