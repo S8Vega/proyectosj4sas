@@ -31,13 +31,17 @@ public class AfiliadoEpsServicioImpl implements IServicio<AfiliadoEps, Long> {
 	@Override
 	@Transactional
 	public void save(AfiliadoEps t) {
-		afiliadoEpsDao.save(t);
+		 afiliadoEpsDao.save(t);
 	}
 
 	@Override
 	@Transactional
 	public void deleteById(Long id) {
 		afiliadoEpsDao.deleteById(id);
+	}
+	
+	public AfiliadoEps saveF(AfiliadoEps t) {
+		return afiliadoEpsDao.save(t);
 	}
 
 }

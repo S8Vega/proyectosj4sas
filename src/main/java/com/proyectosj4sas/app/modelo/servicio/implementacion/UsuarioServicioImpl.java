@@ -62,7 +62,7 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 			
 			
 			
-+ "    <a href=\"http://localhost:8080/users/password-update-request/$tokenValue\">Click Aqui</a>\n"
++ "    <a href=\"http://$host_to_deploy:8080/users/password-update-request/$tokenValue\">Click Aqui</a>\n"
 			+"\n"
 			+ "                            Haga clic en este enlace para restablecer la clave.\n"
 			+ "                            Gracias\n"
@@ -168,6 +168,8 @@ public class UsuarioServicioImpl implements IServicio<Usuario, Long> ,UserDetail
 			
 			String content = TEXT_BODY.replace("$tokenValue", token);
 			content=content.replace("$username", usuario.getUsername());
+			//content=content.replace("$host_to_deploy", "ec2-3-94-103-110.compute-1.amazonaws.com");
+			content=content.replace("$host_to_deploy", "localhost");
 			emailBody.setContent(content);
 			return emailPort.sendEmail(emailBody);
 		}
