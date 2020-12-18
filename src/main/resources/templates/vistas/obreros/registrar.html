@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="/plantilla/template :: head">
 </head>
 
@@ -23,56 +23,60 @@
 			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
 
 			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 col-md-6">
+						<br>
+					</div>
+					<div class="col-lg-10 col-md-6 border ml-5 p-4 shadow p-3 mb-5 bg-white rounded">
+						<img th:src="@{/img/icons/obrero2.svg}" class="col-md-4" style="float: right;">
 
-
-				<!-- CONTENIDO DINAMICO -->
-				<div>
-					<h3>Información básica</h3>
-
-
-					<form th:action="@{/vistas/obreros/guardar}" method="post"
-						th:object="${obrero}">
-						<div class="form-group row">
-							<label class="col-md-4" for="nombre">Nombre</label> <input
-								class="form_registro" id="nombre"
-								th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
-							<small class="form-text text-danger"
-								th:if="${#fields.hasErrors('trabajador.nombre')}"
-								th:errors="*{trabajador.nombre}"></small>
-						</div>
-
-
+						<!-- CONTENIDO DINAMICO -->
 						<div>
-							<label class="col-md-4" for="estado">Estado</label> <select
-								name="estado" id="estado">
-								<option selected>activo</option>
-								<option value="inactivo">inactivo</option>
-							</select>
-						</div>
-						<div class="form-group row">
-							<label class="col-md-4" for="estado">Cedula</label> <input
-								class="form_registro" id="cedula"
-								th:field="${obrero.trabajador.cedula}" placeholder="Cédula"
-								value=""> <small class="form-text text-danger"
-								th:if="${#fields.hasErrors('trabajador.cedula')}"
-								th:errors="*{trabajador.cedula}"></small>
-						</div>
-						<div class="form-group row">
-							<label for="">fecha de ingreso</label>
-							<input type="date" th:field="${obrero.fechaIngreso}">
-						</div>
-						<div>
-							<label class="col-md-4" for="cargo">Cargo</label> <select
-								name="cargo" id="cargo">
-								<option selected>Business Development</option>
-								<option value="Accounting">Accounting</option>
-								<option value="Human Resources">Human Resources</option>
-								<option value="Research and Development">Research and
-									Development</option>
-							</select>
-						</div>
+							<div class="form-group row">
+                                <h3 class="col-md-6" for="nombre">Informacion Basica:</h3>
+                            </div>
 
-						<!--
+							<form th:action="@{/vistas/obreros/guardar}" method="post" th:object="${obrero}">
+								<div class="form-group row">
+									<label class="col-md-4" for="nombre">Nombre</label> <input class="form_registro col-lg-6 border-1"
+										id="nombre" th:field="${obrero.trabajador.nombre}" placeholder="Nombre">
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('trabajador.nombre')}"
+										th:errors="*{trabajador.nombre}"></small>
+								</div>
+
+
+								<div class="form-group row">
+									<label class="col-lg-4" for="estado">Estado</label> <select name="estado"
+										id="estado" class="col-lg-6 scrollEstado form-control dropdown-toggle border-1">
+										<option selected>activo</option>
+										<option value="inactivo">inactivo</option>
+									</select>
+								</div>
+								<div class="form-group row">
+									<label class="col-md-4" for="estado">Cedula</label> <input class="form_registro col-lg-6 border-1"
+										id="cedula" th:field="${obrero.trabajador.cedula}" placeholder="Cédula"
+										value=""> <small class="form-text text-danger"
+										th:if="${#fields.hasErrors('trabajador.cedula')}"
+										th:errors="*{trabajador.cedula}"></small>
+								</div>
+								<div class="form-group row">
+									<label for="" class="col-md-4" >Fecha de ingreso</label>
+									<input type="date" th:field="${obrero.fechaIngreso}">
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-4" for="cargo">Cargo</label> <select name="cargo" id="cargo" class="col-lg-6 scrollEstado form-control dropdown-toggle border-1">
+										<option selected>Business Development</option>
+										<option value="Accounting">Accounting</option>
+										<option value="Human Resources">Human Resources</option>
+										<option value="Research and Development">Research and
+											Development</option>
+									</select>
+								</div>
+
+
+								<!--
 							<div id="arl">
 
 
@@ -105,13 +109,16 @@
 						</div>
 						-->
 
-						<div class="row">
-							<input type="hidden" name="id_obra" th:value="${idObra}">
-							<button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
+								<div class="row">
+									<input type="hidden" name="id_obra" th:value="${idObra}">
+									<button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
 
+								</div>
+
+							</form>
 						</div>
 
-					</form>
+					</div>
 				</div>
 			</div>
 			<!-- ./CONTENIDO DINAMICO -->
@@ -126,4 +133,5 @@
 	-->
 	<!-- ./JAVASCRIPT -->
 </body>
+
 </html>
