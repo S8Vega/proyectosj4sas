@@ -28,12 +28,12 @@
 
             <div class="">
                 <div class="row">
-                    
+
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10 col-md-6">
                         <br>
                     </div>
-                    <div class="col-lg-10 col-md-6 border ml-5 p-4 shadow p-3 mb-5 bg-white rounded">
+                    <div class="col-lg-10 col-md-6 border text-center ml-5 p-4 shadow p-3 mb-5 bg-white rounded">
                         <!-- CONTENIDO DINAMICO -->
                         <img th:src="@{/img/icons/ingenieria.svg}" class="col-md-4" style="float: right;">
 
@@ -44,11 +44,11 @@
                                 <h3 class="col-md-6" for="nombre">Informacion Basica:</h3>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-4" for="nombre">Nombre de obra:</label> <input th:field="${obra.nombre}" class="form_registro col-lg-6 border-1" id="nombre" placeholder="Nombre">
+                                <label class="col-md-4" for="nombre">Nombre de obra:</label> <input required th:field="${obra.nombre}" class="form_registro col-lg-6 border-1" id="nombre" placeholder="Nombre">
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-4" for="nombre">Dirección de obra:</label> <input th:field="${obra.direccion}" class="form_registro col-lg-6 border-1" id="direccion" placeholder="Dirección">
+                                <label class="col-md-4" for="nombre">Dirección de obra:</label> <input required th:field="${obra.direccion}" class="form_registro col-lg-6 border-1" id="direccion" placeholder="Dirección">
                             </div>
                             <div class="form-group row">
 
@@ -59,9 +59,9 @@
 
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-4" for="estado">Fecha de inicio:</label> <input class="form_registro" type="date" id="fecha_inicio" name="fecha_inicio">
+                                <label class="col-md-4" for="estado">Fecha de inicio:</label> <input required class="form_registro" type="date" id="fecha_inicio" name="fecha_inicio">
                             </div>
-                            <input type="hidden" name="id_empresa" th:value="${idEmpresa}">
+                            <input required type="hidden" name="id_empresa" th:value="${idEmpresa}">
                             <div class="row">
                                 <!--
 									<div class="col-lg-4" >
