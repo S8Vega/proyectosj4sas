@@ -1,0 +1,196 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
+.caja1 {
+    width: 40%;
+    height: max-content;
+    display: inline-block;
+    padding: 5px;
+}
+
+.titulo_ligth {
+    text-align: left;
+    margin-top: 15%;
+    font-size: 1.4em;
+    opacity: .6;
+    font-family: 'Saira Extra Condensed', sans-serif;
+    animation: animationIn 1.5s;
+    letter-spacing: 2.4px;
+}
+
+.introduce_txt {
+    margin-top: 45%;
+    text-align: left;
+    font-family: 'Saira Extra Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.1em;
+    opacity: .7;
+}
+
+@keyframes animationIn {
+    0% {
+        transform: translateY(-300px);
+    }
+    60% {
+        transform: translateY(25px);
+    }
+    75% {
+        transform: translateY(-10px);
+    }
+    90% {
+        transform: translateY(5px);
+    }
+}
+
+.titulo_app {
+    line-height: 0;
+    font-family: 'Be Vietnam', sans-serif;
+    font-size: 3em;
+    letter-spacing: 1px;
+    animation: animationIn 1s;
+    opacity: .8;
+}
+
+b {
+    text-align: left;
+}
+
+.input_usuario {
+    display: inline-block;
+    width: 100%;
+    height: 28px;
+    border-radius: 6pt;
+    font-family: Roboto;
+    border: 1.5px solid black;
+    text-indent: 4%;
+    opacity: .5;
+}
+
+.input_contra {
+    display: inline-block;
+    width: 100%;
+    height: 28px;
+    margin-top: 6%;
+    border-radius: 6pt;
+    border: 1.5px solid black;
+    opacity: .5;
+    text-indent: 4%;
+}
+
+input:focus {
+    border: 2px solid #ef8f21;
+    opacity: .5;
+    border-radius: 6pt;
+}
+
+::placeholder {
+    background-color: none;
+    text-indent: 4%;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    opacity: 1;
+    border: none;
+    border-radius: 6pt;
+}
+
+.text_recuperar {
+    text-align: center;
+    margin-top: 35%;
+    font-family: 'Roboto', sans-serif;
+    opacity: .8;
+}
+
+.link_recuperar {
+    color: #36a4c7;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+.btn_login {
+    display: inline-block;
+    width: 52%;
+    height: 35px;
+    font-size: 0.8rem;
+    margin-top: 6%;
+    border-radius: 6pt;
+    background-color: #ef8f21;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn_login:hover {
+    background-color: white;
+    border: .3px solid #ef8f21;
+    color: #ef8f21;
+}
+
+.cont_btn_login {
+    text-align: center;
+}
+
+.caja2 {
+    position: relative;
+    width: 60%;
+    height: 70%;
+    text-align: center;
+    display: inline-block;
+}
+
+.txt_logotipo {
+    position: absolute;
+    font-size: 2.5em;
+    color: white;
+    top: 70%;
+    left: 11%;
+    animation-delay: 5s;
+    animation: animationInLogotipe 1.5s;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+@keyframes animationInLogotipe {
+    0% {
+        transform: translateY(200px);
+    }
+    60% {
+        transform: translateY(-25px);
+    }
+    75% {
+        transform: translateY(10px);
+    }
+    90% {
+        transform: translateY(-5px);
+    }
+}
+
+.organizador {
+    height: max-content;
+    width: auto;
+    display: flexbox;
+    align-items: left;
+    margin-left: 15%;
+    margin-right: 35%;
+    margin-top: 15;
+}
+
+.contenedor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+html,
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+}

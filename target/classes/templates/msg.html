@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+
+
+
+    <div class="d-flex" id="wrapper">
+        <!--    <div class="d-flex" id="wrapper"> -->
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+
+
+
+            <div class="container-fluid  ">
+
+
+                <!-- CONTENIDO DINAMICO -->
+                <div class="row col-10 mx-auto mt-5 shadow p-3 mb-5 bg-white rounded">
+                    <div class="row mt-4">
+                        <img class="col-4 mx-auto" th:src="@{/img/isotipo.png}">
+                    </div>
+                    <div class="mx-auto mt-5">
+                        <div class="alert alert-info  mx-auto" th:if="${msg != null}" th:text="${msg}">
+
+                        </div>
+                        <div class="row mx-auto">
+                            <a th:href="@{/login}" class="row-md-7 mx-auto btn hudsoft-btn-sm">Iniciar sesión</a>
+                        </div>
+                    </div>
+                    <!-- ./CONTENIDO DINAMICO -->
+
+
+
+
+                </div>
+
+                <footer th:replace="plantilla/template :: footer"></footer>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

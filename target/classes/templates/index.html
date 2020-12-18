@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">J4 SOFT</div>
+            <div class="list-group list-group-flush text-center">
+
+
+                <nav th:replace="plantilla/template :: menu_vertical"></nav>
+
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+
+            <nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+            <div class="container-fluid">
+
+
+                <!-- CONTENIDO DINAMICO -->
+                <div class="row mx-auto">
+                    <img class="mx-auto" width="40%" th:src="@{/img/isotipo.png}">
+                </div>
+                <!-- ./CONTENIDO DINAMICO -->
+
+
+
+
+            </div>
+
+            <footer th:replace="plantilla/template :: footer"></footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
