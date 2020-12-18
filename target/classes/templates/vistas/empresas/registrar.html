@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">J4 SOFT</div>
+            <div class="list-group list-group-flush text-center">
+                <nav th:replace="plantilla/template :: menu_vertical"></nav>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+
+            <nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+            <div class="container-fluid">
+
+
+                <!-- CONTENIDO DINAMICO -->
+                <div class="col-lg-10 col-md-6 border ml-5 mt-4 p-4 shadow p-3 mb-5 bg-white rounded">
+
+                    <h4 class="mb-5">Llena los campos necesarios</h4>
+                    <img th:src="@{/img/icons/anteproyecto.svg}" class="col-md-3" style="float: right;">
+
+                    <form th:action="@{/empresas/guardar}" method="post" th:object="${empresa}">
+                        <div class="form-group row">
+                            <label class="col-md-4" for="">Nombre:</label>
+                            <input class="form_registro" required id="nombre" th:field="${empresa.nombre}" placeholder="">
+                            <small class="form-text text-danger"></small>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-md-4" for="">NIT:</label>
+                            <input class="form_registro" id="nit" required th:field="${empresa.nit}" placeholder="">
+                            <small class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4" for="">DIRECCIÓN:</label>
+                            <input class="form_registro" required id="direccion" th:field="${empresa.direccion}" placeholder="" value="">
+                            <small class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4" for="">TELÉFONO:</label>
+                            <input class="form_registro" required th:type="tel" id="telefono" th:field="${empresa.telefono}" placeholder="">
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="hudsoft-btn-sm mx-auto mt-3 px-3">Crear</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <!-- ./CONTENIDO DINAMICO -->
+            <footer th:replace="plantilla/template :: footer"></footer>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+    <!-- JAVASCRIPT -->
+    <!-- ./JAVASCRIPT -->
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+
+	<div class="d-flex" id="wrapper">
+
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">J4 SOFT</div>
+			<div class="list-group list-group-flush text-center">
+
+
+				<nav th:replace="plantilla/template :: menu_vertical"></nav>
+
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+
+			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+			<div class="container-fluid">
+
+
+				<!-- CONTENIDO DINAMICO -->
+				<div class="row mt-5">
+
+					<div class="col">
+						<a
+							class="list-group-item list-group-item-action bg-light text-center col"
+							type="button"> <img width="70" class="mx-auto"
+							src="https://www.flaticon.es/svg/static/icons/svg/3588/3588614.svg"><br>
+							OBRERO
+						</a>
+					</div>
+
+					<div class="col mx-auto">
+						<a
+							class="list-group-item list-group-item-action bg-light text-center col"
+							id="sub_menu_constructoras" type="button" data-toggle="collapse"
+							data-target="#" aria-expanded="false"> <img width="70"
+							class="mx-auto"
+							src="https://img.icons8.com/dusk/344/add-user-male.png"> <br>
+
+							NUEVO
+						</a>
+					</div>
+					<div class="col">
+						<a
+							class="list-group-item list-group-item-action bg-light text-center col"
+							id="sub_menu_constructoras" type="button" data-toggle="collapse"
+							data-target="#" aria-expanded="false"> <img width="70"
+							class="mx-auto"
+							src="https://img.icons8.com/dusk/344/edit-user-male.png"> <br>
+							EXISTENTE
+						</a>
+					</div>
+				</div>
+				<div class="row mt-5">
+
+					<div class="col">
+						<a	th:href="@{joimar/registrar_obra}"
+							class="list-group-item list-group-item-action bg-light text-center col"
+							type="button"> <img width="70" class="mx-auto"
+							src="https://www.flaticon.es/svg/static/icons/svg/1207/1207212.svg"><br>
+							OBRA
+						</a>
+					</div>
+
+					<div class="col">
+						<a
+							class="list-group-item list-group-item-action bg-light text-center col"
+							id="sub_menu_constructoras" type="button" data-toggle="collapse"
+							data-target="#" aria-expanded="false"> <img width="70"
+							class="mx-auto"
+							src="https://img.icons8.com/dusk/344/add-file--v1.png"> <br>
+							NUEVA
+						</a>
+					</div>
+					<div class="col">
+						<a
+							class="list-group-item list-group-item-action bg-light text-center col"
+							type="button"> <img width="70" class="mx-auto"
+							src="https://img.icons8.com/dusk/344/edit-file.png"><br>
+							EXISTENTE
+						</a>
+					</div>
+				</div>
+				<!-- ./CONTENIDO DINAMICO -->
+			</div>
+			<footer th:replace="plantilla/template :: footer"></footer>
+		</div>
+	</div>
+</body>
+</html>

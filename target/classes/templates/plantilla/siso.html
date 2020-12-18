@@ -1,0 +1,59 @@
+<div class="col-md-5" th:fragment="siso">
+    <!-- CREAR SISO -->
+    <div th:if="${obra.siso == null}" class="card">
+        <div class="card-header hudsoft-thead-dark">
+            <strong>Siso</strong>
+        </div>
+        <div class="card-body">
+            <div class="row mx-auto">
+                <div class="alert alert-warning mx-auto" role="alert">
+                    No hay un siso registrado
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <a th:href="@{/sisos/registrar/}+${obra.id}" class="col hudsoft-btn-sm text-center">agregar
+                    SISO</a>
+            </div>
+        </div>
+    </div>
+    <!-- ./CREAR SISO-->
+
+    <!-- MODIFICAR SISO -->
+    <div th:if="${obra.siso != null}" th:fragment="modificar" class="card shadow p-3 mb-5 bg-white rounded border-0">
+        <div class="card-header hudsoft-thead-dark">
+            <div class="media-body">
+                <h4 class="text-light display-6" th:text="${obra.siso.trabajador.nombre}"></h4>
+                <strong>Siso</strong>
+            </div>
+        </div>
+        <div class="">
+            <section class="card">
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item"><span>Telefono: </span> <span class="" th:text="${obra.siso.telefono}"></span></li>
+                    <li class="list-group-item"><span>Correo: </span> <span class="" th:text="${obra.siso.correo}"></span></li>
+                </ul>
+            </section>
+
+        </div>
+        <div class="card-footer">
+            <div class="row ">
+                <a id="btn_eliminar_siso" type="buttom" class="col-md-5 btn mx-auto hudsoft-btn-sm hudsoft-danger text-center">eliminar
+            </a>
+                <a th:href="@{/sisos/modificar/}+${obra.id}" class="col-md-5  mx-auto hudsoft-btn-sm text-center">modificar
+            </a>
+            </div>
+        </div>
+        <form id="form_eliminar_siso" th:action="@{/sisos/eliminar/}+${obra.id}" method="post">
+
+        </form>
+        <script>
+            document.getElementById("btn_eliminar_siso").onclick = () => {
+                document.getElementById("form_eliminar_siso").submit();
+            }
+        </script>
+    </div>
+    <!-- ./MODIFICAR SISO-->
+</div>
