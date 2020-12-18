@@ -33,24 +33,24 @@
                     <form th:action="@{/empresas/guardar}" method="post" th:object="${empresa}">
                         <div class="form-group row">
                             <label class="col-md-4" for="">Nombre:</label>
-                            <input class="form_registro" id="nombre" th:field="${empresa.nombre}" placeholder="">
+                            <input class="form_registro" required id="nombre" th:field="${empresa.nombre}" placeholder="">
                             <small class="form-text text-danger"></small>
                         </div>
 
 
                         <div class="form-group row">
                             <label class="col-md-4" for="">NIT:</label>
-                            <input class="form_registro" id="nit" th:field="${empresa.nit}" placeholder="">
+                            <input class="form_registro" id="nit" required th:field="${empresa.nit}" placeholder="">
                             <small class="form-text text-danger"></small>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4" for="">DIRECCIÓN:</label>
-                            <input class="form_registro" id="direccion" th:field="${empresa.direccion}" placeholder="" value="">
+                            <input class="form_registro" required id="direccion" th:field="${empresa.direccion}" placeholder="" value="">
                             <small class="form-text text-danger"></small>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4" for="">TELÉFONO:</label>
-                            <input class="form_registro" th:type="tel" id="telefono" th:field="${empresa.telefono}" placeholder="">
+                            <input class="form_registro" required th:type="tel" id="telefono" th:field="${empresa.telefono}" placeholder="">
                         </div>
                         <div class="row">
                             <button type="submit" class="hudsoft-btn-sm mx-auto mt-3 px-3">Crear</button>

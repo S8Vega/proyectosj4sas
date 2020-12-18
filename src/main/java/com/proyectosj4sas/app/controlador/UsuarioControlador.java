@@ -41,9 +41,9 @@ public class UsuarioControlador {
 		boolean status = userService.requestPasswordReset(passwordResetRequestModel.getEmail());
 
 		if (status) {
-			model.addAttribute("msg", "se ha enviado un email con un enlace para efectuar tu cambio de clave!");
+			model.addAttribute("msg", "Se ha enviado un email con un enlace para efectuar tu cambio de clave!");
 		} else {
-			model.addAttribute("msg", "el email proporcionado no se encuentra registrado!");
+			model.addAttribute("msg", "El email proporcionado no se encuentra registrado!");
 		}
 
 		return "msg";
@@ -53,15 +53,15 @@ public class UsuarioControlador {
 	@GetMapping("/password-reset-request")
 	public String changePasword(Model model, RedirectAttributes flash) {
 		model.addAttribute("password_reset_request", new PasswordResetRequestModel());
-		flash.addFlashAttribute("info", "ingresa tus datos para actualizar tu clave de acceso!");
-		model.addAttribute("msg", "ingresa email para enviarte un enlace de cambio de clave!");
+		flash.addFlashAttribute("info", "Ingresa tus datos para actualizar tu clave de acceso!");
+		model.addAttribute("msg", "Ingresa un email para enviarte un enlace para el reset de clave!");
 		return "reset_password";
 	}
 
 	@GetMapping("/password-update-request/{token}")
 	public String updatePasword(@PathVariable String token, Model model, RedirectAttributes flash) {
-		flash.addFlashAttribute("info", "ingresa tus datos para actualizar tu clave de acceso!");
-		model.addAttribute("msg", "ingresa tu nueva clave!");
+		flash.addFlashAttribute("info", "Ingresa tus datos para actualizar tu clave de acceso!");
+		model.addAttribute("msg", "Ingresa tu nueva clave!");
 		model.addAttribute("token", token);
 		return "update_password";
 	}
@@ -74,7 +74,7 @@ public class UsuarioControlador {
 		if (password.equals(password_confirm)) {
 			PasswordResetTokenEntity tokenEntity = passwordResetTokenRepository.findByToken(token);
 			if (tokenEntity == null) {
-				model.addAttribute("msg", "el tiempo ha expirado!");
+				model.addAttribute("msg", "El tiempo ha expirado!");
 				return "msg";
 			}
 
@@ -83,11 +83,11 @@ public class UsuarioControlador {
 			userService.save(u);
 			passwordResetTokenRepository.deleteById(tokenEntity.getId());
 		} else {
-			model.addAttribute("msg", "las claves no coincidieron!");
+			model.addAttribute("msg", "Las claves no coincidieron!");
 			return "msg";
 		}
 
-		model.addAttribute("info", "las claves se han cambiado correctamente!");
+		model.addAttribute("info", "Las claves se han cambiado correctamente!");
 		return "login";
 
 	}

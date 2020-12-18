@@ -4,7 +4,7 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title th:text="${titulo}"></title>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -119,6 +119,7 @@
 
         <p class="text-center text-secondary mt-2">
             Copyrights &copy; UFPS ING DE SISTEMAS 2020 <i class="em em-flag-co" aria-role="presentation" aria-label="Colombia Flag"></i>
+       
         </p>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script th:src="@{/js/util.js}"></script>
@@ -197,8 +198,7 @@
                 siguiente();
             }
         </script>
-
-    </footer>
+  </footer>
 
 </body>
 

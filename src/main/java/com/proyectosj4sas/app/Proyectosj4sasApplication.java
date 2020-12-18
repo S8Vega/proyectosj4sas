@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.proyectosj4sas.app.modelo.entidad.Usuario;
 import com.proyectosj4sas.app.modelo.servicio.implementacion.UsuarioServicioImpl;
 
 @SpringBootApplication
@@ -37,15 +39,11 @@ public class Proyectosj4sasApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//		Usuario usuarios [] = {
-//				new Usuario("antares","clave001","asimplemailmore@gmail.com"),
-//				new Usuario("joimar","clave002", "")
-//		}; 
-//		  
+	  
 //		  Usuario u = new Usuario(); 
-//		  u.setEmail("antareslastname@gmail.com");
-//		  u.setPassword(passwordEncoder.encode("")); 
-//		  u.setUsername("gloria botello");
+//		  u.setEmail("asimplemailmore@gmail.com");
+//		  u.setPassword(passwordEncoder.encode("amanecer")); 
+//		  u.setUsername("antares");
 //		  u.setEnable(true);		  
 //		  
 //		  userService.save(u);

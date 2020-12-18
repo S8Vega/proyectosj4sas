@@ -159,9 +159,6 @@ public class ObreroControlador {
 	@PostMapping("/update")
 	public String guardarModificado(@ModelAttribute Obrero obrero, RedirectAttributes flash, Model model,
 			@RequestParam(name = "id_obra", required = false) Long idObra) {
-		System.out.println(idObra);
-		System.out.println(obrero.getId());
-		System.out.println(obrero);
 		Trabajador tr = trabajadorService.findById(obrero.getTrabajador().getId());
 		tr.setCedula(obrero.getTrabajador().getCedula());
 		tr.setNombre(obrero.getTrabajador().getNombre());
@@ -184,7 +181,6 @@ public class ObreroControlador {
 
 	@GetMapping("/update/afiliacion_arl/{idAfiliacion}/{idObrero}")
 	public String actualizarAfiliacionArl(@PathVariable Long idAfiliacion,@PathVariable Long idObrero,@ModelAttribute AfiliadoArl afiliacionArl, Model model){
-	System.out.println(idObrero);
 		model.addAttribute("titulo", "MODIFICAR AFILIACION ARL");
 		model.addAttribute("ruta_de_navegacion", "MODIFICACION DE AFILIACION ARL");
 		model.addAttribute("arls", arlService.findAll());
@@ -192,13 +188,25 @@ public class ObreroControlador {
 		model.addAttribute("afiliacionArl", afiliadoArlService.findById(idAfiliacion));
 		return "/vistas/obreros/modificar_afiliacion_arl";
 	}
+	
 	@PostMapping("/update/afiliacion_arl")
 	public String actualizarAfiliacionArl(@ModelAttribute AfiliadoArl afiliacionArl,RedirectAttributes flash,Model model,
 	@RequestParam("idObrero") Long idObrero){
-		afiliadoArlService.save(afiliacionArl);
+		if(afiliacionArl.getArl().getId()== 16) {
+			AfiliadoArl af= afiliadoArlService.findById(afiliacionArl.getId());
+			System.out.println(af.getId());
+			af.setTrabajador(null);
+			af.setArl(null);
+			afiliadoArlService.save(af);
+			afiliadoArlService.deleteById(af.getId());
+		}else {
+			afiliadoArlService.save(afiliacionArl);
+		}
+		
 		flash.addFlashAttribute("success", "afiliacion de arl modificada correctamente");
 		return "redirect:/vistas/obreros/modificar/"+idObrero;
 	}
+	
 	@PostMapping("/guardar/afiliacion_arl")
 	public String guardarAfiliacionArl(@ModelAttribute AfiliadoArl afiliacionArl,RedirectAttributes flash,Model model,
 	@RequestParam("idObrero") Long idObrero){
