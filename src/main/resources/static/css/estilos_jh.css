@@ -1,39 +1,44 @@
 @charset "UTF-8";
-
 .hudsoft-badge-important {
-	background-color:#EF8F21;
+    background-color: #EF8F21;
 }
+
 .hudsoft-text-important {
-	color:#EF8F21;
+    color: #EF8F21;
 }
 
 .hudsoft-background-color {
-	color:#36A4C6;
+    color: #36A4C6;
 }
 
 .hudsoft-close:hover {
-	background-color:#EF8F21;
+    background-color: #EF8F21;
 }
 
 .hudsoft-hover:hover {
-	background-color:#EF8F21;
+    background-color: #EF8F21;
 }
 
 .hudsoft-thead-dark {
-	background-color:#36A4C6;
-	color:white;
+    background-color: #36A4C6;
+    color: white;
 }
+
 .hudsoft-bg-dark {
-	background-color:#36A4C6;
-	color:white;
+    background-color: #36A4C6;
+    color: white;
 }
+
 .hudsoft-fg-dark {
-	color:#36A4C6;
+    color: #36A4C6;
 }
+
 .hudsoft-bg-dark:hover {
-	background-color:#EF8F21;
-	color:white;
+    background-color: #EF8F21;
+    color: white;
 }
+
+
 /**
  * .hudsoft-btn-sm {
 	background-color:#36A4C6;
@@ -47,63 +52,74 @@
 }
  */
 
+
 /**BOTONES*/
-.hudsoft-btn-sm{
-	text-decoration: none;
-	padding: 5px;
-	font-weight: 100;
-	font-size: 14px;
-	color: #ffffff	!important;
-	background-color: #36A4C6;
-	border-radius: 4px;	
-	border:none;
+
+.hudsoft-btn-sm {
+    text-decoration: none;
+    padding: 5px;
+    font-weight: 100;
+    font-size: 14px;
+    color: #ffffff !important;
+    background-color: #36A4C6;
+    border-radius: 4px;
+    border: none;
 }
 
-.hudsoft-btn-outline-sm{
-	text-decoration: none;
-	padding: 3px;
-	font-weight: 100;
-	font-size: 14px;
-	color: #36A4C6	!important;
-	border-radius: 4px;
-	border: 1px solid #36A4C6;	
+.hudsoft-btn-outline-sm {
+    text-decoration: none;
+    padding: 3px;
+    font-weight: 100;
+    font-size: 14px;
+    color: #36A4C6 !important;
+    border-radius: 4px;
+    border: 1px solid #36A4C6;
 }
 
-.hudsoft-btn-outline-sm:hover{
-	text-decoration:none;
-	color:white;
-	border:none;
-	background-color:#EF8F21;
+.hudsoft-btn-outline-sm:hover {
+    text-decoration: none;
+    color: white;
+    border: none;
+    background-color: #EF8F21;
 }
 
 .hudsoft-btn-sm:hover {
-	text-decoration:none;
-	color: #ffffff;
-	background-color:#EF8F21;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #EF8F21;
 }
+
 
 /**BADGES*/
-.hudsoft-badge-pill{
-	text-decoration: none;
-	padding: 3px;
-	font-weight: 100;
-	font-size: 14px;
-	color: #ffffff;
-	background-color: #4EAD7C;
-	border-radius: 4px;
-	
-}
-.hudsoft-badge-pill-danger{
-	text-decoration: none;
-	padding: 3px;
-	font-weight: 100;
-	font-size: 14px;
-	color: #ffffff;
-	background-color: #EF8F21;
-	border-radius: 6px;
-	
+
+.hudsoft-badge-pill {
+    text-decoration: none;
+    padding: 3px;
+    font-weight: 100;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #4EAD7C;
+    border-radius: 4px;
 }
 
-.hudsoft-danger{
-	background-color: #E85048;
+.hudsoft-badge-pill-danger {
+    text-decoration: none;
+    padding: 3px;
+    font-weight: 100;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #EF8F21;
+    border-radius: 6px;
+}
+
+.hudsoft-danger {
+    background-color: #E85048;
+}
+
+.text-mini {
+    font-size: 0.7rem;
+}
+
+::placeholder {
+    opacity: .4;
 }
