@@ -1,0 +1,122 @@
+<!-- CARD DE AFILIACION ARL -->
+<div th:fragment="arl" class="col-md-4">
+    <div th:if="${obrero.trabajador.afiliadoArl != null}">
+        <div class="card">
+            <div class="card-header hudsoft-thead-dark">
+                <span>ARL</span>
+            </div>
+            <div class="card-body">
+                <label for="codigo de afiliado">codigo de afiliado: <span class="text-info" th:text="${obrero.trabajador.afiliadoArl.codigo}"></span></label>
+
+                <label for=""> fecha de registro: <span class="text-info" th:text="${#calendars.format(obrero.trabajador.afiliadoArl.fechaIngreso,'dd MMMM yyyy')}"></span></label>
+
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm" th:href="@{/vistas/obreros/update/afiliacion_arl/}+${obrero.trabajador.afiliadoArl.id}+'/'+${obrero.id}">Modificar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${obrero.trabajador.afiliadoArl == null}">
+        <div class="card">
+            <div class="card-header bg-secondary text-white p-1 text-center">
+                <span>ARL</span>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning col text-mini" role="alert">
+                    NO INSCRITO!
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm " th:href="@{/vistas/obreros/create/afiliacion_arl/}+${obrero.trabajador.id}+'/'+${obrero.id}">Agregar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/CARD DE AFILIACION ARL -->
+
+<!-- CARD DE AFILIACION EPS -->
+<div th:fragment="eps" class="col-md-4">
+    <div th:if="${obrero.trabajador.afiliadoEps != null}">
+        <div class="card">
+            <div class="card-header hudsoft-thead-dark">
+                <span>EPS</span>
+            </div>
+            <div class="card-body">
+                <label for="codigo de afiliado">codigo de afiliado: <span class="text-info" th:text="${obrero.trabajador.afiliadoEps.codigo}"></span></label>
+
+                <label for=""> fecha de registro: <span class="text-info" th:text="${#calendars.format(obrero.trabajador.afiliadoEps.fechaIngreso,'dd MMMM yyyy')}"></span></label>
+
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm" th:href="@{/afiliaciones/eps/update/}+${obrero.trabajador.afiliadoEps.id}+'/'+${obrero.id}">Modificar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${obrero.trabajador.afiliadoEps == null}">
+        <div class="card">
+            <div class="card-header bg-secondary text-white p-1 text-center">
+                <span>EPS</span>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning col text-mini" role="alert">
+                    NO INCRITO!
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm" th:href="@{/afiliaciones/eps/create/}+${obrero.trabajador.id}+'/'+${obrero.id}">Agregar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/CARD DE AFILIACION EPS -->
+
+<!-- CARD DE AFILIACION AFP -->
+<div th:fragment="afp" class="col-md-4">
+    <div th:if="${obrero.trabajador.afiliadoFondoPension != null}">
+        <div class="card">
+            <div class="card-header hudsoft-thead-dark">
+                <span>AFP</span>
+            </div>
+            <div class="card-body">
+                <label for="codigo de afiliado">codigo de afiliado: <span class="text-info" th:text="${obrero.trabajador.afiliadoFondoPension.codigo}"></span></label>
+
+                <label for=""> fecha de registro: <span class="text-info" th:text="${#calendars.format(obrero.trabajador.afiliadoFondoPension.fechaIngreso,'dd MMMM yyyy')}"></span></label>
+
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm" th:href="@{/afiliaciones/afp/update/}+${obrero.trabajador.afiliadoFondoPension.id}+'/'+${obrero.id}">Modificar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${obrero.trabajador.afiliadoFondoPension == null}">
+        <div class="card">
+            <div class="card-header bg-secondary text-white p-1 text-center">
+                <span>AFP</span>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning col text-mini " role="alert">
+                    NO INSCRITO!
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <a class="col btn hudsoft-btn-sm" th:href="@{/afiliaciones/afp/create/}+${obrero.trabajador.id}+'/'+${obrero.id}">Agregar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/CARD DE AFILIACION AFP -->

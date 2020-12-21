@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!--FONTAWESOME-->
+    <script src="https://kit.fontawesome.com/2a82ed09c6.js"></script>
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/foto_perfil.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos_jh.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilo.css}">
+
+    <!--ENLACE FAV ICO-->
+    <link rel="icon" type="image/png" href="/img/isotipo.png" />
+</head>
+
+<body>
+
+    <div id="notificaciones" th:fragment="mensajes">
+        <div id="1" class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+        <div id="1" class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+        <div id="1" class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+        <div id="1" class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom " th:fragment="menu_horizontal">
+
+
+
+        <button class="btn" id="menu-toggle">
+			<span class="fa fa-chevron-left"></span>
+		</button>
+        <i class=" fas fa-grip-lines-vertical hudsoft-background-color"></i> <span class="ml-2" th:text="${ruta_de_navegacion}"></span>
+
+        <!--<button class="btn float-left hudsoft-bg-dark" id="btn_anterior">
+				<i class="ml-3 fas fa-arrow-left mr-3"></i>
+			</button>-->
+
+
+
+
+        <!--
+				<i class=" float-md-left fas fa-grip-lines-vertical ml-1 hudsoft-background-color"></i>
+			<span class=" float-md-left ml-1" th:text="${ruta_de_navegacion}"></span>
+				<a href="" class="hudsoft-btn-sm float-md-left"><i class="ml-3 fas fa-arrow-left mr-3"></i></a>
+			<a href="" class="hudsoft-btn-sm float-md-right"><i class="ml-3 fas fa-arrow-right mr-3"></i></a>
+			-->
+
+        <!--<button class="btn float-right hudsoft-bg-dark" id="btn_siguiente">
+				<i class="ml-3 fas fa-arrow-right mr-3"></i>
+			</button>-->
+
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+
+
+        <div class="row collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav navbar-right col mr-5 text-secondary">
+                <li class="ml-auto row align-items-center mr-4">User:</li>
+                <li sec:authorize="isAuthenticated()" class=" row align-items-center"><span sec:authentication="name" class=""></span></li>
+
+            </ul>
+        </div>
+
+        <button class="btn float-left ml-4  btn-sm btn-outline-primary" id="btn_anterior">
+			<i class="ml-3 fas fa-arrow-left mr-3"></i>
+		</button>
+        <button class="btn float-right ml-4  btn-sm btn-outline-primary" id="btn_siguiente">
+			<i class="ml-3 fas fa-arrow-right mr-3"></i>
+		</button>
+
+
+
+    </nav>
+    <div id="menu_padre" th:fragment="menu_vertical">
+        <a th:href="@{/}" class="list-group-item list-group-item-action bg-light"> <i class="fas fa-play"></i> MENU</span>
+        </a>
+        <div class="mt-3">
+            <a id="btn_listado_general_obras" th:href="@{/_obras}" class="list-group-item list-group-item-action bg-light text-center" type="button"> <img width="50" class="mx-auto" th:src="@{/img/icons/obrero.svg}"><br> Obras
+            </a>
+        </div>
+        <div class="mt-3">
+            <a th:href="@{/empresas/}" class="list-group-item list-group-item-action bg-light text-center">
+                <img width="50" class="mx-auto" th:src="@{/img/icons/anteproyecto.svg}"><br> Constructoras
+            </a>
+        </div>
+        <div class="mt-3">
+            <a href="" class="list-group-item list-group-item-action bg-light text-center" id="sub_menu_configuracion" type="button" data-toggle="collapse" data-target="#collapse_configuracion" aria-expanded="false"> <img width="50" class="mx-auto" th:src="@{/img/icons/configuraciones.svg}"><br> Configuración
+            </a>
+        </div>
+        <div class="mt-5">
+            <form id="logoutForm" th:action="@{/logout}" method="post">
+                <button id="btn_close_session btn-lg" class="btn btn-light col hudsoft-close" type="submit">
+					<i class="fas fa-sign-out-alt hudsoft-background-color"></i> Cerrar sesión
+				</button>
+            </form>
+        </div>
+
+    </div>
+
+    <hr width=90% style="height: 2px">
+    <footer th:fragment="footer" class="text-center">
+        <!-- URL -->
+        <!--no borrar-->
+        <a id="app_path" th:value="${#httpServletRequest.requestURI}"></a>
+        <!-- ./URL -->
+
+
+        <p class="text-center text-secondary mt-2">
+            Copyrights &copy; UFPS ING DE SISTEMAS 2020 <i class="em em-flag-co" aria-role="presentation" aria-label="Colombia Flag"></i>
+        </p>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script th:src="@{/js/util.js}"></script>
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+
+            $('.count').each(function() {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: 3000,
+                    easing: 'swing',
+                    step: function(now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+            let btnSalir = document.getElementById("btn_close_session");
+            btnSalir.onclick = () => {
+                document.getElementById("logoutForm").submit();
+            }
+
+            /**
+             * navegacion 
+             * */
+            let listado_general_obras = document.getElementById("btn_listado_general_obras");
+            listado_general_obras.onclick = () => {
+                if (document.getElementById("app_path").getAttribute("value") == listado_general_obras.getAttribute("href")) {
+
+                } else {
+                    siguiente();
+                }
+
+            }
+
+            function siguiente() {
+
+                if (JSON.parse(sessionStorage.getItem("p_anterior")).pop() == document.getElementById("app_path").getAttribute("value")) {
+
+                } else {
+                    let p_anterior = JSON.parse(sessionStorage.getItem("p_anterior"));
+                    p_anterior.push(document.getElementById("app_path").getAttribute("value"));
+                    sessionStorage.setItem("p_anterior", JSON.stringify(p_anterior));
+
+                    let p_siguiente = JSON.parse(sessionStorage.getItem("p_siguiente"));
+                    let aux = p_siguiente.pop();
+                    sessionStorage.setItem("p_siguiente", JSON.stringify(p_siguiente));
+
+                    window.location = aux;
+                }
+
+            }
+
+            function anterior() {
+
+                let p_siguiente = JSON.parse(sessionStorage.getItem("p_siguiente"));
+                p_siguiente.push(document.getElementById("app_path").getAttribute("value"));
+                sessionStorage.setItem("p_siguiente", JSON.stringify(p_siguiente));
+
+                let p_anterior = JSON.parse(sessionStorage.getItem("p_anterior"));
+                let aux = p_anterior.pop();
+                sessionStorage.setItem("p_anterior", JSON.stringify(p_anterior));
+
+                window.location = aux;
+            }
+
+            let btn_anterior = document.getElementById("btn_anterior");
+            btn_anterior.onclick = () => {
+                anterior();
+            }
+            let btn_siguiente = document.getElementById("btn_siguiente");
+            btn_siguiente.onclick = () => {
+                siguiente();
+            }
+        </script>
+
+    </footer>
+
+</body>
+
+</html>

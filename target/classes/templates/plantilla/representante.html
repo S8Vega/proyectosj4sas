@@ -1,0 +1,58 @@
+<div class="col-md-5" th:fragment="representante">
+    <!-- CREAR REPRESENTANTE -->
+    <div th:if="${obra.representante == null}" class="card  shadow p-3 mb-5 bg-white rounded border-0">
+        <div class="card-header hudsoft-thead-dark">
+            <strong>Representante</strong>
+        </div>
+        <div class="card-body">
+            <div class="row mx-auto">
+                <div class="alert alert-primary mx-auto" role="alert">
+                    No hay un representante registrado
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <a th:href="@{/representantes/registrar/}+${obra.id}" class="col hudsoft-btn-sm text-center">Agregar
+                representante</a>
+            </div>
+        </div>
+    </div>
+    <!-- ./CREAR REPRESENTANTE-->
+    <!-- MODIFICAR CONTADOR -->
+    <div th:if="${obra.representante != null}" th:fragment="modificar" class="card shadow p-3 mb-5 bg-white rounded border-0">
+        <div class="card-header hudsoft-thead-dark">
+            <div class="media-body">
+                <h4 class="text-light display-6" th:text="${obra.representante.nombre}"></h4>
+                <strong>Representante</strong>
+            </div>
+        </div>
+        <div class="">
+            <section class="card">
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item"><span>Telefono: </span> <span class="" th:text="${obra.representante.telefono}"></span></li>
+                    <li class="list-group-item"><span>Correo: </span> <span class="" th:text="${obra.representante.correo}"></span></li>
+                </ul>
+            </section>
+
+        </div>
+        <div class="card-footer">
+            <div class="row ">
+                <a id="btn_eliminar_representante" type="buttom" class="col-md-5 btn mx-auto hudsoft-btn-sm hudsoft-danger text-center">eliminar
+            </a>
+                <a th:href="@{/representantes/modificar/}+${obra.id}" class="col-md-5  mx-auto hudsoft-btn-sm text-center">Modificar
+            </a>
+            </div>
+        </div>
+        <form id="form_eliminar_representante" th:action="@{/representantes/eliminar/}+${obra.id}" method="post">
+
+        </form>
+        <script>
+            document.getElementById("btn_eliminar_representante").onclick = () => {
+                document.getElementById("form_eliminar_representante").submit();
+            }
+        </script>
+    </div>
+    <!-- ./MODIFICAR CONTADOR-->
+</div>

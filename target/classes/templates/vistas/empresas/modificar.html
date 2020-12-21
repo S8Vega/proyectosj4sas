@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/template :: head">
+    <style TYPE="text/css">
+        .modal-contenido {
+            background-color: aqua;
+            width: 300px;
+            padding: 10px 20px;
+            margin: 20% auto;
+            position: relative;
+        }
+        
+        .modal {
+            background-color: rgba(0, 0, 0, .8);
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        #miModal:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">J4 SOFT</div>
+            <div class="list-group list-group-flush text-center">
+                <nav th:replace="plantilla/template :: menu_vertical"></nav>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+
+            <nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+            <div class="container-fluid">
+
+                <div class=" col-lg-6 col-md-6 border ml-5 p-4 mt-4 shadow p-3 mb-5 bg-white rounded">
+                    <!-- CONTENIDO DINAMICO -->
+                    <div class="mt-3 p-3">
+                        <h4>Actualiza los campos</h4>
+
+
+                        <form th:action="@{/empresas/guardar_modificado}" method="post" th:object="${empresa}">
+                            <div class="form-group row mt-4">
+                                <label class="col-md-4 float-left" for="">NOMBRE:</label>
+                                <input class="form_registro text-secondary" id="nombre" th:field="${empresa.nombre}">
+                                <small class="form-text text-danger"></small>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-md-4 " for="">NIT:</label>
+                                <input class="form_registro text-secondary" id="nit" th:field="${empresa.nit}">
+                                <small class="form-text text-danger"></small>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4" for="">DIRECCIÓN:</label>
+                                <input class="form_registro text-secondary" id="direccion" th:field="${empresa.direccion}" value="">
+                                <small class="form-text text-danger"></small>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4" for="">TELÉFONO:</label>
+                                <input class="form_registro text-secondary" th:type="tel" type="number" id="telefono" th:field="${empresa.telefono}">
+                            </div>
+                            <!--    <div>
+                            <label class="col-md-4" for="cargo">Asigna un contador a la obra</label>
+                            <a href="#miModal"><button type="submit" class="hudsoft-btn-sm mx-auto">Diligenciar</button></a>
+                            <div id="miModal">
+                                <a href="#">X</a>
+                                <h2>Mi primer Modal</h2>
+                                <p>Este es mi primera ventana modal sin utilizar JavaScript.</p>
+                            </div>
+
+                        </div> -->
+                            <input th:field="${empresa.id}" type="hidden">
+                            <div class="row">
+                                <!-- <input name="id_secret" value="56"> -->
+                                <!-- <input type="hidden" name="id_obra" th:value="${idObra}"> -->
+                                <button type="submit" class="hudsoft-btn-sm mx-auto mt-4">Actualizar</button>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ./CONTENIDO DINAMICO -->
+            <footer th:replace="plantilla/template :: footer"></footer>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+    <!-- JAVASCRIPT -->
+
+    <!-- ./JAVASCRIPT -->
+</body>
+
+</html>

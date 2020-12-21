@@ -23,43 +23,42 @@
             <nav th:replace="plantilla/template :: menu_horizontal"></nav>
 
             <div class="container-fluid">
+                <div class="mt-4 col-lg-10 col-md-6 border ml-5 p-4 shadow p-3 mb-5 bg-white rounded">
+                    <img th:src="@{/img/icons/boss.svg}" class="col-md-4 h-75" style="float: right;">
 
-
-                <!-- CONTENIDO DINAMICO -->
-                <div class="col-lg-11 col-md-6 border ml-5 mt-4 p-5 shadow p-3 mb-5 bg-white rounded">
+                    <!-- CONTENIDO DINAMICO -->
                     <div>
-                        <h3>Información básica</h3>
+                        <h3>Completa los campos</h3>
 
 
-                        <form class="mt-4" th:action="@{/vistas/obreros/update/afiliacion_arl}" method="post" th:object="${afiliacionArl}">
+                        <form class="mt-4" th:action="@{/sisos/guardar_modificado}" th:object="${siso}" method="POST">
+                            <div class="form-group row">
+                                <label class="col-md-4" for="nombre">Nombres</label> <input th:field="${siso.trabajador.nombre}" class="form_registro" id="nombre" placeholder="">
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4" for="nombre">Cedula</label> <input th:field="${siso.trabajador.cedula}" class="form_registro" id="telefono" placeholder="">
+                            </div>
 
                             <div class="form-group row">
-                                <label for="" class="mr-3">Código de afiliado:</label>
-                                <input th:field="${afiliacionArl.codigo}">
+                                <label class="col-md-4" for="nombre">Teléfono</label> <input th:field="${siso.telefono}" class="form_registro" id="telefono" placeholder="">
                             </div>
                             <div class="form-group row">
-                                <label for="" class="mr-3">ARL: </label>
-                                <select th:field="${afiliacionArl.arl.id}">
-								<option th:each="arl: ${arls}" th:value="${arl.id}" th:text="${arl.nombre}"></option>
-							</select>
+                                <label class="col-md-4" for="nombre">Correo</label> <input th:field="${siso.correo}" class="form_registro" id="correo" placeholder="">
                             </div>
-                            <div class="form-group row">
-                                <label for="" class="mr-3">Fecha ingreso:</label>
-                                <input type="date" th:field="${afiliacionArl.fechaIngreso}">
+                            <input th:field="${siso.trabajador.id}" type="hidden">
+                            <input th:field="${siso.id}" type="hidden">
+                            <input th:value="${idObra}" name="idObra" type="hidden">
+
+
+
+
+                            <div class="row">
+                                <button type="submit" class="hudsoft-btn-sm mx-auto">Guardar</button>
                             </div>
-                            <div class="form-group row">
-                                <label for="" class="mr-3">Fecha retiro: </label>
-                                <input type="date" th:field="${afiliacionArl.fechaRetiro}">
-                            </div>
-                            <input th:value="${idObrero}" type="hidden" name="idObrero">
-                            <input th:field="${afiliacionArl.trabajador.id}" type="hidden">
-                            <input th:field="${afiliacionArl.id}" type="hidden">
-                            <button class=" mr-3 hudsoft-btn-sm col mx-auto">Guardar</button>
+
                         </form>
                     </div>
                 </div>
-
-
                 <!-- ./CONTENIDO DINAMICO -->
                 <footer th:replace="plantilla/template :: footer"></footer>
             </div>

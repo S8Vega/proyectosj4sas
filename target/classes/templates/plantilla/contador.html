@@ -1,0 +1,53 @@
+<!-- MODIFICAR CONTADOR -->
+<div th:if="${empresa.contador != null}" th:fragment="modificar" class="card">
+    <div class="card-header hudsoft-thead-dark">
+        <h6>Informacion del contador</h6>
+    </div>
+    <div class="card-body">
+
+        <div class="row mx-auto">
+            <ul class="list-group col-md-12 ml-2">
+                <li class="list-group-item">
+                    <label for="">Nombre: <span class="text-secondary" th:text="${empresa.contador.nombre}"></span></label>
+                </li>
+                <li class="list-group-item">
+                    <label for="">Correo: <span class="text-secondary" th:text="${empresa.contador.correo}"></span></label>
+                </li>
+                <li class="list-group-item">
+                    <label for="">Telefono: <span class="text-secondary" th:text="${empresa.contador.telefono}"></span></label>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <a th:href="@{/contador/modificar/}+${empresa.id}" class="col hudsoft-btn-sm text-center">modificar
+                contador</a>
+        </div>
+    </div>
+</div>
+<!-- ./MODIFICAR CONTADOR-->
+<!-- CREAR CONTADOR -->
+<div th:if="${empresa.contador == null}" th:fragment="crear" class="card">
+    <div class="card-header hudsoft-thead-dark">
+        <h6>Informacion del contador</h6>
+    </div>
+    <div class="card-body">
+
+        <div class="row mx-auto">
+            <div class="alert alert-primary mx-auto" role="alert">
+                No hay un contador registrado
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <a th:href="@{/contador/crear/}+${empresa.id}" class="col hudsoft-btn-sm text-center">agregar
+                contador</a>
+        </div>
+    </div>
+</div>
+<!-- ./CREAR CONTADOR-->

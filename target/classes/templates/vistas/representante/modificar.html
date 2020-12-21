@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">J4 SOFT</div>
+            <div class="list-group list-group-flush text-center">
+                <nav th:replace="plantilla/template :: menu_vertical"></nav>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+
+            <nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10 col-md-6">
+                        <br>
+                    </div>
+                    <div class="col-lg-10 col-md-6 border ml-5 p-4 shadow p-3 mb-5 bg-white rounded">
+                        <img th:src="@{/img/icons/manager.svg}" class="col-md-4 h-75" style="float: right;">
+
+                        <!-- CONTENIDO DINAMICO -->
+                        <div>
+                            <div class="form-group row">
+                                <h4 class="col-md-6" for="nombre">Completa los campos:</h4>
+                            </div>
+
+
+                            <form th:action="@{/representantes/guardar_modificado}" th:object="${representante}" method="POST">
+                                <div class="form-group row">
+                                    <label class="col-md-4" for="nombre">Nombres:</label> <input th:field="${representante.nombre}" class="form_registro text-secondary" id="nombre" placeholder="">
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-md-4" for="nombre">Teléfono:</label> <input th:field="${representante.telefono}" class="form_registro text-secondary" id="telefono" placeholder="">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4" for="nombre">Correo:</label> <input th:field="${representante.correo}" class="form_registro text-secondary" id="correo" placeholder="">
+                                </div>
+                                <input th:field="${representante.id}" type="hidden">
+
+                                <input th:value="${idObra}" name="idObra" type="hidden">
+
+
+
+
+                                <div class="row">
+                                    <button type="submit" class="hudsoft-btn-sm mx-auto mt-2">Guardar</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./CONTENIDO DINAMICO -->
+            <footer th:replace="plantilla/template :: footer"></footer>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript" th:src="@{/js/obreros/registrar.js}"></script>
+    <!-- ./JAVASCRIPT -->
+</body>
+
+</html>

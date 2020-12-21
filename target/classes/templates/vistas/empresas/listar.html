@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/plantilla/template :: head">
+	<style TYPE="text/css">
+		#nombre_fragmento {
+			animation-name: in_tittle;
+			animation-duration: 2s;
+		}
+
+		@keyframes in_tittle {
+			from {
+				margin-left: -400%;
+				width: 0px;
+				opacity: 0.2;
+			}
+
+			to {
+				margin-left: 0%;
+				width: max-content;
+				opacity: 1;
+			}
+		}
+
+		@keyframes in_button {
+		from{
+			opacity: 0;
+		}
+		to{
+			opacity: 1;
+		}
+
+	}
+	
+	#btn_opciones{
+			animation-name: in_button;	
+			animation-duration: 2s;
+		}
+			</style>
+</head>
+
+<body>
+	<div th:replace="/plantilla/template :: mensajes"></div>
+
+	<div class="d-flex" id="wrapper">
+
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">J4 SOFT</div>
+			<div class="list-group list-group-flush text-center">
+				<nav th:replace="plantilla/template :: menu_vertical"></nav>
+
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+
+			<nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+			<div class="container-fluid">
+
+				<!-- CONTENIDO DINAMICO -->
+				<div class="mt-2">
+					<div class="card">
+						<div id="nombre_fragmento"  class="card-header hudsoft-thead-dark">Listado de
+							Empresas Asociadas</div>
+						<div class="card-body card-block">
+					
+					
+							<table id="dtBasicExample"
+								class="table table-hover table-striped table-bordered table-sm table-responsive-sm">
+								<thead class="hudsoft-thead-dark">
+									<tr class="text-center">
+										<th scope="col">#</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Nit</th>
+										<th scope="col">Dirección</th>
+										<th scope="col">Teléfono</th>
+										<th scope="col">Opciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="empresa: ${empresas}" class="text-center">
+										<th th:text="${empresa.id}"></th>
+										<td th:text="${empresa.nombre}"></td>
+										<td th:text="${empresa.nit}"></td>
+										<td th:text="${empresa.direccion}"></td>
+										<td th:text="${empresa.telefono}"></td>
+										<td><a th:href="@{/empresas/}+${empresa.id}" class="hudsoft-btn-sm">Empresa</a>
+											<a th:href="@{/empresas/__${empresa.id}__/obras}"
+												class="hudsoft-btn-sm">Obras</a></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="card-footer">
+							<a th:href="@{/empresas/registrar}"
+									class="hudsoft-btn-sm float-right mr-1	" >Agregar Empresa</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ./CONTENIDO DINAMICO -->
+
+			<footer th:replace="plantilla/template :: footer"></footer>
+		</div>
+
+	</div>
+</body>
+
+</html>
