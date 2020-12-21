@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/template :: head">
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">J4 SOFT</div>
+            <div class="list-group list-group-flush text-center">
+                <nav th:replace="plantilla/template :: menu_vertical"></nav>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+
+            <nav th:replace="plantilla/template :: menu_horizontal"></nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10 col-md-6">
+                        <br>
+                    </div>
+                    <div class="col-lg-10 col-md-6 border ml-5 p-4 shadow p-3 mb-5 bg-white rounded">
+                        <img th:src="@{/img/icons/obrero2.svg}" class="col-md-4" style="float: right;">
+
+                        <!-- CONTENIDO DINAMICO -->
+                        <div>
+                            <div class="form-group row">
+                                <h3 class="col-md-6" for="nombre">Informacion Basica:</h3>
+                            </div>
+
+                            <form th:action="@{/vistas/obreros/guardar}" method="post" th:object="${obrero}">
+                                <div class="form-group row">
+                                    <label class="col-md-4" for="nombre">Nombre</label> <input required class="form_registro col-lg-6 border-1" id="nombre" th:field="${obrero.trabajador.nombre}" placeholder="">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('trabajador.nombre')}" th:errors="*{trabajador.nombre}"></small>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4" for="estado">Estado</label> <select name="estado" id="estado" class="col-lg-6 scrollEstado form-control dropdown-toggle border-1">
+										<option selected>activo</option>
+										<option value="inactivo">inactivo</option>
+									</select>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4" for="estado">Cedula</label> <input required class="form_registro col-lg-6 border-1" id="cedula" th:field="${obrero.trabajador.cedula}" placeholder="" value=""> <small class="form-text text-danger"
+                                        th:if="${#fields.hasErrors('trabajador.cedula')}" th:errors="*{trabajador.cedula}"></small>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="" class="col-md-4">Fecha de ingreso</label>
+                                    <input required type="date" th:field="${obrero.fechaIngreso}">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4" for="cargo">Cargo</label> <select name="cargo" id="cargo" class="col-lg-6 scrollEstado form-control dropdown-toggle border-1">
+										<option selected>Business Development</option>
+										<option value="Accounting">Accounting</option>
+										<option value="Human Resources">Human Resources</option>
+										<option value="Research and Development">Research and
+											Development</option>
+									</select>
+                                </div>
+
+
+                                <!--
+							<div id="arl">
+
+
+
+							<label class="col-md-4" for="afiliadoArl">ARL</label> <select
+								id="id_arl" name="id_arl">
+							</select> <input class="form_registro" name="codigo_afiliado_arl"
+								placeholder="Codigo Afiliado ARL"> <input
+								class="form_registro" type="date" name="fecha_registro_arl">
+						</div>
+
+
+						<div>
+							<label class="col-md-4" for="afiliadoEps">EPS</label> <select
+								id="id_eps" name="id_eps">
+
+
+							</select> <input class="form_registro" name="codigo_afiliado_eps"
+								placeholder="Codigo Afiliado EPS"> <input
+								class="form_registro" type="date" name="fecha_registro_eps">
+						</div>
+						<div>
+							<label class="col-md-4" for="afiliadoFondoPension">Fondo
+								de Pension</label> <select name="id_afp" id="id_afp">
+
+
+							</select> <input class="form_registro" name="codigo_afiliado_afp"
+								placeholder="Codigo Afiliado ARL"> <input
+								class="form_registro" type="date" name="fecha_registro_afp">
+						</div>
+						-->
+
+                                <div class="row">
+                                    <input type="hidden" name="id_obra" th:value="${idObra}">
+                                    <button type="submit" class="hudsoft-btn-sm mx-auto">Crear</button>
+
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- ./CONTENIDO DINAMICO -->
+            <footer th:replace="plantilla/template :: footer"></footer>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+    <!-- JAVASCRIPT -->
+    <!--
+		<script type="text/javascript" th:src="@{/js/obreros/registrar.js}"></script>
+	-->
+    <!-- ./JAVASCRIPT -->
+</body>
+
+</html>
